@@ -1,0 +1,192 @@
+/* =========================================================
+   GIA Profile — Compact, Full-Width, Neutral Avatar
+   (scoped to .gia-profile-* only) — Tokenized
+   ========================================================= */
+
+/* ---------- Shell ---------- */
+.gia-profile-shell{
+  background: var(--bg);
+  min-height: 100vh;
+  color: var(--text-muted);
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+/* ---------- Top bar ---------- */
+.gia-profile-topbar{
+  height: 56px;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  box-shadow: var(--shadow);
+}
+.gia-profile-topbar .brand{
+  font-weight: 700;
+  color: var(--text);
+  gap: 8px;
+  display: flex;
+  align-items: center;
+}
+.gia-profile-topbar .back-btn{
+  all: unset;
+  display: inline-grid;
+  place-items: center;
+  width: 36px !important;
+  height: 32px !important;
+  border-radius: 8px;
+  background: linear-gradient(135deg, var(--brand-a), var(--brand-b));
+  border: 1px solid var(--border);
+  color: var(--primary-contrast);
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  line-height: 1;
+}
+.gia-profile-topbar .back-btn:hover{
+  background: linear-gradient(135deg, var(--brand-b), var(--brand-a));
+}
+
+/* ---------- Full-width layout ---------- */
+.gia-profile-layout{
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 16px;
+  width: 100%;
+  max-width: none;
+  margin: 16px 12px;
+}
+
+/* ---------- Sidebar ---------- */
+.gia-profile-sidebar{
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.sidebar-user{ display:flex; flex-direction:column; align-items:center; text-align:center; }
+.sidebar-avatar{
+  width: 56px; height: 56px; border-radius: 50%; overflow: hidden;
+  margin-bottom: 8px; box-shadow: var(--shadow);
+}
+/* Neutralize avatar tint */
+.sidebar-avatar img,
+.hero-avatar img{
+  width:100%; height:100%; object-fit:cover; display:block;
+  filter: grayscale(1) saturate(0) brightness(0.95);
+}
+.sidebar-name{ font-weight:700; color: var(--text); font-size:14px; }
+.sidebar-email{ color: var(--text-muted); font-size:12px; }
+
+.gia-profile-nav{ display:flex; flex-direction:column; gap:6px; }
+.nav-item{
+  display:flex; align-items:center; gap:10px; padding:9px 12px;
+  border-radius:10px; border:1px solid transparent; background: var(--bg);
+  font-weight:600; color: var(--text); cursor:pointer;
+  transition: background .18s ease, box-shadow .18s ease, border-color .18s ease;
+  font-size:13px;
+}
+.nav-item:hover{
+  background: color-mix(in srgb, var(--brand-b) 10%, var(--panel));
+  border-color: color-mix(in srgb, var(--brand-b) 35%, var(--border));
+}
+.nav-item.active{
+  color: var(--primary-contrast);
+  background: linear-gradient(135deg, var(--brand-a), var(--brand-b));
+  box-shadow: var(--shadow);
+}
+
+/* ---------- Main ---------- */
+.gia-profile-main{ display:flex; flex-direction:column; gap:16px; }
+
+/* Hero (compact) */
+.gia-profile-hero{
+  display:flex; align-items:center; gap:14px; padding:16px;
+  background: var(--surface); border:1px solid var(--border);
+  border-radius: 12px; box-shadow: var(--shadow);
+}
+.hero-avatar{ position:relative; width:64px; height:64px; border-radius:50%; overflow:hidden; }
+.edit-pic{
+  position:absolute; bottom:0; right:0; transform:translate(20%,20%);
+  width:24px; height:24px; border-radius:50%;
+  border:1px solid var(--border);
+  background: linear-gradient(135deg, var(--brand-a), var(--brand-b));
+  color: var(--primary-contrast); cursor:pointer;
+}
+
+.hero-meta .hero-name{ font-size:18px; font-weight:700; color: var(--text); }
+.hero-meta .hero-email{ color: var(--text-muted); font-size:12px; }
+
+/* ---------- Overview cards ---------- */
+.gia-profile-grid{
+  display:grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap:14px;
+}
+.gia-profile-tile{
+  grid-column: span 6;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  padding: 14px;
+  transition: box-shadow .18s ease, transform .06s ease;
+}
+.gia-profile-tile:hover{
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+.gia-profile-tile h3{
+  margin: 0 0 4px; color: var(--text); font-weight:700; font-size:14px;
+}
+.gia-profile-tile p{
+  margin: 0 0 10px; color: var(--text-muted); font-size:13px;
+}
+
+@media (max-width: 1100px){
+  .gia-profile-tile{ grid-column: span 12; }
+}
+
+/* ---------- Buttons (compact) ---------- */
+.linkish{
+  background: var(--brand-b);
+  border: 1px solid var(--brand-a);
+  border-radius: 999px;
+  color: var(--primary-contrast);
+  font-weight: 700; height: 36px; padding: 0 12px; font-size: 13px;
+  display: inline-flex; align-items: center; justify-content: center; cursor: pointer;
+  width: fit-content;
+}
+.gia-profile-btn{
+  display: inline-flex; align-items: center; justify-content: center;
+  height: 38px; padding: 0 14px; border-radius: 999px;
+  font-weight: 700; font-size: 13px;
+  color: var(--primary-contrast);
+  background: linear-gradient(135deg, var(--brand-a), var(--brand-b));
+  border: 1px solid transparent;
+}
+
+/* ---------- General text scale ---------- */
+.gia-profile-main h2{ margin:0 0 8px; color: var(--text); font-size:16px; font-weight:700; }
+.gia-profile-main p, .gia-profile-main li{ color: var(--text-muted); font-size:13px; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 980px){
+  .gia-profile-layout{ grid-template-columns: 1fr; }
+  .gia-profile-sidebar{ width: 100%; }
+  .gia-profile-hero{ flex-direction: column; align-items: flex-start; }
+}
+
+/* ---------- Avatar fallback ---------- */
+.avatar-fallback{
+  width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--panel);
+  color: var(--text-muted);
+  font-weight: 700; font-size: 20px; border-radius: 50%;
+}

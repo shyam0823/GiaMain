@@ -1,0 +1,233 @@
+/* ---------------- Panel (reused base styles) ---------------- */
+.panel {
+  background: var(--surface);
+  border-radius: 12px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  padding: 28px;
+  max-width: 900px;
+  margin-bottom: 32px;
+  font-family: "Segoe UI", Roboto, sans-serif;
+}
+
+/* ---------------- Header ---------------- */
+.location-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+/* Add Location – themed pill (no hardcoded blue) */
+.add-location-btn {
+  background: var(--primary) !important;
+  color: var(--primary-contrast) !important;
+  font-weight: 600;
+  font-size: 1rem;
+  border: 1px solid var(--primary) !important;
+  border-radius: 25px;
+  padding: 10px 22px;
+  box-shadow: 0 3px 8px var(--focus-ring);
+  cursor: pointer;
+  transition: transform .2s, box-shadow .2s, background .2s, border-color .2s;
+  min-width: 180px;
+}
+.add-location-btn:hover {
+  background: var(--primary-strong) !important;
+  border-color: var(--primary-strong) !important;
+  box-shadow: 0 5px 14px var(--focus-ring);
+  transform: translateY(-1px);
+}
+
+/* ---------------- Filters ---------------- */
+.location-filters { margin-bottom: 22px; }
+
+.radio-label {
+  font-weight: 500;
+  font-size: 0.95rem;
+  margin-right: 24px;
+  position: relative;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  color: var(--text);
+}
+
+/* Hide default radio */
+.radio-label input[type="radio"] {
+  opacity: 0;
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+
+.custom-radio {
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--primary-strong);
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 7px;
+  background: var(--bg);
+  position: relative;
+  transition: all 0.25s ease;
+}
+
+.radio-label input:checked + .custom-radio::after {
+  content: "";
+  display: block;
+  width: 10px;
+  height: 10px;
+  background: var(--primary);
+  border-radius: 50%;
+  position: absolute;
+  top: 3px;
+  left: 3px;
+}
+
+/* ---------------- Table ---------------- */
+.location-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+}
+
+.location-table th,
+.location-table td {
+  padding: 12px 10px;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+}
+
+.location-table th {
+  color: var(--primary-contrast);
+  font-weight: 600;
+  background: var(--primary-strong);
+  font-size: 0.95rem;
+}
+
+.tick { color: var(--text); font-size: 1rem; display: inline-block; margin-top: 2px; }
+
+/* ---------------- "edit location" pill (theme-aware) ---------------- */
+/* Your markup uses an <a> – make it look like the orange pill */
+.edit-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  min-width: 140px;
+  background: var(--primary) !important;
+  color: var(--primary-contrast) !important;
+  border: 1px solid var(--primary) !important;
+  border-radius: 9999px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none !important;
+  box-shadow: 0 3px 10px var(--focus-ring);
+  transition: transform .15s ease, box-shadow .2s ease, background .2s ease, border-color .2s ease;
+}
+.edit-link:hover {
+  background: var(--primary-strong) !important;
+  border-color: var(--primary-strong) !important;
+  text-decoration: none !important;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px var(--focus-ring);
+}
+
+/* ---------------- Modal ---------------- */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(17, 24, 39, 0.55);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.location-form {
+  background: var(--bg);
+  padding: 28px;
+  border-radius: 12px;
+  width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  animation: slideUp 0.35s ease;
+}
+
+.location-form h2 {
+  margin-bottom: 18px;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--text);
+  text-align: center;
+}
+
+/* Form rows */
+.form-row { margin-bottom: 14px; display: flex; flex-direction: column; }
+.form-row label { font-weight: 600; margin-bottom: 6px; color: var(--text); }
+
+.form-row input {
+  padding: 10px 14px;
+  border: 1.3px solid var(--border);
+  border-radius: 8px;
+  font-size: 0.95rem;
+  background: var(--surface);
+  transition: border 0.2s, box-shadow 0.2s, background .2s;
+}
+.form-row input:focus {
+  border-color: var(--primary);
+  background: var(--bg);
+  box-shadow: 0 0 0 3px var(--primary-soft);
+  outline: none;
+}
+
+/* ---------------- Modal Buttons ---------------- */
+.button-row {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 20px;
+}
+.button-row button {
+  padding: 10px 18px;
+  border: 1px solid var(--border);
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: all 0.25s ease-in-out;
+  min-width: 120px;
+  background: var(--surface);
+  color: var(--text);
+}
+.button-row button[type="submit"] {
+  background: var(--primary) !important;
+  color: var(--primary-contrast) !important;
+  border-color: var(--primary) !important;
+}
+.button-row button[type="submit"]:hover {
+  background: var(--primary-strong) !important;
+  border-color: var(--primary-strong) !important;
+}
+.button-row button[type="button"]:hover {
+  background: var(--primary-soft);
+}
+
+/* ---------------- Animations ---------------- */
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes slideUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+/* ---------------- Responsive ---------------- */
+@media (max-width: 700px) {
+  .panel { padding: 16px; }
+  .location-header { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .add-location-btn { width: 100%; }
+  .location-form { width: 90%; }
+}

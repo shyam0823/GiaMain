@@ -1,0 +1,119 @@
+/* ---------------- Root Container ---------------- */
+.form-submission-root {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 28px;
+  background: var(--surface);
+  border-radius: 14px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  font-family: "Segoe UI", Roboto, sans-serif;
+}
+
+/* ---------------- Title ---------------- */
+.form-submission-root h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 18px;
+  text-align: center;
+  background: linear-gradient(90deg, #3a7bd5, #00d2ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ---------------- Description ---------------- */
+.form-submission-root p {
+  color: #475569;
+  font-size: 1rem;
+  margin-bottom: 28px;
+  text-align: center;
+}
+
+/* ---------------- Form Fields ---------------- */
+.form-field {
+  margin-bottom: 22px;
+}
+
+.form-field label {
+  display: block;
+  font-weight: 600;
+  color: #334155;
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1.5px solid #d1d5db;
+  border-radius: 10px;
+  font-size: 1rem;
+  background: #f9fafb;
+  transition: border 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+}
+
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+  border-color: #2563eb;
+  outline: none;
+  background: var(--bg);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+/* Required star */
+.form-field .required {
+  color: #ef4444;
+  margin-left: 4px;
+  font-weight: bold;
+}
+
+/* ---------------- Submit Button ---------------- */
+.form-submit-btn {
+  width: 100%;
+  padding: 14px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #3a7bd5, #00d2ff);
+  color: var(--primary-contrast);
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-submit-btn:hover {
+  background: linear-gradient(135deg, #2e5ea3, #0099cc);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.form-submit-btn:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+/* ---------------- Success / Error Messages ---------------- */
+.form-success {
+  margin-top: 22px;
+  padding: 14px;
+  background: #ecfdf5;
+  color: #047857;
+  border: 1.5px solid #34d399;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.form-error {
+  margin-top: 22px;
+  padding: 14px;
+  background: #fef2f2;
+  color: #b91c1c;
+  border: 1.5px solid #fca5a5;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 500;
+}

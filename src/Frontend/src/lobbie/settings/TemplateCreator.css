@@ -1,0 +1,177 @@
+/* ================================
+   TemplateCreator.css (modal look)
+   Matches "Create new patient" overlay
+   Prefix: tc-
+==================================*/
+
+:root {
+  --tc-bg-overlay: rgba(15, 23, 42, 0.55);       /* dark glass */
+  --tc-card-bg: #ffffff;
+  --tc-text: #0f172a;                             /* slate-900 */
+  --tc-muted: #64748b;                            /* slate-500 */
+  --tc-border: #e5e7eb;                           /* gray-200 */
+  --tc-focus: #60a5fa;                            /* blue-400 */
+  --tc-shadow: 0 20px 40px rgba(2, 6, 23, 0.25);
+  --tc-radius: 20px;
+  --tc-gap: 16px;
+
+  /* Primary button gradient like your "Create Patient" */
+  --tc-grad-start: #2563eb;  /* blue-600 */
+  --tc-grad-end:   #06b6d4;  /* cyan-500 */
+}
+
+/* Backdrop */
+.tc-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--tc-bg-overlay);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999; /* above app chrome */
+  animation: tc-fade-in 180ms ease-out;
+}
+
+/* Center card */
+.tc-modal {
+  width: min(860px, calc(100% - 48px));
+  background: var(--tc-card-bg);
+  color: var(--tc-text);
+  border-radius: var(--tc-radius);
+  box-shadow: var(--tc-shadow);
+  padding: 28px;
+  animation: tc-pop 200ms ease-out;
+}
+
+/* Header */
+.tc-modal__title {
+  font-size: 28px;
+  font-weight: 700;
+  text-align: center;
+  margin: 4px 0 20px;
+}
+
+/* Close (optional X) */
+.tc-close {
+  position: absolute;
+  right: 18px;
+  top: 16px;
+  border: 0;
+  background: transparent;
+  font-size: 22px;
+  line-height: 1;
+  color: var(--tc-muted);
+  cursor: pointer;
+}
+.tc-close:hover { color: #0f172a; }
+
+/* Form layout */
+.tc-form {
+  display: grid;
+  gap: var(--tc-gap);
+}
+
+/* Two columns on wider screens, one on mobile */
+@media (min-width: 720px) {
+  .tc-grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--tc-gap);
+  }
+}
+
+/* Labels & inputs */
+.tc-label {
+  display: block;
+  font-size: 14px;
+  color: var(--tc-muted);
+  margin-bottom: 6px;
+}
+
+.tc-input,
+.tc-select,
+.tc-textarea {
+  width: 100%;
+  border: 1px solid var(--tc-border);
+  border-radius: 12px;
+  padding: 12px 14px;
+  font-size: 15px;
+  outline: none;
+  background: var(--bg);
+  transition: box-shadow .15s ease, border-color .15s ease, transform .04s ease;
+}
+
+.tc-textarea { min-height: 110px; resize: vertical; }
+
+.tc-input:focus,
+.tc-select:focus,
+.tc-textarea:focus {
+  border-color: var(--tc-focus);
+  box-shadow: 0 0 0 4px rgba(96, 165, 250, 0.25);
+}
+
+/* Fields preview block (the white panel area) */
+.tc-preview {
+  border: 1px dashed var(--tc-border);
+  border-radius: 14px;
+  padding: 16px;
+  min-height: 84px;
+  background: #fafafa;
+}
+
+/* Action row */
+.tc-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  margin-top: 6px;
+}
+
+/* Buttons */
+.tc-btn {
+  appearance: none;
+  border: 0;
+  border-radius: 12px;
+  padding: 12px 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform .05s ease, box-shadow .15s ease, opacity .15s ease;
+}
+
+.tc-btn:active { transform: translateY(1px); }
+
+/* Primary gradient (matches Create Patient) */
+.tc-btn--primary {
+  background-image: linear-gradient(90deg, var(--tc-grad-start), var(--tc-grad-end));
+  color: var(--primary-contrast);
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.25);
+}
+.tc-btn--primary:hover { box-shadow: 0 10px 24px rgba(37, 99, 235, 0.35); }
+
+/* Secondary / ghost */
+.tc-btn--ghost {
+  background: #f1f5f9;          /* slate-100 */
+  color: #0f172a;
+}
+.tc-btn--ghost:hover { background: #e2e8f0; }
+
+/* Full-width CTA (for your "Add Field" bar) */
+.tc-btn--bar {
+  width: 100%;
+  padding: 14px 18px;
+}
+
+/* Micro helpers */
+.tc-row { display: flex; gap: 10px; align-items: center; }
+.tc-spacer { height: 8px; }
+
+/* Animations (same vibe as patient modal) */
+@keyframes tc-fade-in {
+  from { opacity: 0; } to { opacity: 1; }
+}
+@keyframes tc-pop {
+  from { opacity: 0; transform: translateY(6px) scale(.98); }
+  to   { opacity: 1; transform: translateY(0)   scale(1); }
+}

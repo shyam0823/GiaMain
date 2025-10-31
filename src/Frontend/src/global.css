@@ -1,0 +1,1223 @@
+
+
+/* Root variables (defaults for giaDefault) */
+:root {
+  --bg: #ffffff;
+  --surface: #f8faff;
+  --text: #1b3c53;
+  --muted: #5f7a8a;
+  --primary: #007bff;
+  --primary-contrast: #ffffff;
+  --primary-soft: #e6f0ff;     /* lighter accent */
+  --primary-strong: #005fcc;   /* darker accent */
+  --accent: #d0e4ff;
+  --border: #e6eef7;
+  --ring: #007bff;
+  --gradient: linear-gradient(180deg, #ffffff 0%, #f8faff 100%);
+}
+
+/* Color scheme for browsers */
+:root { color-scheme: light; }
+
+/* ================================
+   Base Page Structure
+   ================================ */
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Inter", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Global layout primitives */
+.app-surface {
+  background: var(--surface);
+  min-height: 100%;
+}
+
+/* ================================
+   Containers, Cards & Panels
+   ================================ */
+aside, .sidebar, .drawer, .panel, .card, .box, .container, .modal, .dropdown-menu {
+  background: var(--surface) !important;
+  color: var(--text) !important;
+  border: 1px solid var(--border) !important;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+}
+
+/* ================================
+   Header / Topbar / Navigation
+   ================================ */
+header, .header, .topbar, .app-header, .navbar, .hero {
+  background: var(--gradient) !important;
+  color: var(--text) !important;
+  border-bottom: 1px solid var(--border) !important;
+}
+
+/* ================================
+   Forms & Inputs
+   ================================ */
+input, select, textarea, .input, .select, .textarea {
+  background: var(--surface) !important;
+  color: var(--text) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 8px;
+  padding: 8px 10px;
+  box-shadow: none !important;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+input:focus, select:focus, textarea:focus {
+  border-color: var(--primary) !important;
+  box-shadow: 0 0 0 2px var(--primary-soft);
+}
+input::placeholder, textarea::placeholder {
+  color: var(--muted) !important;
+}
+
+/* ================================
+   Buttons
+   ================================ */
+button, .btn {
+  background: var(--primary) !important;
+  color: var(--primary-contrast) !important;
+  border: none !important;
+  border-radius: 8px;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s ease-in-out;
+}
+button:hover, .btn:hover { opacity: 0.92; }
+
+.btn-outline, .btn-secondary {
+  background: var(--primary-soft) !important;
+  color: var(--text) !important;
+  border: 1px solid var(--primary-strong) !important;
+}
+.btn-outline:hover, .btn-secondary:hover {
+  background: var(--primary) !important;
+  color: var(--primary-contrast) !important;
+}
+
+/* ================================
+   Tabs / Filters / Pills
+   ================================ */
+.tab, .pill, .chip, .badge, .filter, .segmented-control button {
+  background: var(--primary-soft) !important;
+  color: var(--text) !important;
+  border: 1px solid var(--primary-strong) !important;
+  border-radius: 6px;
+  font-weight: 500;
+}
+.tab.active, .pill.active, .chip.active, .badge.active {
+  background: var(--primary) !important;
+  color: var(--primary-contrast) !important;
+  border-color: var(--primary) !important;
+}
+
+/* ================================
+   Tables
+   ================================ */
+table, .table {
+  color: var(--text) !important;
+  border-collapse: collapse;
+  width: 100%;
+}
+.table thead th {
+  background: var(--primary-strong) !important;
+  color: var(--primary-contrast) !important;
+  border-bottom: 2px solid var(--primary-strong) !important;
+  padding: 10px;
+}
+.table tbody td {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 10px;
+}
+.table tbody tr:hover {
+  background: var(--primary-soft) !important;
+}
+
+/* ================================
+   Pagination
+   ================================ */
+.pagination {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  justify-content: center;
+  margin: 12px 0;
+}
+.pagination button, .pagination .page {
+  background: var(--primary-soft) !important;
+  color: var(--text) !important;
+  border: 1px solid var(--primary-strong) !important;
+  border-radius: 6px;
+  padding: 6px 10px;
+  cursor: pointer;
+}
+.pagination button.active, .pagination .page.active {
+  background: var(--primary) !important;
+  color: var(--primary-contrast) !important;
+}
+
+/* ================================
+   Links & Focus
+   ================================ */
+a, .link {
+  color: var(--primary) !important;
+  text-decoration: none;
+}
+a:hover, .link:hover { text-decoration: underline; }
+
+:focus-visible {
+  outline: 2px solid var(--ring) !important;
+  outline-offset: 2px;
+}
+
+/* ================================
+   Misc Elements
+   ================================ */
+.card {
+  background: var(--surface) !important;
+  border-radius: 10px;
+  padding: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+body {
+  background: var(--bg) !important;
+  color: var(--text) !important;
+}
+/* ===== FINAL OVERRIDES: force remaining navies/blues to themed accents ===== */
+
+/* Table headers (catch-all, higher specificity, wins over !important blues) */
+table thead,
+table thead tr,
+table thead th,
+.table thead,
+.table thead tr,
+.table thead th,
+[class*="table"] thead,
+[class*="table"] thead tr,
+[class*="table"] thead th,
+.table-header,
+.table-header th,
+th.table-header,
+.table-header-cell {
+  background: var(--primary-strong) !important;
+  color: var(--primary-contrast) !important;
+  border-color: var(--primary-strong) !important;
+}
+
+/* Data rows hover and zebra can still look blue—tint them to theme */
+.table tbody tr:hover,
+[class*="table"] tbody tr:hover {
+  background: var(--primary-soft) !important;
+}
+
+/* Pills/Badges/Counters that were hard-coded blue */
+.badge,
+.pill,
+.chip,
+.counter,
+.tag,
+.status,
+.kpi-badge {
+  background: var(--primary-soft) !important;
+  color: var(--text) !important;
+  border: 1px solid var(--primary-strong) !important;
+}
+.badge.primary,
+.pill.primary,
+.chip.primary,
+.tag.primary,
+.status.active {
+  background: var(--primary) !important;
+  color: var(--primary-contrast) !important;
+  border-color: var(--primary) !important;
+}
+
+/* Pagination buttons that were navy */
+.pagination .page,
+.pagination button,
+.pagination a,
+.pager .page,
+.pager button,
+.pager a {
+  background: var(--primary-soft) !important;
+  color: var(--text) !important;
+  border: 1px solid var(--primary-strong) !important;
+}
+.pagination .active,
+.pagination .page.active,
+.pagination button.active,
+.pager .active {
+  background: var(--primary) !important;
+  color: var(--primary-contrast) !important;
+  border-color: var(--primary) !important;
+}
+
+/* Legacy Bootstrap-ish button classes that might be lingering */
+.btn-primary,
+.btn-info,
+.btn-blue {
+  background: var(--primary) !important;
+  color: var(--primary-contrast) !important;
+  border-color: var(--primary) !important;
+}
+.btn-outline-primary,
+.btn-outline-info {
+  background: var(--primary-soft) !important;
+  color: var(--text) !important;
+  border: 1px solid var(--primary-strong) !important;
+}
+
+/* Any “header cell” classes some tables use */
+th[role="columnheader"],
+th.header,
+th.col-header {
+  background: var(--primary-strong) !important;
+  color: var(--primary-contrast) !important;
+  border-color: var(--primary-strong) !important;
+}
+/* ===== FINAL-FINAL OVERRIDES: footer bar + left sidebar ===== */
+
+/* Bottom footer / table footer / sticky controls */
+.table-footer,
+.table__footer,
+.dataTables_wrapper .dataTables_paginate,
+.dataTables_wrapper .dataTables_info,
+.pagination-container,
+.pagination-bar,
+.list-footer,
+.footer-toolbar,
+.sticky-footer,
+.bottom-controls {
+  background: var(--surface) !important;
+  color: var(--text) !important;
+  border-top: 1px solid var(--border) !important;
+  box-shadow: none !important;
+}
+
+/* Buttons inside the bottom area */
+.table-footer button,
+.table__footer button,
+.pagination-container button,
+.pagination-bar button,
+.list-footer button,
+.footer-toolbar button,
+.bottom-controls button,
+.table-footer .btn,
+.pagination-container .btn {
+  background: var(--primary-soft) !important;
+  color: var(--text) !important;
+  border: 1px solid var(--primary-strong) !important;
+}
+.table-footer .active,
+.pagination-container .active,
+.pagination-bar .active,
+.footer-toolbar .active {
+  background: var(--primary) !important;
+  color: var(--primary-contrast) !important;
+  border-color: var(--primary) !important;
+}
+
+/* Left sidebar panel stays light and neutral */
+.app-sidebar,
+.sidebar,
+.side-nav,
+.left-nav,
+.nav-rail {
+  background: var(--surface) !important;
+  border-right: 1px solid var(--border) !important;
+  box-shadow: none !important;
+}
+
+/* Sidebar items (default) */
+.app-sidebar .nav-item,
+.sidebar .nav-item,
+.side-nav .nav-item,
+.left-nav .nav-item,
+.nav-rail .nav-item {
+  color: var(--text) !important;
+  background: transparent !important;
+  border-radius: 10px;
+}
+
+/* Sidebar icons (remove legacy blue squares) */
+.app-sidebar .nav-item .icon,
+.sidebar .nav-item .icon,
+.side-nav .nav-item .icon,
+.left-nav .nav-item .icon,
+.nav-rail .nav-item .icon,
+.app-sidebar .icon-wrap,
+.sidebar .icon-wrap {
+  background: transparent !important;          /* kill the blue tile */
+  color: var(--text) !important;
+}
+
+/* Hover and active states use theme accents */
+.app-sidebar .nav-item:hover,
+.sidebar .nav-item:hover,
+.side-nav .nav-item:hover,
+.left-nav .nav-item:hover {
+  background: var(--primary-soft) !important;
+  color: var(--text) !important;
+}
+
+.app-sidebar .nav-item.active,
+.sidebar .nav-item.active,
+.side-nav .nav-item.active,
+.left-nav .nav-item.active,
+.nav-rail .nav-item.active {
+  background: var(--primary) !important;
+  color: var(--primary-contrast) !important;
+}
+.app-sidebar .nav-item.active .icon,
+.sidebar .nav-item.active .icon,
+.side-nav .nav-item.active .icon {
+  color: var(--primary-contrast) !important;
+}
+/* ===== FINAL PATCH #2: kill remaining blues (zebra rows, "Show", badges) ===== */
+
+/* Zebra rows & hover states from Bootstrap-like tables */
+.table-striped tbody tr:nth-of-type(odd),
+.table-striped tbody tr:nth-of-type(even),
+.table-hover tbody tr:hover,
+tr.selected,
+.table tbody tr.selected {
+  background: var(--primary-soft) !important;   /* themed tint instead of blue */
+  color: var(--text) !important;
+}
+
+/* Row selection checkmark/indicator that might be blue */
+.table .row-selected,
+tr[aria-selected="true"],
+tr.is-selected {
+  background: var(--primary-soft) !important;
+  color: var(--text) !important;
+}
+
+/* "Show:" capsule at footer - input group bits */
+.input-group-text,
+.input-group > .input-group-text,
+.form-select,
+select.form-select {
+  background: var(--primary-soft) !important;
+  color: var(--text) !important;
+  border: 1px solid var(--primary-strong) !important;
+  box-shadow: none !important;
+}
+
+/* The small dropdown caret capsule next to "Show" */
+.input-group .dropdown-toggle,
+.input-group .btn {
+  background: var(--primary-soft) !important;
+  color: var(--text) !important;
+  border: 1px solid var(--primary-strong) !important;
+}
+
+/* “0 forms” counter / small info badges that used to be blue */
+.badge,
+.label,
+.counter,
+.count-badge,
+.info-badge,
+.forms-count,
+.status-pill {
+  background: var(--primary-soft) !important;
+  color: var(--text) !important;
+  border: 1px solid var(--primary-strong) !important;
+}
+.badge-primary,
+.label-primary,
+.badge.info,
+.btn-info,
+.btn-primary.label {
+  background: var(--primary) !important;
+  color: var(--primary-contrast) !important;
+  border-color: var(--primary) !important;
+}
+
+/* Any residual bg-primary / text-primary utilities */
+.bg-primary,
+.bg-info,
+.bg-blue,
+.text-primary,
+.text-info {
+  background: var(--primary) !important;
+  color: var(--primary-contrast) !important;
+}
+
+/* Footer/pagination container itself */
+.table-footer,
+.pagination-container,
+.pagination-bar,
+.dataTables_wrapper .dataTables_paginate,
+.dataTables_wrapper .dataTables_info {
+  background: var(--surface) !important;
+  color: var(--text) !important;
+  border-top: 1px solid var(--border) !important;
+}
+
+/* Footer pagination buttons */
+.pagination .page,
+.pagination button,
+.pagination a,
+.pagination .page-item .page-link,
+.pagination .page-item,
+.pager .page,
+.pager button {
+  background: var(--primary-soft) !important;
+  color: var(--text) !important;
+  border: 1px solid var(--primary-strong) !important;
+  border-radius: 6px !important;
+}
+.pagination .active,
+.pagination .page-item.active .page-link,
+.pager .active {
+  background: var(--primary) !important;
+  color: var(--primary-contrast) !important;
+  border-color: var(--primary) !important;
+}
+/* ===== FINAL PATCH #3: native <select> menu + DataTables "Show:" area ===== */
+
+/* Style the CLOSED select control (already themed, keep for safety) */
+select,
+.form-select {
+  background: var(--surface) !important;
+  color: var(--text) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 8px !important;
+  appearance: none;                 /* remove UA styling */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+/* Style the OPENED dropdown list (supported by Chromium/Firefox) */
+select option,
+select optgroup {
+  background: var(--surface) !important;
+  color: var(--text) !important;
+}
+select option:checked,
+select option:focus,
+select option:hover {
+  background: var(--primary-soft) !important;
+  color: var(--text) !important;
+}
+
+/* Old Edge/IE arrow (harmless elsewhere) */
+select::-ms-expand { display: none; }
+
+/* DataTables "Show:" block (length selector) */
+.dataTables_wrapper .dataTables_length,
+.dataTables_wrapper .dataTables_length label,
+.dataTables_wrapper .dataTables_length select {
+  background: transparent !important;
+  color: var(--text) !important;
+  border-color: var(--border) !important;
+}
+
+/* The blue capsule behind "Show:" in some themes */
+.dataTables_wrapper .dataTables_length,
+.dataTables_length,
+.length-menu,
+.show-count,
+footer .length-menu,
+.table-footer .length-menu {
+  background: var(--surface) !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+/* The "Show" label chip and dropdown next to it */
+.dataTables_length label .input-group-text,
+.dataTables_length .input-group-text,
+.dataTables_length .btn,
+.dataTables_length .dropdown-toggle,
+.dataTables_length .form-select,
+.length-menu .input-group-text,
+.length-menu .form-select {
+  background: var(--primary-soft) !important;
+  border: 1px solid var(--primary-strong) !important;
+  color: var(--text) !important;
+  border-radius: 8px !important;
+}
+
+/* DataTables paginate buttons (safety) */
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+  background: var(--primary-soft) !important;
+  color: var(--text) !important;
+  border: 1px solid var(--primary-strong) !important;
+  border-radius: 6px !important;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button.current,
+.dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+  background: var(--primary) !important;
+  color: var(--primary-contrast) !important;
+  border-color: var(--primary) !important;
+}
+/* ===== FINAL PATCH #5 — kill blue gradient chip in footer ===== */
+
+/* Footer container stays light */
+.footer-bar {
+  background: var(--surface) !important;
+  color: var(--text) !important;
+  border-top: 1px solid var(--border) !important;
+  box-shadow: none !important;
+}
+
+/* The blue gradient capsule around "Show:" */
+.footer-bar .show-wrap,
+.footer-bar .show-wrap * {
+  background: transparent !important;           /* wipe gradient on descendants */
+  box-shadow: none !important;
+}
+
+/* Give the chip a themed look */
+.footer-bar .show-wrap {
+  background: var(--primary-soft) !important;   /* themed soft background */
+  border: 1px solid var(--primary-strong) !important;
+  border-radius: 10px !important;
+  padding: 6px 10px !important;
+}
+
+/* The "Show:" text */
+.footer-bar .show-label {
+  color: var(--text) !important;                 /* was white */
+  font-weight: 600 !important;
+}
+
+/* The dropdown inside the chip */
+.footer-bar .show-select,
+.footer-bar .show-wrap select {
+  background: var(--surface) !important;
+  color: var(--text) !important;
+  border: 1px solid var(--primary-strong) !important;
+  border-radius: 8px !important;
+  box-shadow: none !important;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+/* The forms counter chip at left */
+.footer-bar .count-badge,
+.footer-bar .count-badge * {
+  background: var(--primary-soft) !important;
+  color: var(--text) !important;
+  border: 1px solid var(--primary-strong) !important;
+  border-radius: 10px !important;
+  box-shadow: none !important;
+}
+
+/* Pager arrows on the right */
+.footer-bar .pager-wrap button,
+.footer-bar .pager-wrap .btn,
+.footer-bar .pager-wrap a {
+  background: var(--primary-soft) !important;
+  color: var(--text) !important;
+  border: 1px solid var(--primary-strong) !important;
+  border-radius: 8px !important;
+}
+.footer-bar .pager-wrap .active,
+.footer-bar .pager-wrap .btn.active,
+.footer-bar .pager-wrap .current {
+  background: var(--primary) !important;
+  color: var(--primary-contrast) !important;
+  border-color: var(--primary) !important;
+}
+
+/* Safety: any lingering gradient on footer descendants */
+.footer-bar [style*="linear-gradient"],
+.footer-bar .bg-gradient {
+  background: var(--primary-soft) !important;
+  box-shadow: none !important;
+}
+/* =========================
+   FINAL PATCH #6 – the last blues
+   ========================= */
+
+/* 1) Forms table rows (kill zebra blue + selected blue) */
+.forms-table tbody tr,
+table.forms-table tbody tr {
+  background: var(--surface) !important;
+  color: var(--text) !important;
+}
+.forms-table tbody tr:nth-child(odd),
+.forms-table tbody tr:nth-child(even) {
+  background: var(--surface) !important;                 /* no legacy zebra */
+}
+.forms-table tbody tr:hover {
+  background: var(--primary-soft) !important;            /* themed hover */
+}
+.forms-table tbody tr.selected,
+.forms-table tbody tr.active,
+.forms-table tbody tr[aria-selected="true"],
+.forms-table tbody tr.is-selected {
+  background: var(--primary-soft) !important;            /* themed selected */
+  color: var(--text) !important;
+}
+
+/* 2) Tooltips / help popovers (e.g., the “Analytics” bubble) */
+.tooltip,
+.popover,
+.tour-tip,
+.tippy-box,
+.rc-tooltip,
+.reactour__popover,
+[data-popper-placement][role="tooltip"] {
+  background: var(--surface) !important;
+  color: var(--text) !important;
+  border: 1px solid var(--border) !important;
+  box-shadow: 0 8px 24px rgba(0,0,0,.08) !important;
+}
+.tooltip a,
+.popover a,
+.tippy-box a,
+.rc-tooltip a,
+.reactour__popover a {
+  color: var(--primary) !important;                      /* stop blue link */
+}
+
+/* 3) Top filters (forms filters) */
+.forms-filters select,
+.forms-filters .ff-input,
+.forms-filters .ff-input select {
+  background: var(--surface) !important;
+  color: var(--text) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 8px !important;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+/* Safety: wipe any gradient remnants on footer/filter chips */
+.forms-filters [style*="linear-gradient"],
+.footer-bar [style*="linear-gradient"] {
+  background: var(--primary-soft) !important;
+  box-shadow: none !important;
+}
+
+/* Optional: give hovered filter chips a gentle theme tint */
+.forms-filters .chip:hover,
+.forms-filters .pill:hover {
+  background: var(--primary-soft) !important;
+  color: var(--text) !important;
+}
+/* ===== FINAL PATCH #7 — kill cell-level blues & page gradient ===== */
+
+/* Page wrapper background (was a fixed blue/gray gradient) */
+.lobbie-dashboard {
+  background: var(--gradient) !important;       /* or var(--bg) if you want flat */
+  color: var(--text) !important;
+}
+
+/* Table HEADER styling (optional – keeps your current theme tokens) */
+.forms-table thead th {
+  background: var(--primary) !important;
+  color: var(--primary-contrast) !important;
+  border-color: var(--primary) !important;
+}
+
+/* Table BODY cells — override direct td backgrounds */
+table.forms-table tbody tr td,
+.forms-table tbody tr td {
+  background: var(--surface) !important;        /* was #eaf3ff */
+  color: var(--text) !important;
+  border-bottom: 1px solid var(--border) !important;
+}
+
+/* Kill zebra striping that sets even-row cells to blue */
+table.forms-table tbody tr:nth-child(odd) td,
+table.forms-table tbody tr:nth-child(even) td,
+.forms-table tbody tr:nth-child(odd) td,
+.forms-table tbody tr:nth-child(even) td {
+  background: var(--surface) !important;        /* was #dbeafe */
+}
+
+/* Hover/selected states (theme-friendly) */
+table.forms-table tbody tr:hover td,
+.forms-table tbody tr:hover td {
+  background: var(--primary-soft) !important;
+  color: var(--text) !important;
+}
+
+table.forms-table tbody tr.selected td,
+.forms-table tbody tr.active td,
+.forms-table tbody tr[aria-selected="true"] td,
+.forms-table tbody tr.is-selected td,
+.forms-table tbody tr.selected,
+.forms-table tbody tr.active,
+.forms-table tbody tr[aria-selected="true"],
+.forms-table tbody tr.is-selected {
+  background: var(--primary-soft) !important;
+  color: var(--text) !important;
+}
+
+/* Safety: if any inline gradient sneaks in on the table container */
+.table-container[style*="linear-gradient"],
+.forms-table[style*="linear-gradient"] {
+  background: var(--surface) !important;
+}
+/***********************
+ * 1) TABLE BLUE FIXES *
+ ***********************/
+.forms-table,
+table.forms-table {
+  background: var(--surface) !important;
+}
+
+.forms-table td,
+table.forms-table td {
+  background: var(--surface) !important;
+  color: var(--text) !important;
+  border-bottom: 1px solid var(--border) !important;
+}
+
+/* strip any alternating-row blues that older CSS added */
+.forms-table tr:nth-child(even) td,
+table.forms-table tr:nth-child(even) td {
+  background: var(--surface) !important;
+}
+
+/* hover/selected state — use theme soft instead of blue */
+.forms-table tbody tr:hover td,
+table.forms-table tbody tr:hover td,
+.forms-table tr.selected td,
+table.forms-table tr.selected td {
+  background: var(--primary-soft) !important;
+}
+
+/*********************************
+ * 2) FOOTER "SHOW" SELECT STYLES *
+ *********************************/
+.footer-bar {
+  background: var(--surface) !important;
+  color: var(--text) !important;
+  border-top: 1px solid var(--border) !important;
+  box-shadow: none !important;
+}
+
+/* the pill wrapper */
+.footer-bar .show-wrap {
+  background: var(--primary-soft) !important;
+  border: 1px solid var(--border) !important;
+  color: var(--text) !important;
+  border-radius: 9999px !important;
+  padding: 6px 12px !important;
+  box-shadow: none !important;
+}
+
+/* normalize the select itself */
+.footer-bar .show-select,
+.footer-bar .show-wrap select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: var(--surface) !important;
+  color: var(--text) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 8px !important;
+  padding: 6px 28px 6px 10px !important;
+  font-weight: 600;
+  line-height: 1.2;
+  box-shadow: none !important;
+  min-width: 120px;
+  outline: none;
+}
+
+/* options popup (Chrome/Edge/Firefox support) */
+.footer-bar .show-select option,
+.footer-bar .show-wrap select option {
+  background: var(--surface) !important;
+  color: var(--text) !important;
+}
+
+/* hovered/selected option — use theme */
+.footer-bar .show-select option:hover,
+.footer-bar .show-wrap select option:hover {
+  background: var(--primary-soft) !important;
+  color: var(--text) !important;
+}
+.footer-bar .show-select option:checked,
+.footer-bar .show-wrap select option:checked {
+  background: var(--primary-soft) !important;
+  color: var(--text) !important;
+}
+
+/* hide default caret on old Edge/IE */
+.footer-bar .show-select::-ms-expand {
+  display: none;
+}
+
+/* avoid tiny scrollbars inside popup */
+.footer-bar .show-select::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+/******************************************
+ * 3) STRIP ANY LEFTOVER DASHBOARD BLUES  *
+ ******************************************/
+.lobbie-dashboard {
+  background: var(--gradient) !important; /* your theme gradient */
+  color: var(--text) !important;
+}
+
+/* in case an old rule forces #eaf3ff/#dbeafe anywhere */
+*[style*="#eaf3ff"],
+*[style*="#dbeafe"] {
+  background: var(--surface) !important;
+}
+/* =============================
+   Theme Scoping (Admin + Customer)
+   ============================= */
+
+/* 🔷 ADMIN AREA: apply theme vars only to admin containers */
+.settings-layout,
+#admin-app,
+.lobbie-root {
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Inter", system-ui, sans-serif;
+}
+
+/* 🔶 CUSTOMER AREA: apply theme vars only to customer containers */
+.customer-container,
+.fb-like-settings {
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Inter", system-ui, sans-serif;
+}
+/* ================================
+   TOPBAR/ACTION BUTTONS — THEME PATCH
+   Force Go / File download / Support / GIA HR to use theme tokens
+   ================================ */
+
+/* Header / Topbar action buttons */
+header .btn,
+header button,
+header .action,
+header .pill,
+.topbar .btn,
+.topbar button,
+.topbar .action,
+.app-header .btn,
+.app-header button,
+.app-header .action,
+.app-header .pill,
+.topbar-actions .btn,
+.topbar-actions button,
+.topbar-actions .action,
+.header-actions .btn,
+.header-actions button,
+.header-actions .action,
+.navbar .btn,
+.navbar button,
+.navbar .action {
+  background: linear-gradient(90deg, var(--brand-a), var(--brand-b)) !important;
+  color: var(--primary-contrast) !important;
+  border: 1px solid var(--brand-a) !important;
+  box-shadow: 0 6px 20px var(--focus-ring) !important;
+}
+
+/* Hover: invert to pill outline */
+header .btn:hover,
+header button:hover,
+header .action:hover,
+.topbar .btn:hover,
+.topbar button:hover,
+.topbar .action:hover,
+.app-header .btn:hover,
+.app-header button:hover,
+.app-header .action:hover,
+.navbar .btn:hover,
+.navbar button:hover,
+.navbar .action:hover {
+  background: var(--panel) !important;
+  color: var(--brand-a) !important;
+  border-color: var(--brand-a) !important;
+  transform: translateY(-1px);
+}
+
+/* “Go” button inside search bar */
+.search-bar button,
+.search-bar .btn,
+.search-wide button,
+.search-wide .btn,
+#global-search button,
+#global-search .btn {
+  background: var(--primary) !important;
+  color: var(--primary-contrast) !important;
+  border: 1px solid var(--primary) !important;
+  box-shadow: 0 6px 16px var(--focus-ring) !important;
+}
+
+/* Any leftover bootstrap-ish primaries in header */
+header .btn-primary,
+.topbar .btn-primary,
+.app-header .btn-primary,
+.navbar .btn-primary,
+header .btn-info,
+.topbar .btn-info,
+.app-header .btn-info {
+  background: var(--primary) !important;
+  border-color: var(--primary) !important;
+  color: var(--primary-contrast) !important;
+}
+
+/* Subtle header chips/pills */
+header .pill,
+.topbar .pill,
+.app-header .pill,
+.header-actions .pill,
+.topbar-actions .pill {
+  background: var(--primary-soft) !important;
+  color: var(--text) !important;
+  border: 1px solid var(--primary-strong) !important;
+}
+header .pill.active,
+.topbar .pill.active,
+.app-header .pill.active {
+  background: var(--primary) !important;
+  color: var(--primary-contrast) !important;
+  border-color: var(--primary) !important;
+}
+
+/* Blue-rimmed icon buttons that stay navy */
+header .icon-button,
+.topbar .icon-button,
+.app-header .icon-button {
+  background: var(--primary-soft) !important;
+  color: var(--brand-a) !important;
+  border: 1px solid var(--primary-strong) !important;
+}
+header .icon-button:hover,
+.topbar .icon-button:hover,
+.app-header .icon-button:hover {
+  background: var(--primary) !important;
+  color: var(--primary-contrast) !important;
+  border-color: var(--primary) !important;
+}
+/* ================================
+   FINAL HEADER/TOPBAR THEME FORCE
+   ================================ */
+
+/* target ALL interactive buttons/links inside header/topbar/navbars */
+header :is(button,a[role="button"],.btn,.button,.action,.pill,[class*="btn"],[class*="Button"]),
+.app-header :is(button,a[role="button"],.btn,.button,.action,.pill,[class*="btn"],[class*="Button"]),
+.topbar :is(button,a[role="button"],.btn,.button,.action,.pill,[class*="btn"],[class*="Button"]),
+.navbar :is(button,a[role="button"],.btn,.button,.action,.pill,[class*="btn"],[class*="Button"]),
+.header-actions :is(button,a[role="button"],.btn,.button,.action,.pill,[class*="btn"],[class*="Button"]),
+.topbar-actions :is(button,a[role="button"],.btn,.button,.action,.pill,[class*="btn"],[class*="Button"]) {
+  background: linear-gradient(90deg, var(--brand-a), var(--brand-b)) !important;
+  color: var(--primary-contrast) !important;
+  border: 1px solid var(--brand-a) !important;
+  box-shadow: 0 6px 18px var(--focus-ring) !important;
+}
+
+/* hover = outlined pill */
+header :is(button,.btn,.action,.pill,[class*="btn"]):hover,
+.app-header :is(button,.btn,.action,.pill,[class*="btn"]):hover,
+.topbar :is(button,.btn,.action,.pill,[class*="btn"]):hover,
+.navbar :is(button,.btn,.action,.pill,[class*="btn"]):hover {
+  background: var(--panel) !important;
+  color: var(--brand-a) !important;
+  border-color: var(--brand-a) !important;
+  transform: translateY(-1px);
+}
+
+/* special case: the "Go" button inside search bar */
+header :is(.search-bar,.search-wide,#global-search) :is(button,.btn,[type="submit"]),
+.app-header :is(.search-bar,.search-wide,#global-search) :is(button,.btn,[type="submit"]) {
+  background: var(--primary) !important;
+  color: var(--primary-contrast) !important;
+  border: 1px solid var(--primary) !important;
+  box-shadow: 0 6px 16px var(--focus-ring) !important;
+}
+
+/* icon-circle buttons that stayed blue */
+header .icon-button,
+.topbar .icon-button,
+.app-header .icon-button {
+  background: var(--primary-soft) !important;
+  color: var(--brand-a) !important;
+  border: 1px solid var(--primary-strong) !important;
+}
+header .icon-button:hover,
+.topbar .icon-button:hover,
+.app-header .icon-button:hover {
+  background: var(--primary) !important;
+  color: var(--primary-contrast) !important;
+  border-color: var(--primary) !important;
+}
+
+/* bootstrap-ish fallbacks in header/topbar */
+header .btn-primary,
+.topbar .btn-primary,
+.app-header .btn-primary,
+.navbar .btn-primary,
+header .btn-info,
+.topbar .btn-info,
+.app-header .btn-info {
+  background: var(--primary) !important;
+  border-color: var(--primary) !important;
+  color: var(--primary-contrast) !important;
+}
+:focus-visible {
+  outline: 2px solid var(--ring, var(--focus-ring, #66afe9)) !important;
+  outline-offset: 2px;
+}
+/* =========================================================
+   ADMIN — FINAL OVERRIDES (append at the very bottom)
+   Ensures everything under Admin uses the selected theme.
+   ========================================================= */
+
+/* Scope tokens to admin shells and to body when tagged */
+body.admin-theme,
+.lobbie-root,
+.settings-layout,
+#admin-app {
+  background: var(--bg) !important;
+  color: var(--text) !important;
+}
+
+/* 1) Buttons in header/topbar/nav: force to theme (kill fixed gradients) */
+body.admin-theme header .btn,
+body.admin-theme header button,
+body.admin-theme header .action,
+body.admin-theme .topbar .btn,
+body.admin-theme .topbar button,
+body.admin-theme .navbar .btn,
+body.admin-theme .navbar button,
+.lobbie-root .btn,
+.lobbie-root button {
+  background: var(--primary) !important;
+  color: var(--primary-contrast) !important;
+  border: 1px solid var(--primary) !important;
+  box-shadow: none !important;
+}
+
+/* If you WANT the brand gradient in header, keep just this block: */
+body.admin-theme header :is(button,a[role="button"],.btn,.button,.action,.pill,[class*="btn"],[class*="Button"]),
+body.admin-theme .topbar :is(button,a[role="button"],.btn,.button,.action,.pill,[class*="btn"],[class*="Button"]) {
+  background: linear-gradient(90deg, var(--brand-a), var(--brand-b)) !important;
+  color: var(--primary-contrast) !important;
+  border: 1px solid var(--brand-a) !important;
+  box-shadow: 0 6px 18px var(--focus-ring) !important;
+}
+
+/* 2) Tables in admin */
+body.admin-theme .table thead th,
+body.admin-theme table thead th,
+.lobbie-root .table thead th,
+.lobbie-root table thead th {
+  background: var(--primary-strong) !important;
+  color: var(--primary-contrast) !important;
+  border-color: var(--primary-strong) !important;
+}
+body.admin-theme .table tbody td,
+body.admin-theme table tbody td,
+.lobbie-root .table tbody td,
+.lobbie-root table tbody td {
+  background: var(--surface) !important;
+  color: var(--text) !important;
+  border-bottom: 1px solid var(--border) !important;
+}
+body.admin-theme .table tbody tr:hover td,
+.lobbie-root .table tbody tr:hover td {
+  background: var(--primary-soft) !important;
+}
+
+/* 3) Pagination + footer controls */
+body.admin-theme .pagination .page,
+body.admin-theme .pagination button,
+body.admin-theme .pagination a,
+.lobbie-root .pagination .page,
+.lobbie-root .pagination button,
+.lobbie-root .pagination a {
+  background: var(--primary-soft) !important;
+  color: var(--text) !important;
+  border: 1px solid var(--primary-strong) !important;
+  border-radius: 6px !important;
+}
+body.admin-theme .pagination .active,
+body.admin-theme .pagination .page.active,
+body.admin-theme .pagination button.active,
+.lobbie-root .pagination .active,
+.lobbie-root .pagination .page.active,
+.lobbie-root .pagination button.active {
+  background: var(--primary) !important;
+  color: var(--primary-contrast) !important;
+  border-color: var(--primary) !important;
+}
+
+/* 4) Footer "Show:" area (length selector) */
+body.admin-theme .footer-bar,
+.lobbie-root .footer-bar {
+  background: var(--surface) !important;
+  color: var(--text) !important;
+  border-top: 1px solid var(--border) !important;
+  box-shadow: none !important;
+}
+body.admin-theme .footer-bar .show-wrap,
+.lobbie-root .footer-bar .show-wrap {
+  background: var(--primary-soft) !important;
+  border: 1px solid var(--primary-strong) !important;
+  border-radius: 10px !important;
+}
+
+/* 5) Kill any legacy gradients still attached to buttons in admin */
+body.admin-theme button[style*="linear-gradient"],
+.lobbie-root button[style*="linear-gradient"] {
+  background: var(--primary) !important;
+}
+
+/* 6) Focus outline fallback (keep this at the very end) */
+:focus-visible {
+  outline: 2px solid var(--ring, var(--focus-ring, #66afe9)) !important;
+  outline-offset: 2px;
+}
+/* Let the dropdown escape the footer area */
+.footer-bar,
+.pager-wrap,
+.show-wrap,
+.themed-select {
+  overflow: visible !important;
+}
+
+/* Remove the old native-select caret from the green pill wrapper */
+.show-wrap::after { content: none !important; }
+
+/* Make sure the selected value uses theme color */
+.show-wrap .themed-select .rs__single-value {
+  color: var(--text) !important;
+}
+/* Force white text on the "File download" button */
+button.topbar-file-download.topbar-file-download,
+button.topbar-file-download.topbar-file-download span,
+button.topbar-file-download.topbar-file-download .arrow {
+  color: #fff !important;     /* text & emoji */
+  fill: #fff !important;      /* SVG icons */
+}
+
+/* keep it white on hover/focus/active too */
+button.topbar-file-download.topbar-file-download:hover,
+button.topbar-file-download.topbar-file-download:focus,
+button.topbar-file-download.topbar-file-download:active {
+  color: #fff !important;
+  fill: #fff !important;
+}
+
+/* optional: set the local CSS var so any var(--text) inside becomes white */
+button.topbar-file-download {
+  --text: #fff;
+}
+/* --- ADD to styles in AuthWeStudClone.jsx --- */
+/* keep overlay/background frozen – you already have StaticBG */
+.purple-static { transform-origin: 199px 60px; }  /* makes vertical mouth scaling look natural */

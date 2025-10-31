@@ -1,0 +1,36 @@
+/* LoginLogoutIcon.css */
+ 
+.icon-container {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+ 
+.icon-dropdown {
+  position: absolute;
+  top: 36px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--bg);
+  color: #333;
+  padding: 6px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  white-space: nowrap;
+  font-size: 14px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  pointer-events: none;
+  z-index: 10;
+}
+ 
+.icon-dropdown::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 6px 6px 0 6px;
+  border-style: solid;
+  border-color: white transparent transparent transparent;
+}
+ 

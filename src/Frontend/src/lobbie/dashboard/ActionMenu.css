@@ -1,0 +1,152 @@
+/* ---------------- Action Menu (Portal Dropdown) ---------------- */
+
+/* Inline wrapper for button (keeps alignment inside table cell) */
+.action-menu-inline {
+  display: inline-block;
+  position: relative;
+}
+
+/* Action button */
+.action-btn {
+  background: linear-gradient(135deg, #3a7bd5, #00d2ff);
+  color: var(--primary-contrast);
+  border: none;
+  padding: 8px 18px;
+  border-radius: 24px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  box-shadow: 0 4px 10px rgba(58, 123, 213, 0.18);
+}
+
+.action-btn:focus {
+  outline: none;
+  box-shadow: 0 6px 16px rgba(58, 123, 213, 0.28);
+}
+
+.action-btn:hover {
+  transform: translateY(-1px);
+}
+
+.action-btn-open {
+  box-shadow: 0 6px 18px rgba(58, 123, 213, 0.3);
+}
+
+/* ---------------- Dropdown (portal to body) ---------------- */
+.action-dropdown-portal {
+  background: var(--bg); /* ✅ pure white background */
+  border-radius: 10px;
+  box-shadow: 0 8px 28px rgba(16, 24, 40, 0.12);
+  overflow: hidden;
+  padding: 6px 4px;
+  min-width: 180px;
+  max-width: 340px;
+  font-family: inherit;
+  transform-origin: top left;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  will-change: transform, opacity;
+  z-index: 9999;
+}
+
+/* Header */
+.dropdown-header {
+  padding: 10px 14px;
+  font-weight: 700;
+  color: #16325c;
+  border-bottom: 1px solid rgba(12, 60, 120, 0.08);
+  background: #f9fafb; /* ✅ subtle neutral header */
+}
+
+/* Dropdown item */
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 14px;
+  background: none;
+  border: none;
+  text-align: left;
+  font-size: 14px;
+  color: #1f2d47;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.dropdown-item .dropdown-icon {
+  min-width: 18px;
+  min-height: 18px;
+  opacity: 0.9;
+  color: #165aab;
+}
+
+.dropdown-item:hover {
+  background: #f5f7fa; /* ✅ subtle hover, light gray */
+  color: #062249;
+}
+
+/* ---------------- Responsive ---------------- */
+@media (max-width: 420px) {
+  .action-dropdown-portal {
+    left: 8px !important;
+    right: 8px !important;
+    min-width: auto;
+    max-width: none;
+  }
+}
+/* ----- strong reset for buttons INSIDE the action dropdown ----- */
+.action-dropdown-portal .dropdown-item {
+  all: unset;                         /* wipe inherited button styles */
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 14px;
+  cursor: pointer;
+  box-sizing: border-box;
+
+  /* Themeful colors */
+  background: transparent !important;
+  color: var(--text) !important;
+  border: 0 !important;
+  border-radius: 8px;
+  font: inherit;
+  line-height: 1.2;
+}
+
+.action-dropdown-portal .dropdown-item .dropdown-icon {
+  min-width: 18px;
+  min-height: 18px;
+  color: var(--primary-strong);
+  opacity: .95;
+}
+
+.action-dropdown-portal .dropdown-item:hover,
+.action-dropdown-portal .dropdown-item:focus {
+  background: var(--primary-soft) !important;  /* subtle highlight */
+  color: var(--text) !important;
+  outline: none;
+}
+
+.action-dropdown-portal .dropdown-item:active {
+  background: color-mix(in oklab, var(--primary-soft) 70%, white);
+}
+
+.action-dropdown-portal {
+  background: var(--surface) !important;
+  border: 1px solid var(--border);
+}
+
+.action-dropdown-portal .dropdown-header {
+  background: color-mix(in oklab, var(--surface) 92%, white);
+  color: var(--text);
+  border-bottom: 1px solid var(--border);
+}
+
+/* keep the trigger pill looking like a button */
+.action-menu-inline .action-btn {
+  background: var(--primary) !important;
+  color: var(--primary-contrast) !important;
+  border: none;
+}

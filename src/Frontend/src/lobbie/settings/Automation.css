@@ -1,0 +1,154 @@
+/* ---------------- Container ---------------- */
+.automation-container {
+  padding: 22px 26px;
+  background: var(--surface);
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  font-family: "Inter", Arial, sans-serif;
+}
+
+/* ---------------- Header ---------------- */
+.automation-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.automation-header h2 {
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 700;
+  background: linear-gradient(90deg, #3a7bd5, #00d2ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ---------------- Add Button ---------------- */
+.add-btn {
+  background: linear-gradient(135deg, #3a7bd5, #00d2ff);
+  color: var(--primary-contrast);
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  width: 200px;
+  transition: all 0.25s ease;
+  font-size: 0.95rem;
+}
+
+.add-btn:hover {
+  background: linear-gradient(135deg, #2e5ea3, #0099cc);
+  box-shadow: 0 3px 8px rgba(58, 123, 213, 0.25);
+}
+
+/* ---------------- Description ---------------- */
+.description {
+  margin: 14px 0;
+  color: #555;
+  font-size: 0.95rem;
+}
+
+/* ---------------- Automation Rows ---------------- */
+.automation-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #f9fbff;
+  border: 1px solid #dbe4f3;
+  padding: 14px 16px;
+  margin-bottom: 12px;
+  border-radius: 10px;
+  transition: background 0.2s ease;
+}
+
+.automation-row:hover {
+  background: #eef6ff;
+}
+
+.automation-row input,
+.automation-row select {
+  padding: 10px 12px;
+  border: 1.4px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+.automation-row input:focus,
+.automation-row select:focus {
+  border-color: #3a7bd5;
+  box-shadow: 0 0 0 3px rgba(58, 123, 213, 0.2);
+  outline: none;
+}
+
+/* ---------------- Delete Button ---------------- */
+.delete-btn {
+  background: transparent;
+  border: none;
+  color: #e11d48;
+  cursor: pointer;
+  font-size: 18px;
+  transition: color 0.2s ease;
+}
+
+.delete-btn:hover {
+  color: #be123c;
+}
+
+/* ---------------- Save Section ---------------- */
+.save-container {
+  text-align: right;
+  margin-top: 18px;
+}
+
+.save-btn {
+  background: var(--bg);
+  border: 1.5px solid #3a7bd5;
+  color: #3a7bd5;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: all 0.25s ease;
+}
+
+.save-btn:hover {
+  background: linear-gradient(135deg, #3a7bd5, #00d2ff);
+  color: var(--primary-contrast);
+  box-shadow: 0 3px 8px rgba(58, 123, 213, 0.25);
+}
+/* Automation header — use global theme colors */
+.automation-container {
+  /* bridge to your global tokens */
+  --auto-primary:        var(--primary, var(--brand-a, #3a7bd5));
+  --auto-primary-strong: var(--primary-strong, color-mix(in srgb, var(--auto-primary) 70%, black));
+  --auto-text:           var(--text, #0f172a);
+}
+
+.automation-header h2{
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 700;
+
+  /* theme gradient */
+  background: linear-gradient(135deg, var(--auto-primary-strong), var(--auto-primary)) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+
+  /* fallback if background-clip:text isn't supported */
+  color: var(--auto-primary) !important;
+}
+
+/* Prefer solid text instead of gradient? Use this instead:
+.automation-header h2{
+  background: none !important;
+  -webkit-background-clip: initial !important;
+  -webkit-text-fill-color: initial !important;
+  color: var(--auto-text) !important;
+}
+*/

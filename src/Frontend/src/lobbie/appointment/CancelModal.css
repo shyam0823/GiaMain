@@ -1,0 +1,66 @@
+/* ===== Cancel — Glassy White Backdrop (same as Postpone) ===== */
+:root{
+  --surface: var(--card, #ffffff);
+  --panel: var(--bg, #f8fafc);
+  --border: var(--line, #e5e7eb);
+  --text: var(--ink, #0f172a);
+  --text-muted: var(--muted, #64748b);
+  --primary: var(--primary, #22c55e);
+  --primary-contrast: var(--primary-contrast, #ffffff);
+  --danger: #ef4444;
+  --focus-ring: color-mix(in srgb, var(--primary) 35%, transparent);
+}
+
+.cancel-overlay{
+  position: fixed; inset: 0; z-index: 2000;
+  display:flex; align-items:center; justify-content:center;
+  padding:16px;
+
+  background: rgba(255,255,255,.74) !important;   /* white veil */
+  -webkit-backdrop-filter: blur(6px) saturate(115%);
+  backdrop-filter: blur(6px) saturate(115%);
+}
+
+.cancel-modal{
+  width: 500px; max-width: 92vw;
+  background: var(--surface);
+  border-radius: 16px;
+  box-shadow: 0 18px 44px rgba(0,0,0,.18);
+  overflow: hidden;
+  animation: cancelPop .14s ease-out;
+  text-align: left;
+  font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+
+.cancel-header{
+  min-height:56px; padding:14px 20px;
+  display:flex; align-items:center;
+  background: linear-gradient(135deg, var(--primary), color-mix(in srgb, var(--primary) 70%, #000));
+  color: var(--primary-contrast); font-weight:900; font-size:1.05rem;
+}
+
+.cancel-body{ padding:18px 22px 8px; }
+.cancel-body h3{ margin:0 0 8px; font-size:18px; font-weight:800; color:var(--text); }
+.cancel-text{ font-size:15px; color:var(--text); margin-bottom:6px; line-height:1.5; }
+.cancel-subtext{ font-size:13px; color:var(--text-muted); margin-bottom:10px; }
+
+.cancel-actions{
+  display:flex; justify-content:flex-end; gap:12px;
+  padding:14px 20px 18px; border-top:1px solid var(--border); background: var(--panel);
+}
+.cancel-btn{
+  border:none; cursor:pointer; font-weight:800; font-size:14px;
+  padding:10px 18px; border-radius:999px; transition:background .15s, box-shadow .15s, color .15s;
+}
+.cancel-no{ background: var(--surface); color: var(--text-muted); box-shadow: 0 2px 8px rgba(0,0,0,.06); }
+.cancel-no:hover{ background: var(--panel); }
+.cancel-yes{
+  background: var(--danger); color: var(--primary-contrast);
+  box-shadow: 0 6px 14px color-mix(in srgb, var(--danger) 25%, transparent);
+}
+.cancel-yes:hover{
+  background: color-mix(in srgb, var(--danger) 85%, black);
+  box-shadow: 0 8px 18px color-mix(in srgb, var(--danger) 35%, transparent);
+}
+
+@keyframes cancelPop{ from{ transform:translateY(6px); opacity:0; } to{ transform:translateY(0); opacity:1; } }

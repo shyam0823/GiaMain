@@ -1,0 +1,129 @@
+/* ---------------- Container ---------------- */
+.add-user-container {
+  background: var(--surface);
+  padding: 28px 36px;
+  border-radius: 12px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  max-width: 800px;
+  margin: 30px auto;
+  font-family: "Inter", Arial, sans-serif;
+}
+
+.add-user-container h2 {
+  font-size: 1.9rem;
+  font-weight: 700;
+  margin-bottom: 22px;
+  background: linear-gradient(90deg, #3a7bd5, #00d2ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ---------------- Form styling ---------------- */
+.add-user-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px 28px;
+}
+
+.add-user-form label {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.add-user-form input[type="text"],
+.add-user-form input[type="email"],
+.add-user-form input[type="password"],
+.add-user-form select {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1.4px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  background: #f9fafb;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  box-sizing: border-box;
+}
+
+.add-user-form input:focus,
+.add-user-form select:focus {
+  border-color: #3a7bd5;
+  outline: none;
+  background: var(--bg);
+  box-shadow: 0 0 0 3px rgba(58, 123, 213, 0.2);
+}
+
+/* ---------------- Password field (span) ---------------- */
+.add-user-form .password-field {
+  grid-column: span 2;
+}
+
+/* ---------------- Checkbox group ---------------- */
+.add-user-form input[type="checkbox"] {
+  margin-right: 8px;
+}
+
+.add-user-form label input[type="checkbox"] {
+  display: inline-block;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
+/* ---------------- Actions ---------------- */
+.form-actions {
+  grid-column: span 2;
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.cancel-btn,
+.save-btn {
+  flex: 1; /* Equal width buttons */
+  padding: 12px 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  text-align: center;
+}
+
+/* Cancel */
+.cancel-btn {
+  background: #f3f4f6;
+  color: #374151;
+}
+.cancel-btn:hover {
+  background: #e5e7eb;
+}
+
+/* Save */
+.save-btn {
+  background: linear-gradient(135deg, #3a7bd5, #00d2ff);
+  color: var(--primary-contrast);
+}
+.save-btn:hover {
+  background: linear-gradient(135deg, #2e5ea3, #0099cc);
+  box-shadow: 0 3px 8px rgba(58, 123, 213, 0.3);
+}
+
+/* ---------------- Responsive ---------------- */
+@media (max-width: 768px) {
+  .add-user-form {
+    grid-template-columns: 1fr;
+  }
+
+  .form-actions {
+    flex-direction: column; /* stack buttons */
+  }
+
+  .cancel-btn,
+  .save-btn {
+    width: 100%; /* full width on small screens */
+  }
+}

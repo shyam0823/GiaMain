@@ -1,0 +1,49 @@
+/* ===== Typography follows theme ===== */
+html, body { color: var(--text); }
+
+body, p, span, li, dt, dd, label, legend, caption,
+th, td, input, textarea, select, button,
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text);
+}
+
+small, .text-muted { color: var(--muted) !important; }
+a { color: var(--primary); }
+a:hover, a:focus { color: var(--primary-strong); }
+::placeholder { color: var(--muted); opacity: .9; }
+
+/* ===== Theme any existing checkboxes/radios (no layout changes) ===== */
+/* Modern, low-impact theming */
+:where(input[type="checkbox"], input[type="radio"]) {
+  accent-color: var(--primary);            /* check/dot + border color */
+}
+
+/* Keep focus ring on-brand without altering size */
+:where(input[type="checkbox"], input[type="radio"]):focus {
+  outline: none;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 25%, transparent);
+}
+
+/* Disabled reads as muted */
+:where(input[type="checkbox"], input[type="radio"]):disabled {
+  opacity: .6;
+  cursor: not-allowed;
+}
+
+/* ===== Bootstrap switch polish (only if present) ===== */
+:where(.form-switch .form-check-input) {
+  accent-color: var(--primary);            /* most browsers handle the tint */
+  border-color: var(--border);
+}
+
+:where(.form-switch .form-check-input:checked) {
+  background-color: var(--primary);
+  border-color: var(--primary);
+}
+
+:where(.form-check-label) { color: var(--text); }
+
+/* Tables, cards, modals keep readable text */
+:where(.table, .card, .modal, .modal-content, .panel, .drawer, .sidebar) {
+  color: var(--text);
+}

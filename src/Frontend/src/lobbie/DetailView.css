@@ -1,0 +1,178 @@
+/* ---------------- Panel ---------------- */
+.detail-view.forms-like.wide {
+  max-width: 1450px;
+  margin: 16px auto 32px;
+  padding: 10px 10px 18px;
+  background: var(--panel); /* #f5f8ff */
+  border-radius: 16px;
+  box-shadow: var(--shadow); /* 0 6px 22px ... */
+  font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* Title matches your style */
+.detail-view.forms-like h2 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin: 8px 10px 12px;
+  background: linear-gradient(90deg, var(--brand-a), var(--brand-b));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ---------------- Top Patients table ---------------- */
+.detail-view .patients-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: color-mix(in srgb, var(--brand-b) 6%, var(--panel)); /* #eaf2ff */
+  border-radius: 12px;
+  overflow: hidden;
+  table-layout: fixed;
+}
+
+.detail-view .patients-table thead th,
+.detail-view .patients-table tbody td {
+  vertical-align: middle;
+}
+
+/* Header */
+.detail-view .patients-table thead th {
+  background: var(--brand-a); /* #0f2e8a */
+  color: var(--primary-contrast);
+  font-weight: 600;
+  padding: 12px 14px;
+  font-size: 14px;
+  letter-spacing: .2px;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+.detail-view .patients-table thead th:first-child { border-top-left-radius: 12px; }
+.detail-view .patients-table thead th:last-child  { border-top-right-radius: 12px; }
+
+/* Body cells */
+.detail-view .patients-table tbody td {
+  padding: 10px 14px;
+  font-size: 14px;
+  color: var(--text); /* #0f172a */
+  border-bottom: 1px solid color-mix(in srgb, var(--brand-b) 15%, var(--border)); /* #dbe7ff */
+  background: color-mix(in srgb, var(--brand-b) 4%, var(--bg)); /* #f2f7ff */
+  text-align: start;
+}
+.detail-view .patients-table tbody tr:nth-child(even) td {
+  background: color-mix(in srgb, var(--brand-b) 8%, var(--bg)); /* #e9f2ff */
+}
+.detail-view .patients-table tbody tr:hover td {
+  background: color-mix(in srgb, var(--brand-b) 14%, var(--bg)); /* #dce9ff */
+}
+
+/* ---------- Alignment fixes ---------- */
+.patients-table thead th:first-child,
+.patients-table tbody td:first-child {
+  text-align: center;
+  padding-left: 0;
+  padding-right: 0;
+  width: 32px;
+}
+
+.patients-table thead th:nth-child(2),
+.patients-table tbody td:nth-child(2) {
+  padding-left: 12px !important;
+  padding-right: 14px;
+}
+
+/* Patient name cell layout (caret + name) */
+.patient-cell {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  cursor: pointer;
+  padding-left: 0;
+}
+.caret {
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid var(--primary-strong); /* #0b1f66 */
+  border-bottom: 2px solid var(--primary-strong);
+  transform: rotate(-45deg);
+  transition: transform 0.15s ease;
+}
+.caret.open { transform: rotate(45deg); }
+.patient-name { font-weight: 700; color: var(--primary-strong); line-height: 1.2; }
+
+/* “Forms” count lighter */
+.patients-table td:nth-child(3) {
+  color: var(--text-muted); /* #475569 */
+  font-weight: 500;
+}
+
+/* -------- Nested sub-table ---------- */
+.subtable-row td { background: transparent !important; border: none; padding-top: 0; }
+
+.subtable-wrapper {
+  margin: 10px 12px 14px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--brand-b) 6%, var(--panel)); /* #f0f4ff */
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--brand-b) 20%, var(--border)); /* #d6e4ff */
+}
+
+.forms-subtable {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.forms-subtable thead th {
+  background: color-mix(in srgb, var(--brand-a) 85%, black); /* dark inner header like #163a9b */
+  color: var(--primary-contrast);
+  font-weight: 600;
+  padding: 12px 16px;
+  font-size: 14px;
+}
+.forms-subtable tbody td {
+  background: color-mix(in srgb, var(--brand-b) 6%, var(--bg)); /* #eef4ff */
+  padding: 12px 16px;
+  border-bottom: 1px solid color-mix(in srgb, var(--brand-b) 20%, var(--border)); /* #d6e4ff */
+  font-size: 14px;
+}
+.forms-subtable tbody tr:nth-child(even) td {
+  background: color-mix(in srgb, var(--brand-b) 10%, var(--bg)); /* #e8f0ff */
+}
+
+/* Status colors */
+.status-complete   { color: var(--success, #0a7a28); font-weight: 600; }
+.status-incomplete { color: var(--warning, #9a3412); font-weight: 600; }
+
+/* Pill buttons like screenshot */
+.subtable-actions { display: flex; gap: 10px; }
+
+.pill-btn {
+  min-width: 120px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all .2s ease;
+}
+
+/* Outline */
+.pill-outline {
+  background: color-mix(in srgb, var(--brand-b) 10%, var(--panel)); /* #e6f0ff */
+  color: var(--brand-a); /* #0f2e8a */
+  border: 1.5px solid color-mix(in srgb, var(--brand-b) 45%, var(--border)); /* #5aa3ff */
+}
+.pill-outline:hover {
+  background: color-mix(in srgb, var(--brand-b) 18%, var(--panel)); /* #d8e9ff */
+}
+
+/* Solid */
+.pill-solid {
+  background: linear-gradient(135deg, var(--brand-a), var(--brand-b)); /* #2a73ff → #00c2ff */
+  color: var(--primary-contrast);
+  border: none;
+}
+.pill-solid:hover { filter: brightness(0.95); }

@@ -1,0 +1,49 @@
+.forms-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  background: var(--bg);
+  border-bottom: 1px solid #e6e9ee;
+}
+
+.forms-title h1 {
+  margin: 0;
+  font-size: 22px;
+  color: #1f2937;
+  font-weight: 700;
+}
+
+.location-text {
+  margin: 2px 0 0;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.forms-actions {
+  display: flex;
+  gap: 14px;
+}
+
+/* --- pill button (matches your Generate CSV style) --- */
+.btn-pill {
+  border: 0;
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--primary-contrast);
+  cursor: pointer;
+  background: linear-gradient(90deg, #2b7bdc 0%, #06c4e8 100%);
+  box-shadow: 0 6px 16px rgba(0, 123, 255, 0.25);
+  transition: transform 0.05s ease, filter 0.2s ease;
+}
+.btn-pill:hover { filter: brightness(1.05); }
+.btn-pill:active { transform: translateY(1px); }
+
+/* small screens */
+@media (max-width: 640px) {
+  .forms-header { padding: 12px 14px; }
+  .forms-actions { gap: 10px; }
+  .forms-title h1 { font-size: 18px; }
+}

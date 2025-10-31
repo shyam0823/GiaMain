@@ -1,0 +1,184 @@
+/* ---------------- Root ---------------- */
+.analytics-container {
+  padding: 24px 32px;
+  font-family: 'Inter', Arial, sans-serif;
+  background: var(--surface);
+}
+
+/* ---------------- Header ---------------- */
+.analytics-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.analytics-header h2 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin: 0;
+  color: var(--text);
+}
+
+/* ---------------- Tabs ---------------- */
+.analytics-tabs {
+  display: flex;
+  gap: 10px;
+}
+
+.tab-btn {
+  padding: 8px 18px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tab-btn:hover {
+  background: var(--hover);
+}
+
+.tab-btn.active {
+  background: linear-gradient(135deg, var(--brand-a), var(--brand-b));
+  color: var(--primary-contrast);
+  border-color: var(--brand-a);
+  box-shadow: 0 3px 8px color-mix(in srgb, var(--brand-a) 25%, transparent);
+}
+
+/* ---------------- Filters ---------------- */
+.analytics-filters {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin: 12px 0;
+  flex-wrap: wrap;
+}
+
+.analytics-label {
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+}
+
+.analytics-select {
+  padding: 7px 14px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  font-size: 0.95rem;
+  background: var(--bg);
+  color: var(--text);
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+.analytics-select:focus {
+  border-color: var(--brand-a);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand-a) 20%, transparent);
+  outline: none;
+}
+
+.analytics-date {
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 0.95rem;
+  padding: 6px 12px;
+  background: var(--bg);
+  color: var(--text);
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+.analytics-date:focus {
+  border-color: var(--brand-a);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand-a) 20%, transparent);
+  outline: none;
+}
+
+.analytics-date-separator {
+  font-size: 1.3rem;
+  color: var(--text-faint);
+  margin: 0 6px;
+}
+
+.analytics-checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+}
+
+.analytics-checkbox-label input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--brand-a);
+}
+
+.analytics-toggle-group {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.analytics-radio {
+  display: flex;
+  align-items: center;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+}
+
+.analytics-radio input[type="radio"] {
+  accent-color: var(--brand-a);
+  width: 18px;
+  height: 18px;
+}
+
+/* ---------------- Table ---------------- */
+.analytics-table {
+  margin-top: 18px;
+  width: 100%;
+}
+
+.analytics-table table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--bg);
+  font-size: 0.95rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.analytics-table th,
+.analytics-table td {
+  padding: 12px 18px;
+  border-bottom: 1px solid var(--border);
+}
+
+.analytics-table th {
+  background: var(--surface-strong);
+  font-weight: 600;
+  text-align: left;
+  color: var(--text-muted);
+}
+
+.analytics-table td {
+  text-align: right;
+  color: var(--text);
+}
+
+.analytics-table td:first-child,
+.analytics-table th:first-child {
+  text-align: left;
+}
+
+.section-divider {
+  background: var(--surface-strong);
+  font-weight: 600;
+  text-align: left !important;
+  border-bottom: none;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}

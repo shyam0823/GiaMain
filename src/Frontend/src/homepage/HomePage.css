@@ -1,0 +1,874 @@
+/* ---------- Global-theme-first homepage styles (uses your global vars with safe fallbacks) ---------- */
+
+/* Added modern responsive design with improved styling */
+* {
+  margin: 1px;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.homepage-container {
+  font-family: "Inter", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  color: var(--text);
+}
+
+/* Header Styles */
+.homepage-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2rem 2rem;
+  /* brand gradient theme */
+  background: var(--gradient);
+  color: var(--primary-contrast);
+  box-shadow: var(--shadow);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  backdrop-filter: blur(20px);
+}
+
+.logo-section {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.home-logo {
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid color-mix(in srgb, var(--primary) 65%, white);
+  box-shadow: var(--shadow);
+}
+
+.logo-text .main-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.logo-text .sub-title {
+  font-size: 0.95rem;
+  opacity: 0.9;
+  font-style: italic;
+  color: var(--primary-contrast);
+}
+
+.nav-section {
+  display: flex;
+  gap: 2rem;
+}
+
+.nav-section a {
+  color: var(--primary-contrast);
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.75rem 1.25rem;
+  border-radius: 30px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-section a::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: var(--gradient);
+  transition: left 0.3s ease;
+  z-index: -1;
+}
+
+.nav-section a:hover::before {
+  left: 0;
+}
+
+.nav-section a:hover {
+  color: var(--primary-contrast);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+
+.employee-portal-btn {
+  background: var(--gradient);
+  color: var(--primary-contrast);
+  border: none;
+  padding: 0.875rem 2rem;
+  border-radius: 30px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow);
+  position: relative;
+  overflow: hidden;
+}
+
+.employee-portal-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, var(--primary-strong) 0%, var(--primary) 100%);
+  transition: left 0.3s ease;
+  z-index: -1;
+}
+
+.employee-portal-btn:hover::before {
+  left: 0;
+}
+
+.employee-portal-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow);
+}
+
+/* Hero Section */
+.hero-section {
+  position: relative;
+  height: 75vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-image-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.homepage-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out;
+  filter: brightness(0.8) contrast(1.05);
+}
+
+.homepage-image.active {
+  opacity: 1;
+}
+
+.hero-overlay {
+  position: relative;
+  z-index: 2;
+  background: color-mix(in srgb, var(--panel) 70%, transparent);
+  padding: 4rem 3rem;
+  border-radius: 20px;
+  text-align: center;
+  backdrop-filter: blur(15px);
+  box-shadow: var(--shadow);
+  border: 1px solid color-mix(in srgb, var(--primary-contrast) 10%, transparent);
+}
+
+.hero-title {
+  font-size: 3.5rem;
+  font-weight: 800;
+  color: var(--primary-contrast);
+  text-shadow: 0 0 0 transparent; /* remove hardcoded shadow */
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+/* Care Section */
+.care-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 65vh;
+  align-items: center;
+  position: relative;
+}
+
+
+.care-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(1.05) contrast(1.1);
+}
+
+.care-content {
+  padding: 5rem;
+  background: linear-gradient(135deg, var(--panel) 0%, var(--bg, #f9fbff) 50%, var(--surface) 100%);
+  position: relative;
+}
+
+.care-content::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary) 0%, color-mix(in srgb, var(--primary) 60%, white) 50%, var(--primary-strong) 100%);
+}
+
+.care-content h2 {
+  font-size: 2.8rem;
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 1.5rem;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.care-icon {
+  font-size: 3.5rem;
+  margin: 1.5rem 0;
+  filter: drop-shadow(0 4px 8px color-mix(in srgb, var(--primary) 30%, transparent));
+}
+
+.care-content p {
+  font-size: 1.15rem;
+  line-height: 1.8;
+  color: var(--text);
+  font-weight: 400;
+}
+
+/* Services Section */
+.services-section {
+  padding: 6rem 2rem;
+  background: linear-gradient(135deg, var(--panel) 0%, var(--bg, #f9fbff) 100%);
+  text-align: center;
+  position: relative;
+}
+
+.services-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, var(--primary) 50%, transparent 100%);
+}
+
+.services-title {
+  font-size: 3.2rem;
+  background: linear-gradient(135deg, var(--primary) 0%, color-mix(in srgb, var(--primary) 50%, white) 50%, var(--primary-strong) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 4rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2.5rem;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+.service-card {
+  background: var(--surface);
+  padding: 3rem 2rem;
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+  transition: all 0.4s ease;
+  border: 1px solid color-mix(in srgb, var(--primary) 12%, var(--border));
+  position: relative;
+  overflow: hidden;
+}
+
+.service-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary) 0%, color-mix(in srgb, var(--primary) 50%, white) 50%, var(--primary-strong) 100%);
+  transform: scaleX(0);
+  transition: transform 0.4s ease;
+}
+
+.service-card:hover::before {
+  transform: scaleX(1);
+}
+
+.service-card:hover {
+  transform: translateY(-15px);
+  box-shadow: var(--shadow);
+  border-color: var(--primary);
+}
+
+.service-icon img {
+  width: 90px;
+  height: 90px;
+  margin-bottom: 1.5rem;
+  filter: drop-shadow(0 4px 12px color-mix(in srgb, var(--primary) 20%, transparent));
+}
+
+.service-card h3 {
+  font-size: 1.4rem;
+  color: var(--text);
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.service-more {
+  background: linear-gradient(135deg, var(--primary-strong) 0%, var(--primary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1.1rem;
+  letter-spacing: 0.5px;
+}
+
+.service-more:hover {
+  transform: translateX(5px);
+}
+
+/* Why Choose Us Section */
+.why-choose-us {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  background: linear-gradient(
+    135deg,
+    var(--bg, #f9fbff) 0%,
+    color-mix(in srgb, var(--primary) 10%, var(--bg, #f9fbff)) 50%,
+    color-mix(in srgb, var(--primary) 20%, var(--bg, #f9fbff)) 100%
+  );
+}
+
+.why-content {
+  padding: 5rem;
+}
+
+.why-title {
+  font-size: 2.8rem;
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 3rem;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.why-item {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 2.5rem;
+  padding: 2rem;
+  border-radius: 15px;
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+  background: var(--panel);
+  border: 1px solid var(--border);
+}
+
+.why-item::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--panel) 90%, white) 0%,
+    color-mix(in srgb, var(--bg, #f9fbff) 90%, white) 100%
+  );
+  transition: left 0.4s ease;
+  z-index: 0;
+}
+
+.why-item:hover::before {
+  left: 0;
+}
+
+.why-item:hover {
+  transform: translateX(10px);
+  box-shadow: var(--shadow);
+}
+
+.why-item.highlighted {
+  background: var(--gradient);
+  color: var(--primary-contrast);
+  box-shadow: var(--shadow);
+}
+
+.why-item.highlighted::before {
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--primary) 10%, transparent) 0%,
+    color-mix(in srgb, var(--primary-strong) 10%, transparent) 100%
+  );
+}
+
+.why-number {
+  background: linear-gradient(135deg, var(--primary-strong) 0%, var(--primary) 100%);
+  color: var(--primary-contrast);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.3rem;
+  flex-shrink: 0;
+  box-shadow: var(--shadow);
+  position: relative;
+  z-index: 1;
+}
+
+.why-text {
+  position: relative;
+  z-index: 1;
+}
+
+.why-text h3 {
+  font-size: 1.4rem;
+  margin-bottom: 0.75rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.why-text p {
+  line-height: 1.7;
+  opacity: 0.9;
+  font-size: 1.05rem;
+}
+
+.why-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(1.05) contrast(1.1);
+}
+
+/* Footer */
+.contactus-footer {
+  background: linear-gradient(135deg, var(--primary) 0%, color-mix(in srgb, var(--primary) 50%, white) 50%, var(--primary-strong) 100%);
+  color: var(--primary-contrast);
+  padding: 4rem 2rem;
+  position: relative;
+}
+
+.contactus-footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--primary) 0%, color-mix(in srgb, var(--primary) 50%, white) 50%, var(--primary-strong) 100%);
+}
+
+.contactus-info-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 3rem;
+  margin-bottom: 4rem;
+}
+
+.contactus-info-col {
+  text-align: center;
+  padding: 1.5rem;
+  border-radius: 15px;
+  transition: all 0.3s ease;
+}
+
+.contactus-info-col:hover {
+  background: color-mix(in srgb, var(--primary-contrast) 5%, transparent);
+  transform: translateY(-5px);
+}
+
+.contactus-heading {
+  font-size: 1.4rem;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+  color: color-mix(in srgb, var(--primary) 70%, var(--primary-contrast));
+}
+
+.contactus-icon-circle {
+  background: linear-gradient(135deg, var(--primary-strong) 0%, var(--primary) 100%);
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+  font-size: 1.8rem;
+  box-shadow: var(--shadow);
+}
+
+.contactus-details-map-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+.contactus-map-col iframe {
+  border-radius: 15px;
+  box-shadow: var(--shadow);
+  border: 2px solid color-mix(in srgb, var(--primary) 20%, transparent);
+}
+
+.contactus-contact-title {
+  font-size: 2.2rem;
+  margin-bottom: 1.5rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--primary) 60%, var(--primary-contrast)) 0%, var(--primary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.contactus-contact-sub {
+  font-size: 1.15rem;
+  margin-bottom: 2.5rem;
+  opacity: 0.9;
+  color: color-mix(in srgb, var(--primary) 60%, var(--primary-contrast));
+}
+
+.contactus-detail-row {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  border: 1px solid color-mix(in srgb, var(--primary-contrast) 10%, transparent);
+}
+
+.contactus-detail-row:hover {
+  background: color-mix(in srgb, var(--primary) 10%, transparent);
+  border-color: color-mix(in srgb, var(--primary) 30%, transparent);
+  transform: translateX(5px);
+}
+
+.contactus-detail-label {
+  font-weight: 700;
+  min-width: 90px;
+  color: color-mix(in srgb, var(--primary) 70%, var(--primary-contrast));
+}
+
+.contactus-detail-value {
+  color: color-mix(in srgb, var(--primary-contrast) 90%, var(--panel));
+}
+
+/* Added responsive design for mobile devices */
+@media (max-width: 768px) {
+  .homepage-header {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .nav-section {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .hero-title {
+    font-size: 2rem;
+  }
+
+  .hero-overlay {
+    padding: 2rem 1rem;
+  }
+
+  .care-section {
+    grid-template-columns: 1fr;
+  }
+
+  .care-content {
+    padding: 2rem;
+  }
+
+  .care-content h2 {
+    font-size: 2rem;
+  }
+
+  .services-title {
+    font-size: 2rem;
+  }
+
+  .why-choose-us {
+    grid-template-columns: 1fr;
+  }
+
+  .why-content {
+    padding: 2rem;
+  }
+
+  .why-title {
+    font-size: 2rem;
+  }
+
+  .contactus-details-map-row {
+    grid-template-columns: 1fr;
+  }
+
+  .contactus-info-row {
+    grid-template-columns: 1fr;
+  }
+
+  .care-section::before {
+    top: -30px;
+    right: 20px;
+    width: 150px;
+    height: 150px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 1.5rem;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .why-item {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .care-section::before {
+    display: none;
+  }
+}
+/* ================================
+   HOMEPAGE THEME BRIDGE + OVERRIDES
+   (paste at the very end of the file)
+   ================================ */
+
+/* 1) Bridge: read tokens from the active theme, no self-references */
+.homepage-container {
+  --hp-text:            var(--text, #0f172a);
+  --hp-panel:           var(--panel, #ffffff);
+  --hp-surface:         var(--surface, #ffffff);
+  --hp-border:          var(--border, #e6eef7);
+
+  /* brand colors coming from the selected theme (orange, green, etc.) */
+  --hp-primary:         var(--primary, var(--brand-a, #3a7bd5));
+  --hp-primary-strong:  var(--primary-strong, color-mix(in srgb, var(--hp-primary) 70%, black));
+  --hp-primary-soft:    var(--primary-soft,  color-mix(in srgb, var(--hp-primary) 12%, white));
+  --hp-contrast:        var(--primary-contrast, #fff);
+}
+
+/* 2) Use those in the header/nav/buttons (kills lingering blue) */
+.homepage-header,
+.employee-portal-btn,
+.nav-section a {
+  background: linear-gradient(135deg, var(--hp-primary-strong), var(--hp-primary)) !important;
+  color: var(--hp-contrast) !important;
+  border: 1px solid var(--hp-primary-strong) !important;
+  box-shadow: var(--shadow, 0 4px 14px rgba(0,0,0,.08)) !important;
+}
+
+/* hover state */
+.nav-section a:hover,
+.employee-portal-btn:hover {
+  background: var(--hp-panel) !important;
+  color: var(--hp-primary-strong) !important;
+  border-color: var(--hp-primary-strong) !important;
+}
+
+/* 3) Generic buttons on homepage respect theme */
+.homepage-container button,
+.homepage-container .btn,
+.homepage-container .cta {
+  background: var(--hp-primary) !important;
+  color: var(--hp-contrast) !important;
+  border-color: var(--hp-primary) !important;
+}
+
+/* 4) Hero + footer use theme (no hard-coded blue) */
+.hero-overlay {
+  background: color-mix(in srgb, var(--hp-panel) 72%, transparent) !important;
+  color: var(--hp-contrast) !important;
+  border: 1px solid color-mix(in srgb, var(--hp-primary) 12%, transparent) !important;
+}
+.contactus-footer {
+  background: linear-gradient(135deg, var(--hp-primary-strong), var(--hp-primary)) !important;
+  color: var(--hp-contrast) !important;
+}
+
+/* 5) Last-resort nuke of legacy blue hexes */
+.homepage-container [style*="#3a7bd5"],
+.homepage-container [style*="#00d2ff"],
+.homepage-container [class*="btn-primary"] {
+  background: var(--hp-primary) !important;
+  color: var(--hp-contrast) !important;
+  border-color: var(--hp-primary) !important;
+}
+/* ================================
+   CONTACT BLOCK — LIGHT BACKGROUND
+   ================================ */
+
+/* Make the whole contact section light */
+.homepage-container .contactus-footer {
+  background: var(--hp-panel, var(--panel, #fff)) !important;
+  color: var(--hp-text, var(--text, #0f172a)) !important;
+  border-top: 1px solid var(--hp-border, var(--border, #e6eef7)) !important;
+}
+
+/* Ensure all text inside is dark and readable */
+.homepage-container .contactus-footer,
+.homepage-container .contactus-footer * {
+  color: var(--hp-text, var(--text, #0f172a)) !important;
+}
+
+/* Headings in this block */
+.homepage-container .contactus-heading,
+.homepage-container .contactus-contact-title {
+  color: var(--hp-text, var(--text, #0f172a)) !important;
+}
+
+/* Sub copy */
+.homepage-container .contactus-contact-sub,
+.homepage-container .contactus-detail-value {
+  color: color-mix(in srgb, var(--hp-text, var(--text, #0f172a)) 80%, transparent) !important;
+}
+
+/* Keep the little icon circles themed purple */
+.homepage-container .contactus-icon-circle {
+  background: linear-gradient(135deg, var(--hp-primary-strong, var(--primary-strong)),
+                                       var(--hp-primary, var(--primary))) !important;
+  color: var(--hp-contrast, var(--primary-contrast, #fff)) !important;
+  box-shadow: var(--shadow);
+}
+
+/* Optional: cards hover hint stays subtle on light bg */
+.homepage-container .contactus-info-col:hover {
+  background: color-mix(in srgb, var(--hp-primary, var(--primary)) 4%, transparent) !important;
+}
+
+/* Keep the map frame tidy on light bg */
+.homepage-container .contactus-map-col iframe {
+  border: 2px solid color-mix(in srgb, var(--hp-primary, var(--primary)) 18%, transparent) !important;
+}
+/* Hero title now uses active theme gradient color */
+.hero-title {
+  font-size: 3.5rem;
+  font-weight: 800;
+  background: linear-gradient(
+    135deg,
+    var(--hp-primary-strong, var(--primary-strong)) 0%,
+    var(--hp-primary, var(--primary)) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  text-shadow: none;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+/* ===========================================
+   THEME-AWARE FIX — care-section heading text
+   =========================================== */
+.homepage-container .care-content h2 {
+  font-size: 2.8rem;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+
+  /* use your global theme tokens */
+  background: linear-gradient(
+    135deg,
+    var(--hp-primary-strong, var(--primary-strong, #4cb100)) 0%,
+    var(--hp-primary, var(--primary, #56cc00)) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+
+  /* fallback for browsers that don’t support background-clip:text */
+  color: var(--hp-primary, var(--primary, #56cc00));
+  text-shadow: 0 1px 6px color-mix(in srgb, var(--hp-primary) 20%, transparent);
+}
+
+/* ensure good contrast on very light panels */
+.homepage-container .care-content {
+  color: var(--hp-text, var(--text, #122015));
+}
+.homepage-container .why-title{
+  /* keep your sizing */
+  font-size: 2.8rem;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 3rem;
+
+  /* theme-aware gradient text (green/orange/blue etc.) */
+  background: linear-gradient(
+    135deg,
+    var(--hp-primary-strong, var(--primary-strong, #4cb100)) 0%,
+    var(--hp-primary, var(--primary, #56cc00)) 100%
+  ) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+
+  /* fallback if clip:text isn’t supported */
+  color: var(--hp-primary, var(--primary, #56cc00)) !important;
+
+  /* gentle contrast boost on light backgrounds */
+  text-shadow: 0 1px 8px color-mix(in srgb, var(--hp-primary, var(--primary)) 18%, transparent);
+}
+/* ===========================================
+   THEME-AWARE FIX — Our Services title
+   =========================================== */
+.homepage-container .services-title {
+  font-size: 3.2rem;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 4rem;
+  letter-spacing: -0.02em;
+
+  /* dynamic gradient pulled from global theme */
+  background: linear-gradient(
+    135deg,
+    var(--hp-primary-strong, var(--primary-strong, #4cb100)) 0%,
+    var(--hp-primary, var(--primary, #56cc00)) 100%
+  ) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+
+  /* fallback for browsers without gradient text support */
+  color: var(--hp-primary, var(--primary, #56cc00)) !important;
+
+  /* subtle text glow for better readability */
+  text-shadow: 0 2px 8px color-mix(in srgb, var(--hp-primary, var(--primary)) 15%, transparent);
+}

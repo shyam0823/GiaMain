@@ -1,0 +1,242 @@
+/* ---------------- Layout ---------------- */
+.signature-page-layout {
+  display: flex;
+  background: var(--bg);
+  height: 100vh;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+.ssidebar {
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  padding-top: 0;
+}
+
+/* Active sidebar item */
+.sidebar-active {
+  color: var(--primary-contrast);
+  font-size: 22px;
+  font-weight: 600;
+  background: linear-gradient(90deg, var(--brand-a), var(--brand-b));
+  padding: 18px 33px;
+  border-bottom: 4px solid var(--brand-b);
+}
+
+/* ---------------- Main Content ---------------- */
+.main-content {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 42px 0 0 42px;
+  box-sizing: border-box;
+}
+
+.main-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 13px;
+  padding: 35px 40px;
+  min-width: 900px;
+  max-width: 1100px;
+  margin: 0;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---------------- Title ---------------- */
+.sig-title {
+  font-size: 36px;
+  font-weight: 600;
+  color: var(--text);
+  margin: 5px 0 10px 8px;
+  letter-spacing: -0.5px;
+}
+
+/* ---------------- Signature Box ---------------- */
+.sig-box {
+  position: relative;
+  margin: 0 0 18px 8px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.sig-canvas {
+  width: 600px;
+  height: 200px;
+  border: 2px dashed var(--border);
+  outline: none;
+  border-radius: 9px;
+  background: transparent;
+}
+
+.sig-placeholder {
+  width: 600px;
+  height: 200px;
+  border: 2px dashed var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  font-weight: 500;
+  border-radius: 9px;
+  cursor: pointer;
+  background: var(--panel);
+}
+
+/* ---------------- Draw Overlay ---------------- */
+.sig-draw-overlay {
+  position: fixed;
+  inset: 0;
+  background: color-mix(in srgb, var(--primary) 55%, transparent);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  backdrop-filter: blur(2px);
+}
+
+.sig-draw-card {
+  background: var(--surface);
+  padding: 30px 40px;
+  border-radius: 15px;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 90%;
+}
+
+/* ---------------- Buttons ---------------- */
+.sig-btn-row {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 16px;
+  margin-top: 18px;
+}
+
+.set-btn {
+  background: linear-gradient(135deg, var(--brand-a), var(--brand-b));
+  color: var(--primary-contrast);
+  font-weight: 500;
+  border: 2px solid var(--brand-b);
+  border-radius: 7px;
+  padding: 11px 27px;
+  font-size: 17px;
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+}
+.set-btn:hover {
+  background: linear-gradient(135deg, var(--brand-b), var(--brand-a));
+  border-color: var(--brand-a);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow);
+}
+
+.del-btn {
+  background: var(--bg);
+  color: var(--danger, #dc2626);
+  font-weight: 500;
+  border: 2px solid var(--danger, #dc2626);
+  border-radius: 7px;
+  padding: 11px 27px;
+  font-size: 17px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, transform 0.15s, border-color 0.2s;
+}
+.del-btn:hover {
+  background: var(--danger, #dc2626);
+  color: var(--primary-contrast);
+  transform: translateY(-1px);
+  border-color: var(--danger, #dc2626);
+}
+
+/* ---------------- Responsive ---------------- */
+@media (max-width: 768px) {
+  .main-card {
+    min-width: 90%;
+    padding: 25px 20px;
+  }
+  .sig-canvas,
+  .sig-placeholder {
+    width: 100%;
+    height: 150px;
+  }
+  .sig-draw-card {
+    width: 95%;
+    padding: 20px;
+  }
+}
+/* ---------------- Signature Overlay (white + blurry background) ---------------- */
+.sig-draw-overlay {
+  position: fixed;
+  inset: 0;
+  /* Dark translucent backdrop with blur */
+  background: rgba(18, 32, 21, 0.35); /* soft dark tint for better focus */
+  backdrop-filter: blur(8px) saturate(140%);
+  -webkit-backdrop-filter: blur(8px) saturate(140%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  transition: backdrop-filter 0.3s ease, background 0.3s ease;
+}
+
+/* White centered modal card */
+.sig-draw-card {
+  background: var(--surface, #ffffff);
+  border: 1px solid color-mix(in srgb, var(--primary) 12%, #e7f4df);
+  border-radius: 16px;
+  box-shadow:
+    0 6px 20px rgba(0, 0, 0, 0.1),
+    0 2px 8px rgba(0, 0, 0, 0.05);
+  padding: 35px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 90%;
+  min-width: 420px;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+/* Subtle lift animation on open */
+.sig-draw-card:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.12),
+    0 3px 12px rgba(0, 0, 0, 0.06);
+}
+
+/* Buttons row remains same but aligned nicer */
+.sig-btn-row {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  margin-top: 24px;
+}
+
+/* Signature box (inside modal) */
+.sig-canvas {
+  width: 600px;
+  height: 220px;
+  border: 2px dashed var(--border, #e7f4df);
+  border-radius: 10px;
+  background: var(--panel, #ffffff);
+}
+
+/* Responsive improvements */
+@media (max-width: 768px) {
+  .sig-draw-card {
+    width: 90%;
+    padding: 25px;
+  }
+  .sig-canvas {
+    width: 100%;
+    height: 180px;
+  }
+}

@@ -1,0 +1,211 @@
+/* FormsTable.css — filters + table area */
+
+/* Container for table */
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+  background: #eaf3ff; /* light blue container */
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-top: 12px;
+}
+
+/* Filters row */
+.filters-row {
+  display: grid;
+  grid-template-columns: 1.2fr 0.9fr 0.9fr 0.9fr;
+  gap: 14px;
+  padding: 14px 20px;
+  background: #dbeafe; /* lighter blue for filters */
+  border-bottom: 2px solid #c0d3eb;
+  border-radius: 10px 10px 0 0;
+}
+
+/* Filter input + select */
+.filter-input,
+.filter-select {
+  height: 42px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #94a3b8;
+  background: #ffffff;
+  color: #1e293b;
+  font-size: 14px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.filter-input::placeholder {
+  color: #64748b;
+}
+
+.filter-input:focus,
+.filter-select:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 5px rgba(37, 99, 235, 0.35);
+}
+
+/* Table */
+.forms-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #eaf3ff; /* light blue background */
+  border-radius: 0 0 10px 10px;
+  overflow: hidden;
+}
+
+/* Table headers */
+.forms-table th {
+  background: #1e3a8a; /* solid dark blue */
+  color: #fff;
+  font-weight: 600;
+  text-align: left;
+  padding: 12px 16px;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+/* Table cells (body rows) */
+.forms-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid #cbd5e1;
+  font-size: 14px;
+  color: #1e293b;
+  vertical-align: middle;
+  background: #eaf3ff; /* all rows light blue */
+}
+
+/* Row striping */
+.forms-table tr:nth-child(even) td {
+  background: #dbeafe; /* slightly different blue */
+}
+
+/* Row hover */
+.forms-table tbody tr:hover td {
+  background: #bfdbfe; /* darker hover blue */
+  transition: background 0.2s ease-in-out;
+}
+
+/* Checkbox column */
+.checkbox-col {
+  width: 40px;
+}
+
+/* Nested table row */
+.nested-table-row td {
+  background: #e0f2fe; /* lighter nested row */
+  font-size: 13px;
+  color: #1e293b;
+}
+
+/* Nested forms table */
+.nested-forms-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 8px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #eaf3ff;
+}
+
+.nested-forms-table th {
+  background: #1e3a8a; /* dark blue */
+  color: white;
+  font-weight: 600;
+  padding: 10px;
+  text-align: left;
+}
+
+.nested-forms-table td {
+  padding: 10px;
+  border-bottom: 1px solid #cbd5e1;
+  background: #eaf3ff;
+}
+
+.nested-forms-table tr:nth-child(even) {
+  background: #dbeafe;
+}
+
+.nested-forms-table tr:hover {
+  background: #bfdbfe;
+  transition: background 0.2s ease-in-out;
+}
+
+/* Action buttons */
+.table-action-btn {
+  padding: 6px 14px;
+  border: none;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  background: #2563eb; /* solid medium blue */
+  color: #fff;
+  transition: all 0.2s ease-in-out;
+}
+
+.table-action-btn:hover {
+  background: #1e40af; /* darker hover blue */
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* ✅ ProgressBar inside table cells */
+.progress-cell {
+  min-width: 160px;
+  max-width: 220px;
+  white-space: nowrap;
+}
+
+.progress-cell .flex {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.progress-cell .text-sm {
+  font-size: 12px;
+  color: #1e293b;
+  font-weight: 500;
+}
+
+/* Smaller progress bar */
+.progress-cell .h-2 {
+  height: 6px !important;
+}
+.progress-cell .h-1 {
+  height: 4px !important;
+}
+.progress-cell .h-3 {
+  height: 8px !important;
+}
+/* ================================
+   Text-style Print / PDF Button
+   ================================ */
+.print-text-btn {
+  background: none;
+  color: #1a3cff; /* bright blue */
+  font-weight: 600;
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: color 0.2s ease, transform 0.05s ease;
+}
+
+.print-text-btn:hover {
+  color: #f3f3f5;
+  text-decoration: underline;
+}
+
+.print-text-btn:active {
+  transform: translateY(1px);
+}
+
+.printer-icon {
+  width: 16px;
+  height: 16px;
+  mask: url("data:image/svg+xml,%3Csvg fill='none' stroke='%231a3cff' stroke-width='2' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M6 9V2h12v7M6 18h12v4H6v-4Zm-3-7h18v9H3v-9Z'/%3E%3C/svg%3E") no-repeat center;
+  background-color: currentColor;
+}

@@ -1,0 +1,239 @@
+/* ========================
+   Notifications (theme-aware)
+   ======================== */
+
+.notifications-root {
+  padding: 36px;
+  font-family: "Segoe UI", Roboto, sans-serif;
+}
+
+/* ---- Theme tokens (fallbacks) ---- */
+.notifications-root {
+  --c-bg: var(--bg, #ffffff);
+  --c-surface: var(--surface, #ffffff);
+  --c-text: var(--text, #1e293b);
+  --c-text-muted: var(--textMuted, #6b7280);
+  --c-border: var(--border, #e5e7eb);
+
+  /* Primary + variants */
+  --c-primary: var(--primary, #3a7bd5);
+  --c-primary-soft: var(--primarySoft, #e7f0ff);
+  --c-primary-contrast: var(--onPrimary, #ffffff);
+  /* darker shade, if your theme provides it; otherwise same as primary */
+  --c-primary-strong: var(--primaryStrong, var(--c-primary));
+  --c-focus: var(--focusRing, rgba(59,130,246,.45));
+}
+
+.notifications-root h1 {
+  font-size: 2.3rem;
+  font-weight: 700;
+  color: var(--c-text);
+  margin-bottom: 12px;
+}
+
+.notifications-subtitle {
+  color: var(--c-text-muted);
+  font-size: 1.1rem;
+  margin-bottom: 22px;
+}
+
+/* ---------------- Panel ---------------- */
+.notifications-panel {
+  background: var(--c-surface);
+  border-radius: 14px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  padding: 26px 32px;
+  display: flex;
+  gap: 42px;
+  width: 100%;
+  max-width: none;
+  margin-top: 15px;
+  box-sizing: border-box;
+  border: 1px solid var(--c-border);
+}
+
+.notifications-col {
+  flex: 1 1 52%;
+  min-width: 380px;
+}
+
+.notifications-col.right {
+  flex: 1 1 38%;
+  min-width: 260px;
+  margin-left: 28px;
+}
+
+.notifications-col h2 {
+  font-size: 1.35rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: var(--c-text);
+}
+
+/* ---------------- Checkbox Groups ---------------- */
+.notif-group {
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.notif-group-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--c-text);
+  margin-bottom: 6px;
+}
+
+/* Checkbox row */
+.notif-checkbox {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+  font-weight: 500;
+  font-size: 1rem;
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+  color: var(--c-text);
+  transition: color 0.2s ease, opacity 0.2s ease;
+}
+
+.notif-checkbox.disabled {
+  color: var(--c-text-muted);
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
+.notif-checkbox.nested {
+  margin-left: 32px;
+}
+
+/* Hide default input */
+.notif-checkbox input[type="checkbox"] {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  position: absolute;
+}
+
+/* Custom checkbox box */
+.custom-checkbox {
+  width: 22px;
+  height: 22px;
+  border: 2px solid var(--c-primary);
+  border-radius: 6px;
+  background: var(--c-primary-soft);
+  margin-right: 12px;
+  position: relative;
+  transition: all 0.2s ease-in-out;
+}
+
+/* hover/keyboard focus ring for accessibility */
+.notif-checkbox:hover .custom-checkbox {
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--c-focus) 60%, transparent);
+}
+.notif-checkbox input[type="checkbox"]:focus-visible + .custom-checkbox {
+  outline: 0;
+  box-shadow: 0 0 0 4px var(--c-focus);
+}
+
+/* Checked state uses theme primary */
+.notif-checkbox.checked .custom-checkbox,
+.notif-checkbox input[type="checkbox"]:checked + .custom-checkbox {
+  background: var(--c-primary);
+  border-color: var(--c-primary);
+}
+
+/* Checkmark */
+.notif-checkbox.checked .custom-checkbox::after,
+.notif-checkbox input[type="checkbox"]:checked + .custom-checkbox::after {
+  content: "";
+  position: absolute;
+  left: 6px;
+  top: 2px;
+  width: 6px;
+  height: 12px;
+  border: solid var(--c-primary-contrast);
+  border-width: 0 2.5px 2.5px 0;
+  transform: rotate(45deg);
+}
+
+/* ---------------- Info & Links ---------------- */
+.info-icon {
+  font-size: 0.9rem;
+  color: var(--c-text-muted);
+  background: color-mix(in srgb, var(--c-primary-soft) 70%, #fff);
+  border-radius: 50%;
+  padding: 2px 7px;
+  margin-left: 6px;
+  border: 1px solid var(--c-border);
+  cursor: pointer;
+  font-weight: 700;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+.info-icon:hover {
+  background: color-mix(in srgb, var(--c-primary-soft) 100%, #fff 0%);
+  color: var(--c-primary);
+  border-color: color-mix(in srgb, var(--c-primary) 40%, var(--c-border));
+}
+
+.view-link {
+  color: var(--c-primary);
+  font-size: 0.95rem;
+  margin-left: 15px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: 500;
+}
+.view-link:hover {
+  text-decoration: underline;
+  color: var(--c-primary-strong);
+}
+
+/* ---------------- Divider ---------------- */
+.notif-divider {
+  height: 1px;
+  background: var(--c-border);
+  margin: 20px 0 14px 0;
+  border: none;
+}
+
+/* ---------------- Descriptions ---------------- */
+.notif-desc-title {
+  font-weight: 700;
+  margin-bottom: 5px;
+  font-size: 1rem;
+  color: var(--c-text);
+}
+
+.notif-desc {
+  font-size: 0.95rem;
+  color: var(--c-text);
+  margin-top: 4px;
+  line-height: 1.45;
+}
+
+.notif-desc ul {
+  margin: 6px 0 0 18px;
+}
+
+.notif-desc a {
+  color: var(--c-primary);
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+/* ---------------- Responsive ---------------- */
+@media (max-width: 1100px) {
+  .notifications-panel {
+    flex-direction: column;
+    gap: 0;
+    padding: 20px 16px;
+  }
+  .notifications-col.right {
+    margin-left: 0;
+    margin-top: 28px;
+  }
+}

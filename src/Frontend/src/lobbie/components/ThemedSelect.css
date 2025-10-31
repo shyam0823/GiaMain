@@ -1,0 +1,57 @@
+.themed-select {
+  position: relative;
+  display: inline-flex;
+  width: 100%;
+}
+.themed-select select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 100%;
+  padding: 10px 36px 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface);
+  color: var(--text);
+  font-weight: 600;
+  outline: none;
+}
+.themed-select select:focus {
+  border-color: var(--ring);
+  box-shadow: 0 0 0 2px color-mix(in oklab, var(--ring) 25%, transparent);
+}
+.themed-select .chev {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  translate: 0 -50%;
+  pointer-events: none;
+  color: var(--muted);
+  font-size: 12px;
+}
+/* Keep fonts consistent with app */
+.react-select__control { font-family: inherit; }
+
+/* Selected checkmark (kept subtle) */
+.ts-check {
+  width: 1.1em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary);
+  font-weight: 700;
+}
+.ts-check--ghost { color: transparent; }
+
+/* Long labels */
+.ts-option-label {
+  display: inline-block;
+  white-space: normal;
+  word-break: break-word;
+}
+
+/* Chevron style */
+.ts-chevron { font-size: 12px; opacity: .8; }
+
+/* Ensure portal menu sits above modals if needed */
+.react-select__menu-portal { z-index: 9999; }

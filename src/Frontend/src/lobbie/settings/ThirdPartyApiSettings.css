@@ -1,0 +1,50 @@
+/* ---------------- Panel Header ---------------- */
+.thirdparty-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 22px;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+/* Title */
+.thirdparty-header h2 {
+  margin: 0;
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.5px;
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+}
+
+/* Action Button */
+.thirdparty-btn {
+  background: linear-gradient(90deg, var(--brand-a), var(--brand-b));
+  color: var(--primary-contrast);
+  font-weight: 600;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 22px;
+  min-width: 180px;
+  text-align: center;
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.thirdparty-btn:hover {
+  background: linear-gradient(90deg, var(--brand-b), var(--brand-a));
+  box-shadow: 0 4px 10px color-mix(in srgb, var(--brand-b) 20%, transparent);
+}
+
+/* ---------------- Empty State ---------------- */
+.thirdparty-empty {
+  text-align: center;
+  margin-top: 40px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+}

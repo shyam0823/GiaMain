@@ -1,0 +1,439 @@
+/* ===== Shell & frame ===== */
+.gia-auth-shell {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background: var(--appBackground, #f5f7fb);
+}
+.gia-auth-frame {
+  width: min(1150px, 94vw);
+  border-radius: 28px;
+  overflow: hidden;
+  background: #fff;
+  display: grid;
+  grid-template-columns: 56% 44%;
+  box-shadow: 0 20px 60px rgba(16, 24, 40, 0.12);
+}
+
+/* ===== Theme map (binds to your global theme) ===== */
+:root{
+  --brand-400: var(--primary, #60a5fa);
+  --brand-500: var(--primary, #3b82f6);
+  --brand-600: var(--primaryStrong, var(--primary-strong, #2563eb));
+  --brand-700: color-mix(in oklab, var(--brand-600), black 8%);
+}
+
+/* ===== LEFT side (gradient + doctor halo + S-curve) ===== */
+.gia-left {
+  position: relative;
+  background: linear-gradient(145deg, var(--brand-500), var(--brand-600));
+  padding: 36px 32px 28px;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  align-items: center;
+  overflow: hidden;
+}
+
+.gia-brand {
+  width: 190px;
+  height: auto;
+  object-fit: contain;
+  margin: 0 auto 16px;
+  display: block;
+}
+/* soft white glow around logo */
+.brand-glow{
+  filter:
+    drop-shadow(0 0 14px rgba(255,255,255,.75))
+    drop-shadow(0 0 32px rgba(255,255,255,.45));
+}
+
+.gia-hero { position: relative; display: grid; place-items: center; }
+.gia-hero::before{
+  content:"";
+  position:absolute; inset:0; margin:auto;
+  width:min(78%,420px); aspect-ratio:1/1; border-radius:999px;
+  background:
+    radial-gradient(70% 70% at 70% 30%, color-mix(in oklab, var(--brand-400), white 22%), transparent 60%),
+    linear-gradient(160deg, var(--brand-500), var(--brand-700));
+  filter: drop-shadow(0 12px 24px rgba(0,0,0,.20));
+  z-index:0;
+}
+.gia-hero img {
+  width: 360px;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 12px 28px rgba(0,0,0,.25));
+  position: relative; z-index:1;
+}
+
+.gia-copy {
+  text-align: center;
+  color: rgba(255,255,255,.95);
+  font-size: 13px;
+  margin-top: 8px;
+}
+
+/* S-curve white “bites” */
+.gia-left::before,
+.gia-left::after{
+  content:"";
+  position:absolute;
+  right:-140px;
+  width:280px; height:280px;
+  background:#fff;
+  border-radius:50%;
+  box-shadow: inset 0 0 0 1px rgba(2,6,23,.06);
+  z-index:2;
+}
+.gia-left::before{ top:-120px; }
+.gia-left::after{  bottom:-120px; }
+
+/* ===== RIGHT side ===== */
+.gia-right {
+  background: #f5f7fb;
+  padding: 40px 28px;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  align-items: start;
+  justify-items: center;
+}
+
+/* tabs */
+.gia-tabs {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: #fff;
+  padding: 8px;
+  border-radius: 12px;
+  border: 1px solid #e6e8ee;
+  box-shadow: 0 6px 18px rgba(16,24,40,.06);
+  margin: 8px 0 22px;
+}
+.tab {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  padding: 10px 24px;
+  border-radius: 9px;
+  font-weight: 700;
+  color: #6b7280;
+  cursor: pointer;
+}
+.tab.is-active {
+  background: linear-gradient(135deg, var(--brand-500), var(--brand-700));
+  color: #fff;
+  box-shadow: 0 10px 20px color-mix(in oklab, var(--brand-700), transparent 70%);
+}
+
+/* ===== Wider form card ===== */
+.gia-card {
+  width: 100%;
+  max-width: 560px;            /* was 420px */
+  background: #fff;
+  border: 1px solid #e6e8ee;
+  border-radius: 18px;
+  padding: 28px 28px;
+  box-shadow: 0 18px 40px rgba(16,24,40,.10);
+}
+.gia-card.wide { max-width: 560px; }
+
+.field { display:flex; flex-direction:column; gap:8px; margin-bottom:16px; }
+.flabel { font-size:13px; font-weight:700; color: var(--text, #0f172a); }
+
+.input{
+  width: 100%;
+  height: 48px;
+  border:1px solid var(--border, #e6e8ee);
+  background:#fff;
+  color: var(--text, #0f172a);
+  border-radius:12px;
+  padding:12px 14px;
+  font-size:15px;
+  transition: border-color .2s, box-shadow .2s;
+}
+.input:focus{
+  outline:none;
+  border-color: var(--brand-500);
+  box-shadow: 0 0 0 6px color-mix(in oklab, var(--brand-500), transparent 82%);
+}
+
+.row-between{ display:flex; align-items:center; justify-content:space-between; margin:6px 0 16px; }
+.check{ display:inline-flex; align-items:center; gap:8px; color:#6b7280; font-size:14px; }
+.ck{ width:16px; height:16px; }
+
+/* subtle link */
+.muted-link{ color: var(--brand-600); text-decoration:none; font-size:14px; }
+.muted-link:hover{ text-decoration:underline; }
+
+/* CTA */
+.btn-primary{
+  width:100%;
+  height: 50px;
+  border:0;
+  border-radius:999px;
+  background: linear-gradient(135deg, var(--brand-500), var(--brand-700));
+  color:#fff;
+  font-weight:800;
+  cursor:pointer;
+  box-shadow: 0 16px 30px color-mix(in oklab, var(--brand-700), transparent 72%);
+  transition: transform .06s ease, box-shadow .2s ease;
+}
+.btn-primary:hover{ box-shadow: 0 18px 36px color-mix(in oklab, var(--brand-700), transparent 64%); }
+.btn-primary:active{ transform: translateY(1px); }
+
+/* ===== Plain-text footer (no button) ===== */
+.foot-link{
+  text-align:center; color:#6b7280; font-size:14px; margin-top:14px;
+}
+.auth-textlink{
+  all: unset;
+  color: var(--brand-600);
+  font-weight: 700;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* kill any leftover decorative bar elements */
+.foot-link::after,
+.foot-link + *,
+.foot-link + .underline,
+.foot-link + .pill,
+.foot-link + .bar,
+.foot-link + div,
+.foot-link + hr{ display:none !important; }
+
+/* ===== Responsive ===== */
+@media (max-width: 980px){
+  .gia-auth-frame{ grid-template-columns: 1fr; border-radius:22px; }
+  .gia-right{ padding: 26px 20px 32px; }
+  .gia-left{ padding: 22px 20px; }
+  .gia-hero img{ width: 260px; }
+  .gia-left::before, .gia-left::after{ display:none; }
+}
+/* Remove the old white half-circles for good */
+.gia-left::before,
+.gia-left::after{ display:none !important; }
+
+/* Ensure balls are clipped to the left split and stay behind content */
+.gia-left{ position:relative; overflow:hidden; isolation:isolate; }
+
+/* --- Transparent theme bubbles --- */
+:root{
+  /* already mapped earlier, kept here to be explicit */
+  --brand-400: var(--primary, #60a5fa);
+  --brand-500: var(--primary, #3b82f6);
+  --brand-600: var(--primaryStrong, var(--primary-strong, #2563eb));
+  --brand-700: color-mix(in oklab, var(--brand-600), black 8%);
+}
+
+.bounce-field{
+  position:absolute; inset:0;
+  pointer-events:none; z-index:0;
+}
+
+/* transparent, theme-tinted ball */
+.ball{
+  position:absolute;
+  top:0; left:0;                          /* animated by keyframes */
+  width: var(--size, 96px);
+  height: var(--size, 96px);
+  border-radius: 50%;
+  opacity: .85;
+  background:
+    radial-gradient(circle at 35% 30%,
+      color-mix(in oklab, var(--brand-400), white 22%) 0 35%,
+      color-mix(in oklab, var(--brand-600), transparent 70%) 65%,
+      transparent 66%);
+  /* subtle glass ring */
+  box-shadow:
+    inset 0 0 0 1px color-mix(in oklab, var(--brand-600), transparent 70%),
+    inset 0 -12px 22px rgba(255,255,255,.25),
+    0 18px 36px rgba(2,6,23,.18);
+  will-change: top, left;
+  animation-timing-function: cubic-bezier(.25,.65,.35,1);
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+/* a soft highlight that rotates slowly (still theme-tinted) */
+.ball::before{
+  content:""; position:absolute; inset:0; border-radius:50%;
+  background:
+    radial-gradient(60% 60% at 70% 30%, rgba(255,255,255,.55), transparent 70%);
+  mix-blend-mode: screen;
+  animation: ball-spin 24s linear infinite;
+}
+
+/* floor shadow */
+.ball::after{
+  content:""; position:absolute; left:50%; bottom:-12px;
+  width:60%; height:10px; transform:translateX(-50%);
+  border-radius:50%;
+  background: radial-gradient(closest-side, rgba(0,0,0,.16), transparent 70%);
+  filter: blur(2px);
+}
+
+/* paths that hit all four edges (we subtract size so they stay inside) */
+@keyframes roam-square{
+  0%   { top:0%; left:0%; }
+  25%  { top:0%; left:calc(100% - var(--size)); }
+  50%  { top:calc(100% - var(--size)); left:calc(100% - var(--size)); }
+  75%  { top:calc(100% - var(--size)); left:0%; }
+  100% { top:0%; left:0%; }
+}
+@keyframes roam-diag{
+  0%   { top:0%; left:0%; }
+  20%  { top:calc(100% - var(--size)); left:calc(100% - var(--size)); }
+  40%  { top:0%; left:calc(100% - var(--size)); }
+  60%  { top:calc(100% - var(--size)); left:0%; }
+  80%  { top:50%; left:50%; transform:translate(-50%,-50%); }
+  100% { top:0%; left:0%; transform:none; }
+}
+@keyframes roam-diamond{
+  0%   { top:0%; left:50%; transform:translateX(-50%); }
+  25%  { top:50%; left:calc(100% - var(--size)); transform:translateY(-50%); }
+  50%  { top:calc(100% - var(--size)); left:50%; transform:translate(-50%,0); }
+  75%  { top:50%; left:0%; transform:translateY(-50%); }
+  100% { top:0%; left:50%; transform:translateX(-50%); }
+}
+@keyframes ball-spin{
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* 18 balls: varied sizes, speeds, and paths (theme-only) */
+.ball.n1  { --size:140px; animation: roam-square 16s -1s infinite alternate; }
+.ball.n2  { --size: 96px; animation: roam-diag   13s -2.3s infinite alternate; }
+.ball.n3  { --size:110px; animation: roam-diamond 15s -3.1s infinite alternate; }
+.ball.n4  { --size: 80px; animation: roam-square 11s -4.2s infinite alternate; }
+.ball.n5  { --size:120px; animation: roam-diag   17s -1.7s infinite alternate; }
+.ball.n6  { --size: 70px; animation: roam-diamond 10s -5.4s infinite alternate; }
+.ball.n7  { --size: 95px; animation: roam-square 14s -2.8s infinite alternate; }
+.ball.n8  { --size: 85px; animation: roam-diag   12.5s -3.7s infinite alternate; }
+.ball.n9  { --size:102px; animation: roam-diamond 16.5s -2.2s infinite alternate; }
+.ball.n10 { --size: 76px; animation: roam-square 12s -1.4s infinite alternate; }
+.ball.n11 { --size: 88px; animation: roam-diag   15.5s -4.6s infinite alternate; }
+.ball.n12 { --size: 72px; animation: roam-diamond 11.5s -5.1s infinite alternate; }
+.ball.n13 { --size:108px; animation: roam-square 18s -2.9s infinite alternate; }
+.ball.n14 { --size: 92px; animation: roam-diag   14.5s -3.3s infinite alternate; }
+.ball.n15 { --size: 78px; animation: roam-diamond 12.2s -1.9s infinite alternate; }
+.ball.n16 { --size: 84px; animation: roam-square 13.8s -4.1s infinite alternate; }
+.ball.n17 { --size: 66px; animation: roam-diag   10.8s -5.6s infinite alternate; }
+.ball.n18 { --size:100px; animation: roam-diamond 17.8s -3.8s infinite alternate; }
+
+/* Centered forgot-password spacing */
+.gia-tabs { margin: 8px 0 24px; }
+.row-center{ display:flex; justify-content:center; margin:12px 0 16px; }
+.center-link{ display:inline-block; }
+
+/* Mobile: reduce count for perf */
+@media (max-width: 980px){
+  .ball.n1,.ball.n3,.ball.n5,.ball.n7,.ball.n9,.ball.n11,.ball.n13,.ball.n15{ display:none; }
+}
+/* --- Force tabs to use AuthGIA styling despite global overrides --- */
+.gia-auth-shell .gia-tabs .tab {
+  /* beat .tab, .pill, .chip... { ... !important } and button globals */
+  background: transparent !important;
+  color: color-mix(in oklab, var(--brand-700, var(--primary)), #111 30%) !important;
+  border: 1px solid color-mix(in oklab, var(--brand-600, var(--primary)), transparent 60%) !important;
+  border-radius: 10px !important;
+  box-shadow: none !important;
+  padding: 10px 24px !important;
+  font-weight: 700 !important;
+  min-width: 0 !important;
+  margin: 0 !important;
+  transition: background .2s, color .2s, border-color .2s, box-shadow .2s !important;
+}
+
+.gia-auth-shell .gia-tabs .tab:hover {
+  border-color: color-mix(in oklab, var(--brand-600, var(--primary)), transparent 30%) !important;
+}
+
+/* Active = solid theme pill (works for both .is-active and aria-selected) */
+.gia-auth-shell .gia-tabs .tab.is-active,
+.gia-auth-shell .gia-tabs .tab[aria-selected="true"] {
+  background: linear-gradient(
+    135deg,
+    var(--brand-500, var(--primary)),
+    var(--brand-700, var(--primary-strong))
+  ) !important;
+  color: #fff !important;
+  border-color: transparent !important;
+  box-shadow: 0 10px 22px color-mix(in oklab, var(--brand-700, var(--primary-strong)), transparent 70%) !important;
+}
+
+/* Optional focus ring */
+.gia-auth-shell .gia-tabs .tab:focus-visible {
+  outline: none !important;
+  box-shadow: 0 0 0 6px color-mix(in oklab, var(--brand-500, var(--primary)), transparent 80%) !important;
+}
+
+/* Reset any global button gradient leaking into tabs */
+.gia-auth-shell .gia-tabs .tab,
+.gia-auth-shell .gia-tabs .tab:is(:hover,:active) {
+  background-image: none !important;
+}
+/* ===== THEME BRIDGE — make brand tokens follow your theme ===== */
+body {
+  /* your active theme */
+  --primary: #ff7d29;
+  --primary-strong: #ff5c00;
+  --primary-soft: #fff0e3;
+  --primary-contrast: #ffffff;
+
+  /* map EVERYTHING that components use to these */
+  --brand-400: var(--primary);
+  --brand-500: var(--primary);
+  --brand-600: var(--primary-strong);
+  --brand-700: color-mix(in oklab, var(--primary-strong), black 8%);
+}
+/* === Compact, centered Sign In button === */
+.gia-auth-shell .gia-card .btn-primary {
+  width: auto !important;            /* stop stretching full width */
+  min-width: 150px !important;       /* small, readable button */
+  height: 44px !important;
+  padding: 0 24px !important;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  margin: 10px auto 0 !important;    /* center horizontally, small top gap */
+  border-radius: 999px !important;
+  background: linear-gradient(135deg, var(--brand-500), var(--brand-700)) !important;
+  box-shadow: 0 8px 20px color-mix(in oklab, var(--brand-700), transparent 75%) !important;
+  font-weight: 700 !important;
+  font-size: 15px !important;
+}
+
+/* keep form buttons centered in the card */
+.gia-auth-shell .gia-card {
+  text-align: center !important;
+}
+
+/* reduce spacing between forgot password and button */
+.gia-auth-shell .gia-card a[href*="forgot"] {
+  display: block !important;
+  margin-bottom: 4px !important;
+}
+/* === Align input fields to the left but keep button centered === */
+.gia-auth-shell .gia-card form {
+  text-align: left !important;          /* left-align labels and inputs */
+}
+
+.gia-auth-shell .gia-card .field,
+.gia-auth-shell .gia-card .input {
+  display: block;
+  text-align: left;
+  width: 100%;                         /* ensure full width for inputs */
+  margin-left: 0;
+  margin-right: 0;
+}
+
+/* keep the sign-in button centered */
+.gia-auth-shell .gia-card .btn-primary {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  margin: 10px auto 0 !important;      /* auto centers it */
+}

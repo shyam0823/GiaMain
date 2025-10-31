@@ -1,0 +1,8 @@
+.lobbie-root {
+  background: var(--bg);
+  color: var(--text);
+}
+
+.lobbie-root > div {
+  background: var(--surface);
+}

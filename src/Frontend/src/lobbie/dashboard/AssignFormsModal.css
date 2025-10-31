@@ -1,0 +1,133 @@
+.assign-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(6, 32, 77, 0.55); /* darker overlay to match theme */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+.assign-modal {
+  background: var(--bg);
+  width: 520px;
+  max-height: 80vh;
+  border-radius: 16px;
+  box-shadow: 0 10px 28px rgba(16, 40, 90, 0.25);
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  animation: fadeIn 0.25s ease-in-out;
+  border: 1px solid rgba(58, 123, 213, 0.15);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 18px;
+  font-weight: 700;
+  color: #16325c;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  padding-bottom: 12px;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+  color: #6c7a92;
+  transition: color 0.2s ease-in-out;
+}
+
+.close-btn:hover {
+  color: #3a7bd5;
+}
+
+.info-box {
+  margin: 16px 0;
+  padding: 12px 14px;
+  background: linear-gradient(135deg, #e8f2ff, #f0faff);
+  border-left: 4px solid #3a7bd5;
+  font-size: 14px;
+  color: #1f2d47;
+  border-radius: 6px;
+}
+
+.form-select {
+  flex: 1;
+  overflow-y: auto;
+  max-height: 300px;
+  margin-bottom: 18px;
+  padding-right: 8px;
+}
+
+.form-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 6px 8px;
+  border-radius: 6px;
+  transition: background 0.2s ease;
+}
+
+.form-checkbox:hover {
+  background: rgba(58, 123, 213, 0.08);
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  padding-top: 14px;
+}
+
+.cancel-btn,
+.assign-btn {
+  padding: 8px 18px;
+  border-radius: 25px;
+  cursor: pointer;
+  border: none;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.2s ease-in-out;
+}
+
+.cancel-btn {
+  background: #e2e6ed;
+  color: #2c3e50;
+}
+
+.cancel-btn:hover {
+  background: #cfd6e0;
+}
+
+.assign-btn {
+  background: linear-gradient(135deg, #3a7bd5, #00d2ff);
+  color: var(--primary-contrast);
+  box-shadow: 0 4px 10px rgba(58, 123, 213, 0.25);
+}
+
+.assign-btn:hover {
+  background: linear-gradient(135deg, #2e5ea3, #0099cc);
+  box-shadow: 0 6px 14px rgba(58, 123, 213, 0.35);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

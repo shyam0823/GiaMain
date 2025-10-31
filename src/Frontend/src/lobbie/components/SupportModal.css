@@ -1,0 +1,167 @@
+/* ===== Overlay / Backdrop ===== */
+.support-backdrop {
+  position: fixed;
+  inset: 0;
+  background: color-mix(in srgb, var(--primary) 45%, transparent);
+  backdrop-filter: blur(6px) saturate(1.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ===== Modal Box ===== */
+.support-modal {
+  background: var(--bg);
+  border-radius: 16px;
+  padding: 32px 40px 28px;
+  width: 520px;
+  max-width: 92vw;
+  box-shadow: var(--shadow);
+  border: none;
+  text-align: center;
+  animation: scaleIn 0.25s ease;
+  position: relative;
+}
+
+@keyframes scaleIn {
+  from { transform: scale(0.96); opacity: 0.9; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* ===== Header ===== */
+.support-heading {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--brand-b); /* bright brand accent */
+  margin-bottom: 20px;
+}
+
+/* ===== Close Button (top-right) ===== */
+.support-close {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  border: none;
+  background: transparent;
+  font-size: 24px;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.support-close:hover {
+  color: var(--text);
+}
+
+/* ===== Body Text ===== */
+.support-body {
+  text-align: left;
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+.support-body p {
+  margin: 6px 0;
+}
+.support-body .lead {
+  font-weight: 600;
+}
+
+/* ===== Form ===== */
+.support-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.support-form label {
+  text-align: left;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.support-form textarea {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-size: 14px;
+  color: var(--text);
+  background: var(--panel);
+  resize: vertical;
+  outline: none;
+  transition: border 0.2s, box-shadow 0.2s;
+}
+
+.support-form textarea:focus {
+  border-color: var(--brand-b);
+  box-shadow: 0 0 0 3px var(--focus-ring);
+}
+
+/* ===== Footer / Buttons ===== */
+.support-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+/* cancel button */
+.btn-secondary {
+  background: var(--panel);
+  color: var(--text);
+  font-weight: 600;
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+.btn-secondary:hover {
+  background: var(--bg);
+}
+
+/* primary button */
+.btn-primary {
+  background: linear-gradient(to right, var(--brand-a), var(--brand-b));
+  color: var(--primary-contrast);
+  font-weight: 700;
+  padding: 10px 22px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.1s, opacity 0.2s;
+}
+.btn-primary:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+/* ===== Mobile view ===== */
+@media (max-width: 480px) {
+  .support-modal {
+    padding: 24px 20px;
+    width: 90%;
+  }
+
+  .support-heading {
+    font-size: 20px;
+  }
+
+  .btn-primary, .btn-secondary {
+    flex: 1;
+  }
+
+  .support-actions {
+    flex-direction: column;
+    gap: 8px;
+  }
+}

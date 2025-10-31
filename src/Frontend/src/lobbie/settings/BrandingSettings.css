@@ -1,0 +1,135 @@
+/* ---------------- Panel Container ---------------- */
+.panel {
+  background: var(--surface);
+  border-radius: 12px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  padding: 32px;
+  max-width: 900px;
+  margin-bottom: 32px;
+  font-family: "Segoe UI", Roboto, sans-serif;
+}
+
+/* ---------------- Headings ---------------- */
+h2 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+h3 {
+  margin-top: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #475569;
+  margin-bottom: 16px;
+}
+
+/* ---------------- Form Groups ---------------- */
+.form-group {
+  margin-bottom: 24px;
+}
+
+.form-label {
+  font-weight: 600;
+  margin-bottom: 6px;
+  display: block;
+  color: #1f2937;
+}
+
+/* ---------------- Inputs ---------------- */
+.brand-input {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 1rem;
+  background: #f9fafb;
+  transition: border 0.2s, box-shadow 0.2s;
+  box-sizing: border-box;
+}
+
+.brand-input:focus {
+  border-color: #3a7bd5;
+  outline: none;
+  background: var(--bg);
+  box-shadow: 0 0 0 3px rgba(58, 123, 213, 0.15);
+}
+
+/* ---------------- Help Text ---------------- */
+.help-text {
+  color: #6b7280;
+  font-size: 0.92rem;
+  margin-bottom: 6px;
+}
+
+/* ---------------- Logo Preview ---------------- */
+.logo-preview img {
+  max-height: 60px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  margin-bottom: 10px;
+  background: var(--bg);
+  padding: 6px;
+}
+
+/* ---------------- Buttons ---------------- */
+button,
+.btn {
+  background: linear-gradient(135deg, #3a7bd5, #00d2ff);
+  color: var(--primary-contrast);
+  padding: 10px 22px;
+  border: none;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-right: 12px;
+  font-size: 0.95rem;
+  min-width: 160px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+  transition: all 0.25s ease-in-out;
+}
+
+button:hover,
+.btn:hover {
+  background: linear-gradient(135deg, #2e5ea3, #0099cc);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Secondary Button */
+button.secondary,
+.btn.secondary {
+  background: #f3f4f6;
+  color: #374151;
+  border: 1.4px solid #d1d5db;
+  border-radius: 25px;
+  box-shadow: none;
+  cursor: pointer;
+  min-width: 160px;
+  transition: background 0.25s ease, border 0.25s ease;
+}
+
+button.secondary:hover,
+.btn.secondary:hover {
+  background: #e5e7eb;
+  border-color: #9ca3af;
+}
+
+/* ---------------- Email Identity Row ---------------- */
+.email-identity-row {
+  display: flex;
+  gap: 32px;
+  margin-bottom: 10px;
+}
+
+/* ---------------- Responsive ---------------- */
+@media (max-width: 900px) {
+  .email-identity-row {
+    flex-direction: column;
+    gap: 0;
+  }
+  .panel {
+    max-width: 100%;
+  }
+}

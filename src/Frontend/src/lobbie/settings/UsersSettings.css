@@ -1,0 +1,229 @@
+/* ================================
+   UsersSettings.css
+   (Compact header + blue table head)
+==================================*/
+:root {
+  --us-card-bg: #ffffff;
+  --us-text: #0f172a;
+  --us-muted: #64748b;
+  --us-border: #e5e7eb;
+  --us-shadow: 0 20px 40px rgba(2, 6, 23, 0.12);
+  --us-radius: 20px;
+
+  /* Gradients */
+  --us-grad-start: #2563eb;
+  --us-grad-end: #06b6d4;
+
+  /* Table header color (like Patient forms list) */
+  --us-header-bg: #1e3a8a; /* deep navy blue */
+  --us-header-text: #ffffff;
+}
+
+/* ---------- Page ---------- */
+.users-page {
+  display: flex;
+  flex: 1;
+  width: 100%;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+.panel.users-panel {
+  flex: 1;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+}
+
+/* ---------- Card ---------- */
+.us-card {
+  background: var(--us-card-bg);
+  color: var(--us-text);
+  border-radius: var(--us-radius);
+  box-shadow: var(--us-shadow);
+  padding: 24px;
+}
+
+/* ---------- Header ---------- */
+.users-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.users-header h2 {
+  font-size: 28px;
+  font-weight: 700;
+  margin: 0;
+}
+
+/* ---------- Add User Button ---------- */
+.add-user-btn {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 10px 18px;
+  color: var(--primary-contrast);
+  background-image: linear-gradient(90deg, var(--us-grad-start), var(--us-grad-end));
+  border-radius: 50px; /* pill shape */
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+  transition: box-shadow 0.2s ease, transform 0.1s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: auto !important;
+  flex: 0 0 auto;
+  white-space: nowrap;
+  margin-left: auto;
+}
+.add-user-btn:hover {
+  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.35);
+}
+.add-user-btn:active {
+  transform: translateY(1px);
+}
+
+/* ---------- Radio Filters ---------- */
+.users-filters {
+  margin: 8px 0 14px;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+.radio-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--us-muted);
+  cursor: pointer;
+}
+.radio-label input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.custom-radio {
+  width: 18px;
+  height: 18px;
+  border: 2px solid #397cf5;
+  border-radius: 50%;
+  position: relative;
+}
+.radio-label input:checked + .custom-radio::after {
+  content: "";
+  width: 10px;
+  height: 10px;
+  background: #276bfd;
+  border-radius: 50%;
+  position: absolute;
+  top: 3px;
+  left: 3px;
+}
+
+/* ---------- Table ---------- */
+.users-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 8px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* Header Row (Blue) */
+.users-table thead tr {
+  background: var(--us-header-bg);
+  color: var(--us-header-text);
+}
+
+.users-table thead th {
+  font-weight: 600;
+  font-size: 14px;
+  padding: 12px 14px;
+  text-align: left;
+  color: var(--us-header-text);
+  border: none;
+  white-space: nowrap;
+}
+
+.users-table thead th:first-child {
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+.users-table thead th:last-child {
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+/* Table Body */
+.users-table tbody tr {
+  background: var(--bg);
+  border: 1px solid var(--us-border);
+  border-radius: 8px;
+}
+.users-table td {
+  padding: 12px 14px;
+  font-size: 15px;
+  color: var(--us-text);
+  border-top: 1px solid var(--us-border);
+  border-bottom: 1px solid var(--us-border);
+}
+
+/* Ticks + Buttons */
+.tick {
+  font-size: 1.05em;
+}
+
+/* Edit user button (compact gradient pill) */
+.edit-link {
+  all: unset;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 86px;
+  padding: 8px 12px;
+  border-radius: 50px;
+  font-weight: 600;
+  cursor: pointer;
+  background-image: linear-gradient(90deg, var(--us-grad-start), var(--us-grad-end));
+  color: var(--primary-contrast);
+  box-shadow: 0 6px 14px rgba(37, 99, 235, 0.2);
+  transition: box-shadow 0.2s ease, transform 0.1s ease;
+}
+.edit-link:hover {
+  box-shadow: 0 8px 18px rgba(37, 99, 235, 0.3);
+  color:white;
+}
+.edit-link:active {
+  transform: translateY(1px);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+  .us-card {
+    padding: 16px;
+  }
+  .users-table thead {
+    display: none;
+  }
+  .users-table,
+  .users-table tbody,
+  .users-table tr,
+  .users-table td {
+    display: block;
+    width: 100%;
+  }
+  .users-table tr {
+    margin-bottom: 10px;
+  }
+  .users-table td {
+    border: 1px solid var(--us-border);
+    border-radius: 10px;
+    margin-bottom: 6px;
+  }
+}

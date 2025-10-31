@@ -1,0 +1,30 @@
+/* ---------------- Layout Wrapper ---------------- */
+.settings-layout {
+  display: flex;
+  height: 100vh;
+  background: #f9fbff; /* soft background to match overall theme */
+  font-family: 'Inter', Arial, sans-serif;
+}
+
+/* ---------------- Content Area ---------------- */
+.settings-content {
+  flex: 1;
+  padding: 24px 32px;
+  overflow-y: auto;
+  background: var(--surface);
+  min-height: 100vh;
+  border-left: 1px solid #e5e7eb;
+  box-shadow: inset 2px 0 6px rgba(0, 0, 0, 0.03);
+}
+
+/* Add subtle scrollbars for long content */
+.settings-content::-webkit-scrollbar {
+  width: 8px;
+}
+.settings-content::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+.settings-content::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}

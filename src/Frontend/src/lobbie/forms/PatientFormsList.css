@@ -1,0 +1,73 @@
+/* ---------------- Root Container ---------------- */
+.patient-forms-list {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 24px;
+  background: var(--surface);
+  border-radius: 12px;
+  box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.08);
+  font-family: "Segoe UI", Roboto, sans-serif;
+}
+
+/* ---------------- Title ---------------- */
+.patient-forms-list h2 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 18px;
+  color: #1e293b;
+  background: linear-gradient(90deg, #3a7bd5, #00d2ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ---------------- Table ---------------- */
+.patient-forms-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* Table headers & cells */
+.patient-forms-table th,
+.patient-forms-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid #e2e8f0;
+  text-align: left;
+  font-size: 0.95rem;
+}
+
+.patient-forms-table th {
+  background: #f0f6ff;
+  font-weight: 600;
+  color: #374151;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+}
+
+.patient-forms-table tr:nth-child(even) {
+  background: #fafbff;
+}
+
+.patient-forms-table tr:hover td {
+  background: #f0f6ff;
+}
+
+/* ---------------- Action Button ---------------- */
+.view-edit-btn {
+  padding: 8px 16px;
+  background: linear-gradient(135deg, #3a7bd5, #00d2ff);
+  color: var(--primary-contrast);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: all 0.25s ease-in-out;
+}
+
+.view-edit-btn:hover {
+  background: linear-gradient(135deg, #2e5ea3, #0099cc);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+}

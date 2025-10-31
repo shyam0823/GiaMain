@@ -1,0 +1,109 @@
+/* Sidebar.css — Tokenized Version */
+.sidebar {
+  width: 60px;
+  background: var(--panel);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-right: 1px solid var(--border);
+  color: var(--text);
+}
+
+.sidebar-logo {
+  margin: 24px 0 16px 0;
+}
+
+/* Navigation */
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.nav-item {
+  padding: 12px 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  color: var(--text);
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.nav-item.active {
+  background: color-mix(in srgb, var(--brand-b) 15%, var(--bg));
+  color: var(--brand-a);
+  font-weight: 600;
+}
+
+.nav-item:hover {
+  background: color-mix(in srgb, var(--brand-b) 8%, var(--panel));
+  color: var(--brand-a);
+}
+
+.nav-icon {
+  font-size: 22px;
+}
+
+/* Auth buttons */
+.sidebar-auth-buttons {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-bottom: 24px;
+}
+
+.sidebar-auth-buttons .nav-item {
+  justify-content: center;
+}
+
+.sidebar-auth-buttons .nav-item.login:hover,
+.sidebar-auth-buttons .nav-item.logout:hover {
+  background: color-mix(in srgb, var(--brand-b) 10%, var(--panel));
+  color: var(--brand-a);
+  border-radius: 8px;
+}
+
+/* Dropdown */
+.sidebar-dropdown {
+  position: absolute;
+  left: 50px;
+  top: -2px;
+  z-index: 20;
+  min-width: 285px;
+  max-width: 350px;
+  background: var(--surface);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  font-size: 16px;
+  color: var(--text);
+  padding: 0;
+  animation: fadeIn 0.14s ease;
+}
+
+.sidebar-dropdown-card {
+  padding: 18px 18px 16px 18px;
+}
+
+.sidebar-dropdown-header {
+  font-weight: 600;
+  font-size: 17px;
+  margin-bottom: 7px;
+  color: var(--brand-a);
+}
+
+.sidebar-dropdown-body {
+  font-size: 15px;
+  color: var(--text);
+  line-height: 1.4;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-7px); }
+  to { opacity: 1; transform: translateY(0); }
+}

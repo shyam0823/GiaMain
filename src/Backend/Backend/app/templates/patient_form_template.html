@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Patient Export</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 40px; }
+    h1 { color: #2a4b8d; }
+    table { width: 100%; border-collapse: collapse; margin-top: 12px; }
+    td, th { border: 1px solid #ccc; padding: 8px; text-align: left; }
+    th { background: #f3f6ff; }
+  </style>
+</head>
+<body>
+  <h1>Patient Form Export</h1>
+  <p><b>Name:</b> {{ patient.name }}</p>
+  <p><b>Email:</b> {{ patient.email }}</p>
+  <p><b>Location:</b> {{ patient.location }}</p>
+
+  <h2>Assigned Forms</h2>
+  <table>
+    <thead>
+      <tr><th>Form Title</th><th>Status</th><th>Completed On</th></tr>
+    </thead>
+    <tbody>
+      {% for f in forms %}
+      <tr>
+        <td>{{ f.title }}</td>
+        <td>{{ f.status }}</td>
+        <td>{{ f.completed_on or "-" }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</body>
+</html>

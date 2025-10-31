@@ -1,0 +1,128 @@
+/* BACKDROP — neutral, frosted, no green tint */
+.pv-backdrop {
+  position: fixed;
+  inset: 0;
+  /* neutral/dark overlay tied to theme, falls back to rgba(15,23,42,.45) */
+  --pv-overlay: color-mix(in srgb, var(--text, #0f172a) 28%, transparent);
+  background: var(--pv-overlay);
+  /* a touch more blur and saturation for the frosted feel */
+  backdrop-filter: blur(6px) saturate(120%);
+  -webkit-backdrop-filter: blur(6px) saturate(120%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+/* MODAL CARD — keep as-is, but a slightly deeper shadow looks closer to screenshot */
+.pv-card {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid color-mix(in srgb, var(--brand-b) 20%, var(--border));
+  border-radius: 14px;
+  width: min(520px, 90vw);
+  padding: 26px 28px 22px;
+  box-shadow: 0 30px 60px rgba(2, 6, 23, 0.25), 0 2px 8px rgba(2, 6, 23, 0.08);
+  animation: pv-fadeIn 0.15s ease-out;
+}
+
+/* INFO ICON (top-right) */
+.pv-info-icon {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 22px;
+  height: 22px;
+  border: 1.6px solid var(--brand-b);
+  border-radius: 50%;
+  color: var(--brand-b);
+  font-weight: bold;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, transform .15s;
+  z-index: 2;
+}
+.pv-info-icon:hover {
+  background: var(--brand-b);
+  color: var(--primary-contrast);
+  transform: translateY(-1px);
+}
+
+/* TOOLTIP */
+.pv-tooltip {
+  position: absolute;
+  top: 30px;
+  right: 0;
+  width: 240px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  padding: 10px 12px;
+  color: var(--text);
+  font-size: 14px;
+  z-index: 150;
+}
+.pv-tooltip-title { font-weight: 600; margin-bottom: 6px; }
+.pv-tooltip-text  { font-size: 13px; color: var(--text-muted); line-height: 1.4; }
+.pv-tooltip::before {
+  content: "";
+  position: absolute;
+  top: -6px;
+  right: 10px;
+  width: 10px; height: 10px;
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+  transform: rotate(-45deg);
+}
+
+/* HEADER TEXTS */
+.pv-title   { font-size: 22px; font-weight: 700; color: var(--text); margin: 0 0 6px; }
+.pv-brand   { font-size: 18px; font-weight: 600; color: var(--text); opacity: .9; margin-bottom: 10px; }
+.pv-section { font-size: 15px; font-weight: 500; color: var(--text-muted); margin: 6px 0 16px; }
+
+/* BUTTON GROUP */
+.pv-actions { display: flex; gap: 14px; margin-bottom: 18px; }
+.pv-btn {
+  flex: 1 1 0;
+  padding: 10px 16px;
+  border: 1.5px solid var(--brand-b);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--brand-b);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all .2s;
+}
+.pv-btn:hover { background: color-mix(in srgb, var(--brand-b) 8%, var(--panel)); transform: translateY(-1px); }
+
+/* FOOTER CLOSE BUTTON */
+.pv-footer { display: flex; justify-content: center; margin-top: 10px; }
+.pv-close {
+  border: 1px solid var(--border);
+  background: var(--bg);
+  border-radius: 8px;
+  padding: 9px 16px;
+  font-weight: 600;
+  color: var(--text);
+  cursor: pointer;
+  transition: all .2s;
+}
+.pv-close:hover { background: var(--danger, #ef4444); color: var(--primary-contrast); }
+
+/* ANIMATION */
+@keyframes pv-fadeIn {
+  from { opacity: 0; transform: translateY(10px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* PRINT */
+@media print {
+  button, .no-print, .toolbar, .action-bar { display: none !important; }
+  body { background: var(--bg) !important; }
+  .print-container { padding: 0 !important; box-shadow: none !important; }
+}

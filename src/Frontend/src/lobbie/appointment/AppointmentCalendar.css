@@ -1,0 +1,192 @@
+/* Calendar container */
+.calendar-selector {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 12px;
+  gap: 8px;
+}
+
+/* Navigation buttons (prev/next) */
+.selector-btn {
+  background: var(--panel);                 /* #f1f5f9 */
+  border: none;
+  font-size: 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 6px 10px;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  color: var(--text);                       /* #334155 */
+  transition: background 0.2s, color 0.2s;
+}
+
+.selector-btn:hover {
+  background: var(--bg);                    /* #e2e8f0-ish */
+  color: var(--primary-strong);             /* #1e3a8a */
+}
+
+/* Month label */
+.selector-label {
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--text);                       /* #1e293b */
+}
+
+/* Weekday headers */
+.weekday {
+  text-align: center;
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--text-muted);                 /* #64748b */
+  padding: 4px 0;
+}
+
+/* Days grid */
+.calendar-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+  margin-top: 6px;
+}
+
+/* Day cell */
+.calendar-day {
+  position: relative;
+  padding: 10px 4px;
+  text-align: center;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text);                       /* #334155 */
+  border-radius: 6px;
+  transition: background 0.2s, color 0.2s;
+}
+
+.calendar-day:hover {
+  background: var(--panel);                 /* #f1f5f9 */
+}
+
+/* Empty cells */
+.calendar-day.empty {
+  visibility: hidden;
+}
+
+/* Selected day */
+.calendar-day.selected {
+  background: linear-gradient(135deg, var(--brand-a), var(--brand-b)); /* #3a7bd5 → #00d2ff */
+  color: var(--primary-contrast);           /* #fff */
+  font-weight: 600;
+  border-radius: 6px;
+  box-shadow: var(--shadow);
+}
+
+/* Today */
+.calendar-day.today {
+  border: 2px solid var(--brand-b);         /* #2563eb */
+  color: var(--primary-strong);             /* #1e3a8a */
+  font-weight: 700;
+  border-radius: 6px;
+}
+
+/* Appointment indicator */
+.has-appointments .appointment-indicator {
+  position: absolute;
+  top: 4px;
+  right: 6px;
+  background: var(--success, #16a34a);      /* prefer --success if defined */
+  color: var(--primary-contrast);
+  font-size: 0.7rem;
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  line-height: 16px;
+  text-align: center;
+  font-weight: 600;
+  box-shadow: var(--shadow);
+}
+/* ===========================================================
+   THEME-AWARE BUTTONS + CLOSE BUTTONS (GLOBAL)
+   =========================================================== */
+
+/* Primary buttons across app */
+button,
+.btn,
+.appointment-form button,
+body.admin-theme header .btn,
+body.admin-theme .topbar .btn,
+body.admin-theme .navbar .btn,
+.lobbie-root .btn {
+  background: linear-gradient(
+    135deg,
+    var(--primary-strong, #4cb100) 0%,
+    var(--primary, #56cc00) 100%
+  ) !important;
+  color: var(--primary-contrast, #fff) !important;
+  border: 1px solid var(--primary-strong, #4cb100) !important;
+  border-radius: 10px !important;
+  box-shadow: 0 3px 8px color-mix(in srgb, var(--primary) 20%, transparent);
+  transition: all 0.25s ease-in-out;
+}
+
+button:hover,
+.btn:hover,
+.appointment-form button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--primary) 35%, transparent);
+}
+
+/* Ghost / secondary buttons */
+.ui-btn--ghost,
+.btn--ghost {
+  background: transparent !important;
+  color: var(--primary, #56cc00) !important;
+  border: 1.5px solid var(--primary, #56cc00) !important;
+  box-shadow: 0 2px 6px color-mix(in srgb, var(--primary) 10%, transparent) !important;
+}
+
+.ui-btn--ghost:hover,
+.btn--ghost:hover {
+  background: color-mix(in srgb, var(--primary) 5%, white) !important;
+}
+
+/* Appointment Form Close Buttons */
+.appointment-form .close-btn,
+.appointment-form .modal-close,
+.appointment-form button[aria-label="Close"],
+.appointment-form [data-close="modal"] {
+  position: absolute !important;
+  top: 10px !important;
+  right: 12px !important;
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: var(--primary-strong, #4cb100) !important;
+  color: var(--primary-contrast, #fff) !important;
+  font-size: 22px !important;
+  line-height: 1 !important;
+  border: none !important;
+  box-shadow: 0 2px 8px color-mix(in srgb, var(--primary) 30%, transparent) !important;
+  cursor: pointer !important;
+  transition: all 0.25s ease-in-out !important;
+}
+
+.appointment-form .close-btn:hover,
+.appointment-form .modal-close:hover,
+.appointment-form button[aria-label="Close"]:hover,
+.appointment-form [data-close="modal"]:hover {
+  background: var(--primary, #56cc00) !important;
+  box-shadow: 0 4px 10px color-mix(in srgb, var(--primary) 45%, transparent) !important;
+  transform: scale(1.05);
+}
+
+/* Appointments container consistency */
+.appointment-manager {
+  background: var(--bg, #f4fdf4) !important;
+  color: var(--text, #122015) !important;
+  font-family: "Inter", "Segoe UI", Roboto, sans-serif !important;
+}

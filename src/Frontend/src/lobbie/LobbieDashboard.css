@@ -1,0 +1,502 @@
+/* Top-level container */
+.lobbie-dashboard {
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(
+    to bottom,
+    color-mix(in srgb, var(--brand-b) 12%, var(--panel)),
+    color-mix(in srgb, var(--text) 6%, var(--bg))
+  ); /* blue-gray gradient via tokens */
+  min-height: 100vh;
+  font-family: "Inter", sans-serif;
+  color: var(--text);
+}
+
+/* Sections inside dashboard */
+.forms-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  background: color-mix(in srgb, var(--brand-b) 8%, var(--panel)); /* light blue-gray */
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+}
+
+/* Provide consistent spacing */
+.forms-section > * {
+  margin-bottom: 10px;
+}
+
+/* Override modal backdrop */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: color-mix(in srgb, var(--primary) 45%, transparent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Dashboard cards */
+.dashboard-card {
+  background: color-mix(in srgb, var(--bg) 10%, transparent); /* frosted glass */
+  backdrop-filter: blur(8px);
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.dashboard-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow);
+}
+
+/* Buttons inside dashboard */
+.dashboard-btn {
+  display: inline-block;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 30px;
+  font-weight: bold;
+  cursor: pointer;
+  background: linear-gradient(135deg, var(--brand-a), var(--brand-b));
+  color: var(--primary-contrast);
+  transition: all 0.3s ease-in-out;
+}
+
+.dashboard-btn:hover {
+  background: linear-gradient(135deg, var(--brand-a), var(--brand-b));
+  box-shadow: var(--shadow);
+}
+
+/* =========================
+   TABLE + MERGED FOOTER BAR
+   ========================= */
+
+/* Table styles */
+.dashboard-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  background: color-mix(in srgb, var(--brand-b) 12%, var(--panel));
+  border-radius: 0;
+  overflow: visible;
+  border: 1px solid var(--border);
+}
+
+.dashboard-table th,
+.dashboard-table td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+.dashboard-table th {
+  background: var(--brand-a);
+  color: var(--primary-contrast);
+}
+
+.dashboard-table tr:nth-child(even) {
+  background: color-mix(in srgb, var(--brand-b) 8%, var(--panel));
+}
+
+/* ===== Merged footer (looks like part of the table) ===== */
+.footer-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: color-mix(in srgb, var(--brand-b) 20%, var(--panel));
+  border-left: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  border-top: none;
+  border-radius: 0;
+  padding: 12px 18px;
+  margin: 0;
+  box-shadow: none;
+  gap: 16px;
+  transition: all 0.3s ease;
+}
+
+/* When placed right after the table, remove gaps automatically */
+.dashboard-table + .footer-bar {
+  margin-top: 0;
+}
+
+/* ===== Left: total count ===== */
+.count-badge {
+  background: linear-gradient(135deg, var(--brand-a), var(--brand-b));
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  font-weight: 400;
+  font-size: 12px;
+  color: var(--primary-contrast);
+  box-shadow: 0 2px 6px color-mix(in srgb, var(--brand-b) 25%, transparent);
+}
+
+/* ===== Middle section ===== */
+.pager-wrap {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* ===== Enhanced Show Dropdown with Full Visible Options ===== */
+.show-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 30px;
+  background: linear-gradient(135deg, var(--brand-a), var(--brand-b)); /* soft blue gradient */
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--brand-b) 35%, transparent);
+  transition: all 0.3s ease;
+  color: var(--primary-contrast);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.show-wrap:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px color-mix(in srgb, var(--brand-b) 45%, transparent);
+}
+
+/* Label */
+.show-label {
+  color: var(--primary-contrast);
+  font-weight: 600;
+  font-size: 14px;
+}
+
+/* Dropdown select */
+.show-select {
+  border: none;
+  background: transparent;
+  color: var(--primary-contrast);
+  font-weight: 700;
+  font-size: 14px;
+  outline: none;
+  cursor: pointer;
+  padding: 6px 20px 6px 8px;
+  min-width: 140px;
+  appearance: none;
+  z-index: 10;
+}
+
+/* Dropdown list popup styling */
+.show-wrap .show-select option,
+.show-wrap .show-select optgroup {
+  background: var(--panel) !important;
+  color: var(--brand-b) !important;
+  font-weight: 700;
+  line-height: 1.5;
+  padding: 8px 10px;
+  border-radius: 6px;
+}
+
+/* Ensure all dropdown options are visible (avoid scroll) */
+.show-select::-webkit-scrollbar { display: none; }
+.show-select option { height: auto !important; }
+
+/* Fix Chrome/Edge popup height */
+select.show-select {
+  overflow-y: visible !important;
+  max-height: none !important;
+}
+
+/* Highlight hovered/selected options */
+.show-wrap .show-select option:hover {
+  background: color-mix(in srgb, var(--brand-b) 15%, transparent) !important;
+  color: var(--brand-a) !important;
+}
+
+.show-wrap .show-select option:checked {
+  background: linear-gradient(135deg, var(--brand-a), var(--brand-b)) !important;
+  color: var(--brand-a) !important;
+}
+
+/* Floating popup look (simulated shadow) */
+.show-wrap select:focus option {
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--brand-b) 30%, transparent);
+}
+
+/* Focus glow */
+.show-select:focus {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 3px;
+}
+
+/* Custom dropdown arrow */
+.show-wrap::after {
+  content: "▼";
+  font-size: 10px;
+  margin-left: 4px;
+  color: var(--primary-contrast);
+  pointer-events: none;
+}
+
+/* Hide Edge default caret */
+.show-select::-ms-expand { display: none; }
+
+/* ===== Pagination Buttons ===== */
+.pager {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 0;
+  padding: 6px 8px;
+  box-shadow: 0 3px 8px color-mix(in srgb, var(--text) 8%, transparent);
+}
+
+.pager-btn {
+  min-width: 34px;
+  height: 34px;
+  border-radius: 0;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--brand-b);
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.pager-btn:hover:not(.active):not(:disabled) {
+  background: color-mix(in srgb, var(--brand-b) 8%, transparent);
+  border-color: var(--brand-b);
+  color: color-mix(in srgb, var(--brand-a) 80%, black);
+}
+
+.pager-btn.active {
+  background: linear-gradient(135deg, var(--brand-a), var(--brand-b));
+  color: var(--primary-contrast);
+  border: 1px solid var(--brand-a);
+  box-shadow: 0 0 10px color-mix(in srgb, var(--brand-a) 35%, transparent);
+}
+
+.pager-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ===== Go Arrow ===== */
+.go-arrow {
+  width: 42px;
+  height: 42px;
+  border-radius: 0;
+  background: transparent;
+  border: 2px solid color-mix(in srgb, var(--brand-a) 55%, var(--border));
+  color: color-mix(in srgb, var(--brand-a) 85%, black);
+  font-size: 18px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s ease;
+}
+
+.go-arrow:hover:not(:disabled) {
+  background: linear-gradient(135deg, var(--brand-a), var(--brand-b));
+  color: var(--primary-contrast);
+  box-shadow: 0 4px 15px color-mix(in srgb, var(--brand-b) 25%, transparent);
+}
+
+.go-arrow:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 720px) {
+  .footer-bar {
+    flex-direction: column;
+    align-items: center;
+    padding: 12px;
+    gap: 12px;
+  }
+  .pager-wrap {
+    justify-content: center;
+    width: 100%;
+  }
+}
+/* Make Print/PDF look like Action button */
+.print-btn {
+  background: var(--primary) !important;
+  color: var(--primary-contrast) !important;
+  border: none !important;
+  border-radius: 8px !important; /* small round corners */
+  font-weight: 600 !important;
+  font-size: 14px !important;
+  padding: 6px 14px !important;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  min-width: 90px;
+}
+
+.print-btn:hover {
+  background: var(--primary-strong) !important;
+  box-shadow: 0 2px 8px color-mix(in srgb, var(--primary) 30%, transparent);
+  transform: translateY(-1px);
+}
+/* When using React-Select inside the pill, remove the old native caret */
+.show-wrap.rs-select::after {
+  content: none !important;
+}
+
+/* Make the RS control sit nicely inside the green pill */
+.show-wrap.rs-select .rs__control {
+  min-height: 36px;         /* matches size="sm" */
+  height: 36px;
+  border-radius: 10px;
+  box-shadow: none;
+  background: var(--surface);
+  border: 1px solid var(--border);
+}
+
+/* Slightly tighter value padding */
+.show-wrap.rs-select .rs__value-container {
+  padding-left: 10px;
+  padding-right: 6px;
+}
+
+/* Keep the text color consistent */
+.show-wrap.rs-select .rs__single-value {
+  color: var(--text);
+}
+
+/* Hide the tiny separator between value and chevron */
+.show-wrap.rs-select .rs__indicator-separator {
+  display: none;
+}
+/* === Theme-styled Show dropdown === */
+.show-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 14px;
+  border-radius: 12px;
+  background: var(--primary-soft);
+  border: 1px solid var(--border);
+  color: var(--text);
+  box-shadow: 0 0 8px color-mix(in srgb, var(--primary) 15%, transparent);
+  transition: all 0.2s ease-in-out;
+}
+
+.show-label {
+  font-weight: 700;
+  color: var(--text);
+}
+
+/* === Dropdown select === */
+.show-select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 6px 28px 6px 10px;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  min-width: 120px;
+}
+
+/* Focus ring */
+.show-select:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--focus-ring);
+}
+
+/* Dropdown arrow */
+.show-wrap::after {
+  content: "▾";
+  font-size: 12px;
+  color: var(--muted);
+  margin-left: -22px;
+  pointer-events: none;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+.show-select:focus + .show-wrap::after {
+  color: var(--primary);
+}
+
+/* Dropdown options styling */
+.show-select option {
+  background: var(--surface);
+  color: var(--text);
+  padding: 10px;
+  font-weight: 600;
+}
+
+/* Hover + Selected states for native dropdown */
+.show-select option:hover,
+.show-select option:focus,
+.show-select option:checked {
+  background: var(--primary);
+  color: var(--primary-contrast);
+}
+
+/* Hide scrollbar if possible */
+.show-select::-webkit-scrollbar {
+  width: 8px;
+}
+.show-select::-webkit-scrollbar-thumb {
+  background: var(--primary-soft);
+  border-radius: 8px;
+}
+/* Let the React-Select menu escape the footer */
+.footer-bar,
+.pager-wrap,
+.show-wrap,
+.themed-select {
+  overflow: visible !important;
+  z-index: 10;
+}
+
+/* React-Select theme hooks (classNamePrefix="rs") */
+.rs__menu,
+.rs__menu-list {
+  background: var(--panel, var(--surface)) !important;
+  border: 1px solid var(--border) !important;
+  box-shadow: 0 10px 30px rgba(0,0,0,.12) !important;
+  opacity: 1 !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.rs__option--is-focused {
+  background: var(--primary-soft) !important;
+  color: var(--text) !important;
+  font-weight: 700;
+}
+
+.rs__option--is-selected {
+  background: var(--primary) !important;
+  color: var(--primary-contrast) !important;
+  font-weight: 800;
+}
+
+/* Clean look for the pill container */
+.show-wrap {
+  background: var(--primary-soft);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 0 0 8px color-mix(in srgb, var(--primary) 15%, transparent);
+}
+.show-label { font-weight: 700; color: var(--text); }
+
+/* Remove decorative caret you might have added earlier */
+.show-wrap::after { content: none !important; }

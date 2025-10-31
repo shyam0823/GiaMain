@@ -1,0 +1,152 @@
+/* ---- Customer shell ---- */
+.customer-container {
+  display: flex;
+  min-height: 100vh;
+  background: var(--bg);      /* ensure white page */
+  color: var(--text);
+}
+
+/* Right side (everything except the sidebar) */
+.customer-content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+}
+
+/* Main content area */
+.customer-main {
+  width: 100%;
+  max-width: clamp(1000px, 92vw, 1400px);
+  margin: 0 auto;
+  padding: 20px 10px 50px;
+  box-sizing: border-box;
+}
+
+/* Make topbar span full width */
+.customer-topbar,
+.customer-topbar .topbar-inner,
+.customer-topbar .container {
+  width: 100%;
+}
+
+/* ================================
+   Assigned Forms — section and cards
+   ================================ */
+.forms-section {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+  padding: 22px 24px;
+  margin-top: 10px;
+}
+
+.forms-section h3 {
+  margin: 0 0 16px;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.forms-section .form-card {
+  display: grid;
+  grid-template-columns: 1.2fr 0.6fr 0.8fr;
+  gap: 18px 26px;
+  align-items: center;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin-bottom: 18px;
+  box-shadow: var(--shadow);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.forms-section .form-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+
+.forms-section .form-card .title,
+.forms-section .form-card h4 {
+  margin: 0 0 6px 0;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.25;
+}
+
+.forms-section .form-card .meta,
+.forms-section .form-card .subtitle,
+.forms-section .form-card .progress {
+  color: var(--text-muted);
+  font-size: 13.5px;
+}
+
+.forms-section .form-card .patient,
+.forms-section .form-card .patient-label {
+  text-align: center;
+  color: var(--text);
+  font-weight: 500;
+  font-size: 14.5px;
+  white-space: nowrap;
+}
+
+.forms-section .form-card .actions,
+.forms-section .form-card .btn-group {
+  display: grid;
+  grid-auto-rows: 44px;
+  gap: 10px;
+}
+
+/* Buttons */
+.customer-container .btn,
+.forms-section .form-card .actions .btn,
+.forms-section .form-card .btn-group .btn,
+.forms-section .form-card .actions .btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 44px;
+  border-radius: 9999px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  background: linear-gradient(92deg, var(--brand-a) 0%, var(--brand-b) 100%);
+  color: var(--primary-contrast);
+  box-shadow: var(--shadow);
+}
+
+.customer-container .btn:hover { transform: translateY(-1px); box-shadow: var(--shadow); }
+.customer-container .btn:focus-visible { outline: none; box-shadow: 0 0 0 3px var(--focus-ring); }
+
+.customer-container .btn.outline,
+.forms-section .form-card .actions .btn-secondary {
+  background: transparent;
+  color: var(--text);
+  border: 2px solid var(--border);
+  box-shadow: none;
+}
+.customer-container .btn.outline:hover {
+  background: linear-gradient(92deg, rgba(0,0,0,.06) 0%, rgba(0,0,0,.10) 100%);
+}
+
+/* Responsive */
+@media (max-width: 1100px) {
+  .forms-section .form-card { grid-template-columns: 1fr 1fr; }
+  .forms-section .form-card .patient,
+  .forms-section .form-card .patient-label { text-align: left; }
+  .forms-section .form-card .actions,
+  .forms-section .form-card .btn-group { grid-column: 1 / -1; }
+}
+@media (max-width: 680px) {
+  .forms-section .form-card { grid-template-columns: 1fr; }
+  .forms-section .form-card .patient,
+  .forms-section .form-card .patient-label {
+    margin-top: -4px; margin-bottom: 4px; text-align: left;
+  }
+}

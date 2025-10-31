@@ -1,0 +1,246 @@
+/* src/pages/MedicalHistory.css */
+ 
+/* Page */
+.mh-page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px;
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color: #0b1b3a;
+}
+ 
+.mh-header h2 {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: .2px;
+}
+ 
+.mh-sub {
+  margin-top: 4px;
+  color: #5d6a85;
+}
+ 
+/* Card */
+.mh-card {
+  background: var(--surface);
+  border-radius: 16px;
+  padding: 16px;
+  margin-top: 18px;
+  box-shadow: 0 10px 30px rgba(15, 72, 157, 0.06);
+  border: 1px solid rgba(15, 72, 157, 0.06);
+}
+ 
+.mh-card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 4px 14px 4px;
+  border-bottom: 1px solid #eef3fb;
+  margin-bottom: 10px;
+}
+ 
+.mh-card-head h3 {
+  margin: 0;
+  font-size: 20px;
+}
+ 
+/* Controls */
+.mh-controls {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+ 
+.mh-input,
+.mh-select {
+  height: 38px;
+  border-radius: 10px;
+  padding: 0 12px;
+  border: 1px solid #d8e2f3;
+  background: #f7fbff;
+  outline: none;
+}
+ 
+.mh-input:focus,
+.mh-select:focus {
+  border-color: #2d7ef7;
+  box-shadow: 0 0 0 3px rgba(45, 126, 247, 0.15);
+}
+ 
+/* Alert */
+.mh-alert {
+  margin-top: 12px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: #fff7e6;
+  color: #8c5d00;
+  border: 1px solid #ffd591;
+}
+ 
+/* List */
+.mh-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+ 
+.mh-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 8px;
+  border-bottom: 1px dashed #edf2fc;
+}
+ 
+.mh-row:last-child {
+  border-bottom: none;
+}
+ 
+.mh-row-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+}
+ 
+.mh-when {
+  font-variation-settings: "wght" 640;
+}
+ 
+.mh-row-sub {
+  margin-top: 4px;
+  color: #5d6a85;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+ 
+.mh-dim { color: #7a879e; }
+ 
+.mh-dot { color: #c7d2e8; }
+ 
+/* Buttons */
+.mh-btn {
+  border: 1px solid #d9e6ff;
+  background: #2d7ef7;
+  color: var(--primary-contrast);
+  padding: 8px 12px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+}
+ 
+.mh-btn.ghost {
+  background: var(--bg);
+  color: #1b3c53;
+  border-color: #cfe0ff;
+}
+ 
+.mh-btn:hover { filter: brightness(0.97); }
+ 
+/* Pills */
+.mh-pill {
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: capitalize;
+  border: 1px solid transparent;
+}
+ 
+.mh-booked   { background: #e6f0ff; color: #1b5bff; border-color: #cfe0ff; }
+.mh-confirmed{ background: #e7fff3; color: #15803d; border-color: #bff1d1; }
+.mh-completed{ background: #eefaf1; color: #11805d; border-color: #ccefe0; }
+.mh-cancelled{ background: #fff0f0; color: #b42318; border-color: #ffd4d4; }
+.mh-pending  { background: #fff8e1; color: #8c6d1f; border-color: #ffe9a8; }
+ 
+/* Empty */
+.mh-empty {
+  padding: 22px;
+  text-align: center;
+  color: #6b7894;
+  background: #f7fbff;
+  border: 1px dashed #d8e2f3;
+  border-radius: 12px;
+}
+ 
+/* Skeletons */
+.mh-skeleton-list { display: grid; gap: 10px; }
+.mh-skel {
+  height: 52px;
+  background: linear-gradient(90deg, #f2f6ff, #e8efff, #f2f6ff);
+  border-radius: 12px;
+  animation: mh-shimmer 1.2s infinite;
+}
+@keyframes mh-shimmer {
+  0% { background-position: -200px 0; }
+  100% { background-position: 200px 0; }
+}
+ 
+/* Timeline */
+.mh-timeline {
+  list-style: none;
+  margin: 0;
+  padding: 10px 0 0 0;
+  position: relative;
+}
+ 
+.mh-tl-item {
+  display: grid;
+  grid-template-columns: 18px 1fr;
+  gap: 10px;
+  padding: 12px 0;
+  position: relative;
+}
+ 
+.mh-tl-item:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: 8px;
+  top: 30px;
+  bottom: -6px;
+  width: 2px;
+  background: #e7efff;
+}
+ 
+.mh-tl-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  background: #2d7ef7;
+  margin-top: 6px;
+  box-shadow: 0 0 0 4px rgba(45, 126, 247, 0.15);
+}
+ 
+.mh-tl-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+}
+ 
+.mh-tl-type {
+  font-weight: 700;
+  color: #133b7c;
+}
+ 
+.mh-tl-date {
+  color: #6b7894;
+  font-size: 12px;
+}
+ 
+.mh-tl-text {
+  margin: 6px 0 0 0;
+  color: #334155;
+}
+ 
+/* Responsive */
+@media (max-width: 720px) {
+  .mh-controls { width: 100%; flex-wrap: wrap; }
+  .mh-input { flex: 1 1 240px; }
+  .mh-select { flex: 0 0 160px; }
+  .mh-row { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .mh-row-actions { width: 100%; }
+}
+ 

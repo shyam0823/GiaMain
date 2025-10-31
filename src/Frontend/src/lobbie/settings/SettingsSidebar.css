@@ -1,0 +1,47 @@
+/* ===============================
+   Settings Sidebar — Themed
+   =============================== */
+.settings-sidebar {
+  width: 240px;
+  background-color: var(--panel);
+  border-right: 1.5px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  padding-top: 24px;
+  height: 100vh;
+  box-sizing: border-box;
+  color: var(--text);
+}
+
+/* Sidebar items */
+.settings-nav-item {
+  padding: 14px 24px;
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: var(--text);
+  cursor: pointer;
+  border-radius: 0 8px 8px 0;
+  margin-bottom: 2px;
+  user-select: none;
+  transition: background-color 0.14s ease, color 0.14s ease;
+}
+
+/* Hover effect */
+.settings-nav-item:hover {
+  background-color: color-mix(in srgb, var(--brand-b) 10%, var(--panel));
+  color: var(--brand-b);
+}
+
+/* Active state */
+.settings-nav-item.active {
+  background-color: color-mix(in srgb, var(--brand-b) 12%, var(--panel));
+  color: var(--brand-b);
+  font-weight: 700;
+}
+
+/* Flexbox structure */
+.settings-sidebar {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}

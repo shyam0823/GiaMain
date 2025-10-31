@@ -1,0 +1,172 @@
+/* ---------------- Container ---------------- */
+.account-settings-container {
+  padding: 20px 28px 36px 16px;
+  max-width: 880px;
+  background: var(--surface);
+  border-radius: 12px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+  font-family: "Segoe UI", Roboto, sans-serif;
+}
+
+/* ---------------- Headings ---------------- */
+.section-heading {
+  font-size: 1.9rem;
+  font-weight: 700;
+  margin-bottom: 22px;
+  color: #1e293b;
+}
+
+.subsection-heading {
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin: 32px 0 18px 0;
+  color: #1f2937;
+}
+
+/* ---------------- Form Rows ---------------- */
+.account-form-row,
+.account-toggle-row {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  margin-bottom: 20px;
+}
+
+/* Field Groups */
+.field-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0;
+}
+
+.field-group label {
+  font-size: 1rem;
+  color: #374151;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+/* Inline labels */
+.field-group-inline {
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+/* ---------------- Inputs ---------------- */
+.account-input {
+  font-size: 1rem;
+  background: #f9fafb;
+  border-radius: 8px;
+  border: 1.4px solid #d1d5db;
+  min-width: 230px;
+  padding: 12px 16px;
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+.account-input:focus {
+  border-color: #3a7bd5;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(58, 123, 213, 0.2);
+  background: var(--bg);
+}
+
+/* ---------------- Save Button ---------------- */
+.save-btn-wrapper {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.save-btn {
+  background: linear-gradient(135deg, #3a7bd5, #00d2ff);
+  color: var(--primary-contrast);
+  font-size: 1.05rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 28px;
+  cursor: pointer;
+  box-shadow: 0 3px 8px rgba(58, 123, 213, 0.25);
+  transition: all 0.2s ease-in-out;
+  width: 200px;
+}
+.save-btn:hover {
+  background: linear-gradient(135deg, #2e5ea3, #0099cc);
+}
+
+/* ---------------- Customization Grid ---------------- */
+.customization-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px 26px;
+  margin-bottom: 18px;
+}
+
+/* ---------------- Toggles ---------------- */
+.account-toggle-row {
+  background: #f0f6ff;
+  padding: 14px 20px;
+  border-radius: 10px;
+  margin: 22px 0 8px 0;
+  border: 1px solid #dbeafe;
+}
+
+.toggle-label {
+  margin-left: 10px;
+  font-size: 1rem;
+  color: #1e293b;
+  font-weight: 500;
+}
+
+/* ---------------- Help Icon ---------------- */
+.help-icon {
+  background: #f9fbff;
+  color: #2563eb;
+  font-size: 0.85rem;
+  border-radius: 50%;
+  padding: 2px 7px;
+  margin-left: 6px;
+  border: 1px solid #cbd5e1;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.help-icon:hover {
+  background: #e6f0ff;
+  color: #1342af;
+}
+
+/* ---------------- Lobbie Connect Table ---------------- */
+.lobbie-connect-table {
+  margin-top: 18px;
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--bg);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.lobbie-connect-table th,
+.lobbie-connect-table td {
+  border-bottom: 1.2px solid #f1f5f9;
+  padding: 12px 14px;
+  text-align: left;
+  font-size: 0.98rem;
+}
+
+.lobbie-connect-table th {
+  background: #f0f6ff;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.lobbie-connect-table tr:hover td {
+  background: #f9fbff;
+}
+
+/* ---------------- Icons ---------------- */
+.integration-icon {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}

@@ -1,0 +1,14 @@
+flask=3.1.1
+flask-sqlalchemy=3.1.1
+flask-jwt-extended=4.7.1
+pyodbc=5.2.0
+sqlalchemy=2.0.42
+werkzeug=3.13
+pytest=8.4.1
+Blueprint=3.4.2
+jsonify=0.5
+requests=2.32.5
+Datetime=5.5
+smtplib=3.14.0
+pdfkit=1.0.0
+twilio=9.8.3

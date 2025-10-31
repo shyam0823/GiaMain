@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Patient Form Export</title>
+  <style>
+    @page { margin: 24mm 18mm; }
+    body  { font-family: Arial, Helvetica, sans-serif; color:#222; }
+    h1    { color:#214A8D; margin:0 0 6px 0; font-size:28px; }
+    h2    { color:#214A8D; font-size:20px; margin:24px 0 8px; }
+    .meta { margin: 2px 0; }
+    .muted{ color:#666; font-size:12px; }
+
+    table.list { width:100%; border-collapse:collapse; margin-top:8px; }
+    table.list th, table.list td { border:1px solid #d9dfe7; padding:8px 10px; font-size:13px; }
+    table.list th { background:#f4f6fb; text-align:left; }
+
+    .form-card { border:1px solid #e4e7ee; border-radius:6px; padding:12px 14px; margin:14px 0 24px; }
+    .form-title{ font-weight:700; font-size:18px; margin-bottom:4px; }
+    .pill { display:inline-block; padding:2px 8px; border-radius:999px; font-size:12px; background:#eef2ff; color:#214A8D; }
+
+    .qa { width:100%; border-collapse:separate; border-spacing:0 6px; margin-top:6px; }
+    .qa td.label { width:35%; vertical-align:top; font-weight:600; padding:8px 10px; background:#fafbff; border:1px solid #e7eaf3; border-right:none; }
+    .qa td.value { vertical-align:top; padding:8px 10px; border:1px solid #e7eaf3; background:#fff; }
+
+    .empty { padding:10px 12px; border:1px dashed #cfd6e5; color:#6b7280; font-size:13px; background:#fbfdff; }
+
+    .page-break { page-break-after: always; }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <h1>Patient Form Export</h1>
+  <div class="meta"><b>Name:</b> {{ patient.name or '-' }}</div>
+  <div class="meta"><b>Email:</b> {{ patient.email or '-' }}</div>
+  <div class="meta"><b>Phone:</b> {{ patient.phone or '-' }}</div>
+
+  <!-- Summary table of assigned forms -->
+  <h2>Assigned Forms</h2>
+  <table class="list">
+    <thead>
+      <tr>
+        <th>Form Title</th>
+        <th>Status</th>
+        <th>Submitted</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for f in forms %}
+      <tr>
+        <td>{{ f.title or ('Form #' ~ f.form_id) }}</td>
+        <td>{{ f.status or (f.submitted_at and 'Completed' or 'Pending') }}</td>
+        <td>{{ f.submitted_at or '-' }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <!-- Each form with all responses -->
+  {% for f in forms %}
+    <div class="form-card">
+      <div class="form-title">
+        {{ loop.index }}. {{ f.title or ('Form #' ~ f.form_id) }}
+        <span class="pill">{{ f.status or (f.submitted_at and 'Completed' or 'Pending') }}</span>
+      </div>
+      <div class="muted">
+        Submission #{{ f.submission_id }}{% if f.submitted_at %} • Submitted: {{ f.submitted_at }}{% endif %}
+      </div>
+
+      {% if f.responses and f.responses|length > 0 %}
+        <table class="qa">
+          {% for r in f.responses %}
+            <tr>
+              <td class="label">{{ r.label or ('Field ' ~ r.field_id) }}</td>
+              <td class="value">
+                {% if r.type and r.type|lower in ['signature','file'] %}
+                  {{ r.response_value or '—' }}
+                {% elif r.type and r.type|lower in ['checkbox','boolean'] %}
+                  {{ (r.response_value in ['1','true','True','YES','yes']) and 'Yes' or 'No' }}
+                {% else %}
+                  {{ r.response_value or '—' }}
+                {% endif %}
+              </td>
+            </tr>
+          {% endfor %}
+        </table>
+      {% else %}
+        <div class="empty">No responses captured for this form.</div>
+      {% endif %}
+    </div>
+
+    {% if not loop.last %}
+      <div class="page-break"></div>
+    {% endif %}
+  {% endfor %}
+
+</body>
+</html>
