@@ -50,9 +50,23 @@ def create_app():
 
     # ---- Serve static forms ----
     forms_path = os.path.join(os.path.dirname(__file__), "static", "forms")
+
     @app.route("/static/forms/<path:filename>")
     def serve_forms(filename):
         return send_from_directory(forms_path, filename)
+
+    # ---- Health & Root routes (so / doesn’t 404) ----
+    @app.get("/api/health")
+    def health():
+        return {"status": "ok"}, 200
+
+    @app.get("/")
+    def index():
+        return {
+            "service": "gia-flask-api",
+            "message": "Backend is up. API lives under /api/*",
+            "health": "/api/health",
+        }, 200
 
     # ---- Debug Route Map ----
     try:
