@@ -3,7 +3,7 @@ from flask import Flask, send_from_directory
 from flask_jwt_extended import JWTManager
 from flask_cors import CORS
 
-# ✅ Import Blueprints
+# Blueprints (use relative imports)
 from .routes.login import login_bp
 from .routes.user import users_bp
 from .routes.analytics import analytics_bp
@@ -16,41 +16,39 @@ from .routes.homepage import homepage_bp
 from .routes.exports import bp_exports, bp_export_compat
 from .routes.export_csv import bp_export_csv
 from .routes.forgot_password import forgot_bp
-from .database import SECRET_KEY
-from Backend.app.routes.customer_homepage import Customer_bp  # must exist and export Customer_bp
-
-# ✅ NEW: uploads routes (works with Uploader.jsx)
 from .routes.upload import uploads_bp
+from .routes.customer_homepage import Customer_bp  # relative, not Backend.app...
+
+# If you still load it from your own module, keep it. Prefer env var in Render.
+try:
+    from .database import SECRET_KEY  # optional if you already have this defined
+except Exception:
+    SECRET_KEY = os.getenv("SECRET_KEY", "change-me")
 
 jwt = JWTManager()
 
 
 def create_app():
-    app = Flask(
-        __name__,
-        static_folder=r"C:\Users\Shyam\Downloads\GiaNew_themed\GiaNew\GIA Homecare\src\Frontend\dist",
-        static_url_path=""
-    )
+    app = Flask(__name__)  # API-only on Render (do NOT set static_folder to a Windows path)
+    app.config["SECRET_KEY"] = os.getenv("SECRET_KEY", SECRET_KEY)
 
-    app.config["SECRET_KEY"] = SECRET_KEY
+    # ----- CORS -----
+    # Read allowed origins from env (comma-separated). Example in Render:
+    # FRONTEND_ORIGINS="https://giademo.purplenowinc.com, https://your-frontend.onrender.com"
+    origins = [o.strip() for o in os.getenv("FRONTEND_ORIGINS", "").split(",") if o.strip()]
 
-    # ✅ JWT & CORS setup
-    jwt.init_app(app)
     CORS(
         app,
-        resources={
-            r"/api/*": {
-                "origins": [
-                    "http://localhost:5173",
-                    "http://127.0.0.1:5173"
-                ]
-            }
-        },
-        supports_credentials=False,
-        expose_headers=["Content-Disposition"]
+        resources={r"/api/*": {"origins": origins or ["*"]}},   # keep * only during testing
+        supports_credentials=False,                              # set True only if using cookies
+        allow_headers=["Content-Type", "Authorization"],
+        expose_headers=["Content-Disposition", "Content-Type"],
+        methods=["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
     )
 
-    # ✅ Register blueprints (core routes)
+    jwt.init_app(app)
+
+    # ----- Register blueprints -----
     app.register_blueprint(login_bp, url_prefix="/api")
     app.register_blueprint(users_bp, url_prefix="/api")
     app.register_blueprint(homepage_bp, url_prefix="/api")
@@ -60,41 +58,21 @@ def create_app():
     app.register_blueprint(logout_bp, url_prefix="/api")
     app.register_blueprint(Appointment_bp, url_prefix="/api")
     app.register_blueprint(forgot_bp, url_prefix="/api")
-
-    # Customer-related blueprints
-    app.register_blueprint(customer_bp, url_prefix="/api")   # from .customer
-    app.register_blueprint(Customer_bp, url_prefix="/api")   # from routes.customer_homepage
-
-    # ✅ Uploads endpoints (Save/Edit/Delete used by Uploader.jsx)
+    app.register_blueprint(customer_bp, url_prefix="/api")
+    app.register_blueprint(Customer_bp, url_prefix="/api")
     app.register_blueprint(uploads_bp, url_prefix="/api")
-
-    # ✅ Export endpoints
-    # bp_exports → provides /api/exports/... for PDF exports
     app.register_blueprint(bp_exports, url_prefix="/api/exports")
-
-    # bp_export_csv → provides /api/exports/forms/csv for CSV export
     app.register_blueprint(bp_export_csv, url_prefix="/api/exports/forms")
-
-    # bp_export_compat → legacy routes (/api/export/...) for backward compatibility
     app.register_blueprint(bp_export_compat, url_prefix="/api/export")
 
-    # ✅ Serve static forms if needed
+    # If you have static forms inside app/static/forms, serve them:
     forms_path = os.path.join(os.path.dirname(__file__), "static", "forms")
 
     @app.route("/static/forms/<path:filename>")
     def serve_forms(filename):
         return send_from_directory(forms_path, filename)
 
-    # ✅ Serve React frontend build
-    @app.route("/", defaults={"path": ""})
-    @app.route("/<path:path>")
-    def serve_frontend(path):
-        target = os.path.join(app.static_folder, path)
-        if path != "" and os.path.exists(target):
-            return send_from_directory(app.static_folder, path)
-        return send_from_directory(app.static_folder, "index.html")
-
-    # ✅ Route map for debugging (shows all active routes in console)
+    # Debug: route map in logs
     print("\n=== ROUTE MAP ===")
     for rule in app.url_map.iter_rules():
         methods = ",".join(sorted(m for m in rule.methods if m not in ("HEAD", "OPTIONS")))
