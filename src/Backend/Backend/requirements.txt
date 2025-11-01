@@ -6,3 +6,5 @@ pyodbc==5.1.0
 python-dotenv==1.0.1
 
 twilio>=9,<10
+
+twilio>=9,<10
