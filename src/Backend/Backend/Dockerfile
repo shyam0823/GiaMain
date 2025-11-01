@@ -1,11 +1,11 @@
 FROM python:3.11-slim
-ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1
+ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 PIP_DEFAULT_TIMEOUT=100
 
-# System deps for pyodbc + MS ODBC Driver 18
+# System deps for pyodbc + build
 RUN apt-get update && apt-get install -y --no-install-recommends \
     curl ca-certificates gnupg apt-transport-https \
-    unixodbc unixodbc-dev build-essential && \
-    rm -rf /var/lib/apt/lists/*
+    unixodbc unixodbc-dev build-essential \
+    && rm -rf /var/lib/apt/lists/*
 
 # Add Microsoft repo (Debian 12 / bookworm) WITHOUT apt-key
 RUN set -eux; \
@@ -17,7 +17,11 @@ RUN set -eux; \
 
 WORKDIR /app
 COPY . /app
-RUN pip install --no-cache-dir -r requirements.txt
+
+# Upgrade pip toolchain first (often fixes build failures),
+# then install with verbose output to see exactly what fails
+RUN python -m pip install --no-cache-dir --upgrade pip setuptools wheel \
+ && python -m pip install --no-cache-dir -r requirements.txt -v
 
 ENV PORT=10000
 CMD ["bash","-lc","gunicorn --bind 0.0.0.0: run:app"]
