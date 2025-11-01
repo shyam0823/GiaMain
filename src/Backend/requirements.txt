@@ -1,6 +1,0 @@
-flask
-gunicorn
-flask-cors
-flask-jwt-extended
-pyodbc
-python-dotenv
