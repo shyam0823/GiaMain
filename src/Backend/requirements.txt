@@ -12,3 +12,9 @@ Datetime=5.5
 smtplib=3.14.0
 pdfkit=1.0.0
 twilio=9.8.3
+flask
+gunicorn
+flask-cors
+flask-jwt-extended
+pyodbc
+python-dotenv
