@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify, Blueprint
 import pyodbc
 import datetime
-from Backend.app.database import get_cursor
+from app.database import get_cursor
 
 Appointment_bp = Blueprint('Appointment', __name__)
 app = Flask(__name__)

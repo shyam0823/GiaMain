@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from Backend.app.services.login_service import blacklist_token
+from app.services.login_service import blacklist_token
 
 logout_bp = Blueprint("logout", __name__)
 

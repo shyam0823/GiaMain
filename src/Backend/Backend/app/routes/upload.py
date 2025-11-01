@@ -1,6 +1,6 @@
 # Backend/app/routes/upload.py
 from flask import Blueprint, request, jsonify
-from Backend.app.database import get_cursor
+from app.database import get_cursor
 from datetime import datetime
 from uuid import UUID, uuid4
 import json

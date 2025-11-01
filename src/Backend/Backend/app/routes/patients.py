@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from Backend.app.database import get_cursor
+from app.database import get_cursor
 from datetime import datetime, date
 
 patients_bp = Blueprint('patients', __name__)

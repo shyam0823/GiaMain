@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request, url_for, redirect
-from Backend.app.database import get_cursor
+from app.database import get_cursor
 from datetime import datetime, date
 import smtplib
 from email.mime.text import MIMEText

@@ -1,7 +1,7 @@
 import datetime
 import jwt
 from werkzeug.security import generate_password_hash, check_password_hash
-from Backend.app.database import get_cursor, SECRET_KEY
+from app.database import get_cursor, SECRET_KEY
 
 # ----------------------------
 # Helpers

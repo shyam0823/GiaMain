@@ -2,7 +2,7 @@ from flask import Blueprint, request, jsonify
 import datetime, random, smtplib, ssl
 from email.message import EmailMessage
 from werkzeug.security import generate_password_hash, check_password_hash
-from Backend.app.database import get_cursor
+from app.database import get_cursor
 
 # --------------------------------------------
 # Blueprint Definition

@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from Backend.app.database import get_cursor
+from app.database import get_cursor
 
 locations_bp = Blueprint('locations', __name__)
 

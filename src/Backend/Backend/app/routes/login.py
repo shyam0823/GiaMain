@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify
 import jwt
 
-from Backend.app.services.login_service import login_user, register_user
+from app.services.login_service import login_user, register_user
 from ..database import SECRET_KEY, get_cursor
 
 login_bp = Blueprint("login", __name__)
