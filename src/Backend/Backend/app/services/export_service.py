@@ -1,4 +1,3 @@
-# Backend/app/services/export_service.py
 from __future__ import annotations
 
 import os
@@ -24,10 +23,10 @@ os.makedirs(TEMPLATE_DIR, exist_ok=True)
 
 env = Environment(
     loader=FileSystemLoader(TEMPLATE_DIR),
-    autoescape=select_autoescape(["html", "xml"])
+    autoescape=select_autoescape(["html", "xml"]),
 )
 
-# If the packet template doesn't exist, create a default one
+# If the packet template doesn't exist, create a sensible default once
 _DEFAULT_TEMPLATE_NAME = "patient_packet.html"
 _default_template_path = os.path.join(TEMPLATE_DIR, _DEFAULT_TEMPLATE_NAME)
 
@@ -131,32 +130,36 @@ if not os.path.exists(_default_template_path):
 </html>
 """)
 
-
 # --------------------------------------------------------------------------------------
-# wkhtmltopdf config / options
+# wkhtmltopdf config / options (Linux container + Windows dev)
 # --------------------------------------------------------------------------------------
 
-def _detect_wkhtmltopdf_exe() -> Optional[str]:
+def _detect_wkhtmltopdf() -> Optional[str]:
     """
-    Try to find wkhtmltopdf on Windows default paths.
-    Return full path or None (pdfkit will then try PATH).
+    Prefer container path (/usr/bin/wkhtmltopdf). On Windows dev boxes, try common installs.
+    Return full path or None (then pdfkit will try PATH).
     """
+    # Container/Linux first
+    linux_path = "/usr/bin/wkhtmltopdf"
+    if os.path.exists(linux_path):
+        return linux_path
+
+    # Windows fallbacks for local dev
     candidates = [
         r"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe",
         r"C:\Program Files (x86)\wkhtmltopdf\bin\wkhtmltopdf.exe",
-        # If you installed the mshtml build name:
-        r"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe",
     ]
     for p in candidates:
         if os.path.exists(p):
             return p
+
     return None
 
 
-_WKHTML_EXE = _detect_wkhtmltopdf_exe()
-_PDFKIT_CFG = pdfkit.configuration(wkhtmltopdf=_WKHTML_EXE) if _WKHTML_EXE else None
+_WKHTML = _detect_wkhtmltopdf()
+_PDFKIT_CFG = pdfkit.configuration(wkhtmltopdf=_WKHTML) if _WKHTML else None
 
-# sensible print options (A4/US Letter friendly)
+# A4/Letter-friendly sensible defaults
 WKHTML_OPTS: Dict[str, str] = {
     "page-size": "Letter",
     "margin-top": "10mm",
@@ -167,14 +170,12 @@ WKHTML_OPTS: Dict[str, str] = {
     "quiet": "",  # suppress wkhtmltopdf console logs
 }
 
-
 # --------------------------------------------------------------------------------------
 # Simple in-memory job store
 # --------------------------------------------------------------------------------------
 
 _JOBS: Dict[str, Dict[str, Optional[str]]] = {}
-# structure: { export_id: {"status": "pending"|"ready"|"error", "path": "c:\\...pdf"} }
-
+# structure: { export_id: {"status": "pending"|"ready"|"error", "path": "<abs pdf path>"} }
 
 # --------------------------------------------------------------------------------------
 # Public API used by routes
@@ -192,12 +193,16 @@ def start_export_job(patient_id: int, view: str) -> str:
         print(f"[Export Debug] Start for patient={patient_id}, view={view}")
 
         data = get_patient_export_data(patient_id)
-
         template = env.get_template(_DEFAULT_TEMPLATE_NAME)
         html = template.render(patient=data["patient"], forms=data["forms"])
 
         pdf_path = os.path.join(EXPORT_DIR, f"{export_id}.pdf")
-        pdfkit.from_string(html, pdf_path, options=WKHTML_OPTS, configuration=_PDFKIT_CFG)
+
+        # Use explicit configuration when we found the binary; otherwise try default PATH
+        if _PDFKIT_CFG:
+            pdfkit.from_string(html, pdf_path, options=WKHTML_OPTS, configuration=_PDFKIT_CFG)
+        else:
+            pdfkit.from_string(html, pdf_path, options=WKHTML_OPTS)
 
         _JOBS[export_id]["status"] = "ready"
         _JOBS[export_id]["path"] = pdf_path
