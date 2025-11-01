@@ -601,56 +601,20 @@ def update_form(form_id):
         traceback.print_exc()
         return jsonify({"error": str(e)}), 500
 
-
-#Send forms
+#send Forms
 @homepage_bp.route("/home/send_forms", methods=["POST"])
 def send_forms():
     data = request.json or {}
     recipients = data.get("recipients", [])
     forms = data.get("forms", [])
-    delivery = data.get("delivery", "patient")  # "patient" (email), "sms", or "office"
+    delivery = data.get("delivery", "patient")  # patient/email, sms, or office
 
     if not recipients or not forms:
         return jsonify({"error": "Recipients or forms missing"}), 400
 
-    # Helper: normalize dueDate from UI into YYYY-MM-DD
-    def _norm_due(d):
-        if not d:
-            return datetime.now().strftime("%Y-%m-%d")
-        # Try common inputs: "YYYY-MM-DD", "DD-MM-YYYY", "MM/DD/YYYY"
-        for fmt in ("%Y-%m-%d", "%d-%m-%Y", "%m/%d/%Y", "%d/%m/%Y"):
-            try:
-                return datetime.strptime(d, fmt).strftime("%Y-%m-%d")
-            except Exception:
-                pass
-        # As a last resort, return "today"
-        return datetime.now().strftime("%Y-%m-%d")
-
-    #Helper: normalize phone numbers to E.164 (+91)
-    import re
-    from twilio.rest import Client
-    from twilio.base.exceptions import TwilioRestException
-
-    def to_e164(number: str, default_country="+91") -> str:
-        """Normalize numbers into Twilio-friendly E.164 format."""
-        if not number:
-            return ""
-        s = str(number).strip().replace(" ", "")
-        if re.match(r"^\+\d{6,15}$", s):
-            return s
-        digits = re.sub(r"\D", "", s)
-        if digits.startswith("0") and len(digits) in (11, 12):
-            digits = digits[1:]
-        if len(digits) == 10:
-            return f"{default_country}{digits}"
-        if not s.startswith("+") and len(digits) >= 11:
-            return f"+{digits}"
-        return s
-
-    today_iso = datetime.now().strftime("%Y-%m-%d")
-    qr_tokens = {}
     form_ids = [str(f.get("id") or f.get("formId") or f.get("form_id")) for f in forms]
-    updated_recipients = []  #Return per-recipient timestamps to the UI
+    qr_tokens = {}
+    updated_recipients = []
 
     for rec in recipients:
         patient_id = rec.get("patientId")
@@ -658,26 +622,25 @@ def send_forms():
         name = rec.get("name")
         phone = rec.get("phone")
         loc = rec.get("location", "GIA HR")
-        due_in = rec.get("dueDate")  # whatever the UI sent
-        due_iso = _norm_due(due_in)  # normalized YYYY-MM-DD
+        due_in = rec.get("dueDate")
+        due_iso = _norm_due(due_in)
 
         if not patient_id:
             continue
 
-        # Normalize ID
         try:
             patient_id = int(float(patient_id))
         except Exception:
             continue
 
-        # Build a QR for this batch (works for email/sms/office)
+        # QR token for this patient + forms
         timestamp = int(datetime.now().timestamp())
         ids_segment = ",".join(form_ids)
         qr_token = f"{patient_id}-{ids_segment}-{timestamp}"
         qr_url = url_for("homepage.fill_form_qr", token=qr_token, _external=True)
         qr_tokens[patient_id] = qr_url
 
-        # Ensure a row exists in form_status per (patient, form)
+        # Ensure record exists
         for fid in form_ids:
             fid_int = int(float(fid))
             rows_updated = execute_query(
@@ -686,7 +649,6 @@ def send_forms():
                 commit=True,
             )
             if rows_updated == 0:
-                # Create with baseline values; due_date will be updated again below to due_iso anyway
                 execute_query(
                     """
                     INSERT INTO form_status
@@ -697,10 +659,9 @@ def send_forms():
                     commit=True,
                 )
 
-        # Prepare per-recipient log for the frontend
         recipient_log = {"name": name, "emailSent": None, "smsSent": None, "error": None, "hint": None}
 
-        # ---------------- EMAIL DELIVERY (delivery == "patient") ----------------
+        # ---------------- EMAIL DELIVERY ----------------
         if delivery == "patient" and email:
             try:
                 html_body = f"""
@@ -711,8 +672,9 @@ def send_forms():
                     <p><a href="{qr_url}">Click here to fill your forms</a></p>
                 </div>
                 """
-                sender_email = "vakashyamsundar8@gmail.com"
-                sender_password = "jiss tsmp agkr aqdr"
+                sender_email = os.getenv("SMTP_EMAIL", "vakashyamsundar8@gmail.com")
+                sender_password = os.getenv("SMTP_PASS", "jiss tsmp agkr aqdr")
+
                 msg = MIMEMultipart("alternative")
                 msg["From"] = sender_email
                 msg["To"] = email
@@ -724,11 +686,9 @@ def send_forms():
                     server.login(sender_email, sender_password)
                     server.sendmail(sender_email, email, msg.as_string())
 
-                #Always overwrite email_sent with the latest timestamp
-                #Always set due_date to the chosen due date from UI (due_iso)
                 for fid in form_ids:
                     fid_int = int(float(fid))
-                    rows_updated = execute_query(
+                    execute_query(
                         """
                         UPDATE form_status
                         SET email_sent = GETDATE(),
@@ -740,40 +700,41 @@ def send_forms():
                         (due_iso, loc, patient_id, fid_int),
                         commit=True,
                     )
-                    if rows_updated == 0:
-                        execute_query(
-                            """
-                            INSERT INTO form_status
-                              (patient_id, form_id, status, due_date, email_sent, created, location)
-                            VALUES (?, ?, 'Active', ?, GETDATE(), GETDATE(), ?)
-                            """,
-                            (patient_id, fid_int, due_iso, loc),
-                            commit=True,
-                        )
 
                 recipient_log["emailSent"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
             except Exception as e:
                 recipient_log["error"] = "EMAIL_FAILED"
                 recipient_log["hint"] = str(e)
-                print(f"❌ Email sending failed for {email}: {str(e)}")
+                print(f"❌ Email failed for {email}: {e}")
 
-        # ---------------- SMS DELIVERY (delivery == "sms") ----------------
-        if delivery == "sms" and phone:
+        # ---------------- SMS DELIVERY ----------------
+        elif delivery == "sms" and phone:
             try:
+                # Lazy import Twilio
+                try:
+                    from twilio.rest import Client
+                    from twilio.base.exceptions import TwilioRestException
+                except ImportError as e:
+                    current_app.logger.error("Twilio not installed: %s", e)
+                    abort(500, description="Twilio dependency missing.")
+
+                account_sid = os.getenv("TWILIO_ACCOUNT_SID", "")
+                auth_token = os.getenv("TWILIO_AUTH_TOKEN", "")
+                messaging_sid = os.getenv("TWILIO_MESSAGING_SERVICE_SID", "")
+                from_number = os.getenv("TWILIO_FROM", "+19786198530")
+
+                if not account_sid or not auth_token:
+                    abort(500, description="Twilio credentials not configured.")
+
                 message_body = f"""
 Hello {name},
 You have been assigned {len(forms)} forms by GIA HR.
 
 Open here: {qr_url}
 """
-                account_sid = os.getenv("TWILIO_ACCOUNT_SID", "AC5465c2bfbe35e4093096c3af24d3e50d")
-                auth_token = os.getenv("TWILIO_AUTH_TOKEN", "76286288d4ba30235917d2ee133813d6")
-                messaging_sid = os.getenv("TWILIO_MESSAGING_SERVICE_SID", "")
-                from_number = os.getenv("TWILIO_FROM", "+19786198530")
-
                 client = Client(account_sid, auth_token)
-                to_number = to_e164(phone, default_country="+91")
+                to_number = to_e164(phone)
 
                 send_kwargs = {"body": message_body.strip(), "to": to_number}
                 if messaging_sid:
@@ -782,86 +743,45 @@ Open here: {qr_url}
                     send_kwargs["from_"] = from_number
 
                 msg = client.messages.create(**send_kwargs)
-                print("Twilio SID:", msg.sid, "Status:", msg.status)
+                print("✅ Twilio SID:", msg.sid, "Status:", msg.status)
 
-                #Always overwrite sms_sent with the latest timestamp
-                #Always set due_date to the chosen due date from UI (due_iso)
                 for fid in form_ids:
                     fid_int = int(float(fid))
-                    rows_updated = execute_query(
+                    execute_query(
                         """
                         UPDATE form_status
-                        SET sms_sent  = GETDATE(),
-                            due_date  = ?,
-                            location  = ?,
-                            status    = 'Active'
+                        SET sms_sent = GETDATE(),
+                            due_date = ?,
+                            location = ?,
+                            status = 'Active'
                         WHERE patient_id = ? AND form_id = ?
                         """,
                         (due_iso, loc, patient_id, fid_int),
                         commit=True,
                     )
-                    if rows_updated == 0:
-                        execute_query(
-                            """
-                            INSERT INTO form_status
-                              (patient_id, form_id, status, due_date, sms_sent, created, location)
-                            VALUES (?, ?, 'Active', ?, GETDATE(), GETDATE(), ?)
-                            """,
-                            (patient_id, fid_int, due_iso, loc),
-                            commit=True,
-                        )
 
                 recipient_log["smsSent"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
-            except TwilioRestException as e:
-                code = getattr(e, "code", None)
-                msg = e.msg or str(e)
-                recipient_log["error"] = f"TWILIO_{code or 'ERROR'}"
-                if code == 21408:
-                    recipient_log["hint"] = (
-                        "Geo-permission or trial restriction for region. "
-                        "Enable India (+91) and verify the number for trial accounts."
-                    )
-                elif code == 21606:
-                    recipient_log["hint"] = "Invalid phone number. Must be in +91XXXXXXXXXX format."
-                elif code == 21610:
-                    recipient_log["hint"] = "Recipient opted out (STOP). Must reply START to re-enable."
-                elif code == 20003:
-                    recipient_log["hint"] = "Auth error. Check Twilio Account SID/Auth Token."
-                else:
-                    recipient_log["hint"] = msg
-                print(f"❌ SMS sending failed for {phone}: {msg}")
             except Exception as e:
                 recipient_log["error"] = "SMS_FAILED"
                 recipient_log["hint"] = str(e)
-                print(f"❌ SMS sending failed for {phone}: {str(e)}")
+                print(f"❌ SMS failed for {phone}: {e}")
 
-        # ---------------- OFFICE DELIVERY (delivery == "office") ----------------
-        if delivery == "office":
-            # Just set due_date and meta; no email/sms timestamps
+        # ---------------- OFFICE DELIVERY ----------------
+        elif delivery == "office":
             for fid in form_ids:
                 fid_int = int(float(fid))
-                rows_updated = execute_query(
+                execute_query(
                     """
                     UPDATE form_status
                     SET due_date = ?,
                         location = ?,
-                        status   = 'Active'
+                        status = 'Active'
                     WHERE patient_id = ? AND form_id = ?
                     """,
                     (due_iso, loc, patient_id, fid_int),
                     commit=True,
                 )
-                if rows_updated == 0:
-                    execute_query(
-                        """
-                        INSERT INTO form_status
-                          (patient_id, form_id, status, due_date, created, location)
-                        VALUES (?, ?, 'Active', ?, GETDATE(), ?)
-                        """,
-                        (patient_id, fid_int, due_iso, loc),
-                        commit=True,
-                    )
 
         updated_recipients.append(recipient_log)
 
@@ -873,7 +793,7 @@ Open here: {qr_url}
     })
 
 
-#QR redirect
+# ========== QR REDIRECT ==========
 @homepage_bp.route("/fill-form/<string:token>", methods=["GET"])
 def fill_form_qr(token):
     try:
@@ -892,13 +812,13 @@ def fill_form_qr(token):
             return "Form not assigned or invalid link", 404
 
         first_form_id = form_ids.split(",")[0]
+        frontend_base = os.getenv("FRONTEND_URL", "http://localhost:5173")
 
-        return redirect(f"http://localhost:5173/form-editor/{first_form_id}?patient={patient_id}&forms={form_ids}")
+        return redirect(f"{frontend_base}/form-editor/{first_form_id}?patient={patient_id}&forms={form_ids}")
     except Exception as e:
         traceback.print_exc()
         return f"Error: {str(e)}", 500
-
-
+    
 #GET /home/forms/<int:form_id>/fields
 @homepage_bp.route("/home/forms/<int:form_id>/fields", methods=["GET"])
 def get_form_fields(form_id):
