@@ -24,4 +24,4 @@ RUN python -m pip install --no-cache-dir --upgrade pip setuptools wheel \
  && python -m pip install --no-cache-dir -r requirements.txt -v
 
 ENV PORT=10000
-CMD ["bash","-lc","gunicorn --bind 0.0.0.0: run:app"]
+CMD ["sh","-c","gunicorn --bind 0.0.0.0:${PORT:-10000} wsgi:app"]
