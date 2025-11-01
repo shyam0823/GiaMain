@@ -20,4 +20,5 @@ COPY . /app
 
 ENV PORT=10000
 # run the Flask app via gunicorn, importing the WSGI app from wsgi.py
-CMD ["gunicorn", "--bind", "0.0.0.0:${PORT}", "wsgi:app"]
+CMD ["sh","-c","gunicorn --bind 0.0.0.0:${PORT:-10000} wsgi:app"]
+
